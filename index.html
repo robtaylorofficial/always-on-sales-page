@@ -243,39 +243,159 @@
       margin-top: 12px;
       font-size: 1.05rem;
     }
+    /* 6-col grid: 3 cards per row, last 2 centred */
     .problems-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 22px;
       margin-bottom: 48px;
     }
-    .problem-card {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(251,186,0,0.2);
-      border-left: 4px solid var(--yellow);
-      border-radius: 10px;
-      padding: 28px 28px 24px;
-      transition: background 0.2s, border-color 0.2s, transform 0.2s;
+    .flip-card                    { grid-column: span 2; }
+    .flip-card:nth-child(4)       { grid-column: 2 / span 2; }
+    .flip-card:nth-child(5)       { grid-column: 4 / span 2; }
+
+    /* ---- 3D flip mechanics ---- */
+    .flip-card {
+      perspective: 1200px;
+      height: 270px;
+      cursor: pointer;
     }
-    .problem-card:hover {
-      background: rgba(251,186,0,0.06);
-      border-color: rgba(251,186,0,0.5);
-      transform: translateY(-3px);
+    .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .flip-card:hover .flip-card-inner,
+    .flip-card.flipped .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .flip-card-front,
+    .flip-card-back {
+      position: absolute;
+      inset: 0;
+      border-radius: 12px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 26px;
+      overflow: hidden;
+    }
+
+    /* ---- Front face ---- */
+    .flip-card-front {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(251,186,0,0.18);
+      border-left: 4px solid var(--yellow);
     }
     .problem-number {
-      font-size: 0.7rem;
+      font-size: 0.65rem;
       font-weight: 700;
       color: var(--yellow);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
     .problem-question {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 600;
       color: var(--white);
-      line-height: 1.45;
+      line-height: 1.5;
+      flex: 1;
     }
+    .flip-hint {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 0.65rem;
+      font-weight: 500;
+      color: rgba(255,255,255,0.25);
+      margin-top: 14px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+    .flip-hint svg {
+      width: 12px; height: 12px;
+      opacity: 0.5;
+      flex-shrink: 0;
+    }
+
+    /* ---- Back face colour variants ---- */
+    .flip-card-back {
+      transform: rotateY(180deg);
+    }
+    .back-yellow { background: var(--yellow);       color: #1a0830; }
+    .back-blue   { background: var(--blue);         color: #fff; }
+    .back-green  { background: var(--green);        color: #fff; }
+    .back-purple { background: var(--purple-light); color: #fff; }
+    .back-dark   { background: #1a3a4a;             color: #fff; }
+
+    /* ---- Back face content ---- */
+    .back-q-badge {
+      display: inline-block;
+      font-size: 0.6rem;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.15);
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+    .back-yellow .back-q-badge { background: rgba(0,0,0,0.12); color: #1a0830; }
+    .back-data-label {
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+      opacity: 0.6;
+      margin-bottom: 5px;
+    }
+    .back-stat {
+      font-size: 0.9rem;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    .back-divider {
+      height: 1px;
+      background: currentColor;
+      opacity: 0.2;
+      margin-bottom: 10px;
+      flex-shrink: 0;
+    }
+    .back-commentary {
+      font-size: 0.75rem;
+      line-height: 1.6;
+      opacity: 0.88;
+      flex: 1;
+    }
+    .back-flip-hint {
+      font-size: 0.6rem;
+      opacity: 0.35;
+      text-align: right;
+      margin-top: 10px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ---- Responsive ---- */
+    @media (max-width: 960px) {
+      .problems-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .flip-card,
+      .flip-card:nth-child(4),
+      .flip-card:nth-child(5) { grid-column: span 1; }
+    }
+    @media (max-width: 560px) {
+      .problems-grid { grid-template-columns: 1fr; }
+      .flip-card { height: 240px; }
+    }
+
     .problem-closer {
       text-align: center;
       border-top: 1px solid rgba(255,255,255,0.08);
@@ -1050,26 +1170,117 @@
       <p>Be honest. Because this is where most businesses are losing.</p>
     </div>
     <div class="problems-grid">
-      <div class="problem-card fade-in">
-        <div class="problem-number">Question 01</div>
-        <p class="problem-question">How many enquiries came into your business this month that didn't get a response within three hours — and what did that cost you?</p>
+
+      <!-- Card 1 — yellow back -->
+      <div class="flip-card fade-in" onclick="toggleFlip(this)">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="problem-number">Question 01</div>
+            <p class="problem-question">How many enquiries didn't get a response within three hours — and what did that cost you?</p>
+            <div class="flip-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+              Flip for the data
+            </div>
+          </div>
+          <div class="flip-card-back back-yellow">
+            <span class="back-q-badge">Q01 · Response Speed</span>
+            <div class="back-data-label">Data Point</div>
+            <div class="back-stat">34.5% of buyers expect a response within three hours. 75.9% say speed directly influences their decision to engage.</div>
+            <div class="back-divider"></div>
+            <div class="back-commentary">Every delayed response isn't just poor service — it's active leakage. If you're missing that three-hour window, you're not just late, you're likely out of the decision entirely.</div>
+            <div class="back-flip-hint">← flip back</div>
+          </div>
+        </div>
       </div>
-      <div class="problem-card fade-in">
-        <div class="problem-number">Question 02</div>
-        <p class="problem-question">How many of your buyers had already decided what they needed before they ever spoke to your team — and where were you while they were doing that research?</p>
+
+      <!-- Card 2 — blue back -->
+      <div class="flip-card fade-in" onclick="toggleFlip(this)">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="problem-number">Question 02</div>
+            <p class="problem-question">How many buyers had already decided before speaking to you — and where were you?</p>
+            <div class="flip-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+              Flip for the data
+            </div>
+          </div>
+          <div class="flip-card-back back-blue">
+            <span class="back-q-badge">Q02 · Buyer Research</span>
+            <div class="back-data-label">Data Point</div>
+            <div class="back-stat">75% of buyers already know what they need before engaging a supplier.</div>
+            <div class="back-divider"></div>
+            <div class="back-commentary">By the time sales gets involved, most of the thinking is already done. If you're not present during research, you're not shaping demand — you're reacting to it.</div>
+            <div class="back-flip-hint">← flip back</div>
+          </div>
+        </div>
       </div>
-      <div class="problem-card fade-in">
-        <div class="problem-number">Question 03</div>
-        <p class="problem-question">If a prospect landed on your website today with a real problem, would they get a clear answer — or just another brochure?</p>
+
+      <!-- Card 3 — green back -->
+      <div class="flip-card fade-in" onclick="toggleFlip(this)">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="problem-number">Question 03</div>
+            <p class="problem-question">If a prospect landed on your website with a real problem, would they get an answer?</p>
+            <div class="flip-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+              Flip for the data
+            </div>
+          </div>
+          <div class="flip-card-back back-green">
+            <span class="back-q-badge">Q03 · Digital Presence</span>
+            <div class="back-data-label">Data Point</div>
+            <div class="back-stat">94.1% of buyers use search engines to research suppliers before engaging.</div>
+            <div class="back-divider"></div>
+            <div class="back-commentary">Your website is now your first sales conversation. If it reads like a brochure instead of solving problems, you're invisible at the exact moment buyers are looking.</div>
+            <div class="back-flip-hint">← flip back</div>
+          </div>
+        </div>
       </div>
-      <div class="problem-card fade-in">
-        <div class="problem-number">Question 04</div>
-        <p class="problem-question">When your sales team finally gets involved, are they building on insight — or starting from scratch?</p>
+
+      <!-- Card 4 — purple back -->
+      <div class="flip-card fade-in" onclick="toggleFlip(this)">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="problem-number">Question 04</div>
+            <p class="problem-question">When sales finally gets involved, are they building on insight or starting from scratch?</p>
+            <div class="flip-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+              Flip for the data
+            </div>
+          </div>
+          <div class="flip-card-back back-purple">
+            <span class="back-q-badge">Q04 · Sales Preparation</span>
+            <div class="back-data-label">Data Point</div>
+            <div class="back-stat">82.4% of buyers feel disappointed when an account manager comes to a meeting unprepared.</div>
+            <div class="back-divider"></div>
+            <div class="back-commentary">Buyers arrive informed. If your team shows up unprepared, it signals you haven't kept up. That erodes trust before the conversation even begins.</div>
+            <div class="back-flip-hint">← flip back</div>
+          </div>
+        </div>
       </div>
-      <div class="problem-card fade-in">
-        <div class="problem-number">Question 05</div>
-        <p class="problem-question">Where in your current process do leads slow down, get ignored, or disappear altogether?</p>
+
+      <!-- Card 5 — dark teal back -->
+      <div class="flip-card fade-in" onclick="toggleFlip(this)">
+        <div class="flip-card-inner">
+          <div class="flip-card-front">
+            <div class="problem-number">Question 05</div>
+            <p class="problem-question">Where in your process do leads slow down, get ignored, or disappear?</p>
+            <div class="flip-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12h16M13 5l7 7-7 7"/></svg>
+              Flip for the data
+            </div>
+          </div>
+          <div class="flip-card-back back-dark">
+            <span class="back-q-badge">Q05 · Lead Leakage</span>
+            <div class="back-data-label">Data Point</div>
+            <div class="back-stat">83% of buyers spend most of their time on responsibilities outside of buying.</div>
+            <div class="back-divider"></div>
+            <div class="back-commentary">Leads don't disappear — they get deprioritised. If your process isn't easy, timely, and relevant, you're competing against everything else in their day. And losing.</div>
+            <div class="back-flip-hint">← flip back</div>
+          </div>
+        </div>
       </div>
+
     </div>
     <div class="problem-closer fade-in">
       <p>"Because they do. Not through bad intent. Through broken systems."</p>
@@ -1768,6 +1979,14 @@
     const isOpen = question.classList.contains('open');
     question.classList.toggle('open', !isOpen);
     answer.classList.toggle('open', !isOpen);
+  }
+
+  /* --- Flip Cards (tap on mobile) --- */
+  function toggleFlip(card) {
+    // Only use JS toggle on touch devices; desktop uses CSS :hover
+    if (window.matchMedia('(hover: none)').matches) {
+      card.classList.toggle('flipped');
+    }
   }
 
   /* --- Scroll Fade-In --- */
