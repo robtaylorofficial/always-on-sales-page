@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Always On | Plan Grow Do</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: #f5f4f7;
+      color: #1a1a2e;
+      line-height: 1.7;
+    }
+
+    :root {
+      --purple:      #43165c;
+      --purple-dark: #2d0e3e;
+      --purple-light:#6b2a8f;
+      --yellow:      #fbba00;
+      --green:       #76b82a;
+      --blue:        #009fe3;
+      --white:       #ffffff;
+      --grey-light:  #f5f4f7;
+      --grey-mid:    #e8e4ef;
+      --text-muted:  #6b6b8a;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      background: var(--purple-dark);
+      border-bottom: 2px solid var(--yellow);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo img { height: 38px; width: auto; display: block; }
+    .nav-logo-text {
+      color: var(--white);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .nav-logo-text span { color: var(--yellow); }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--yellow); }
+
+    /* ===== HERO STRIP ===== */
+    .policy-hero {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
+      padding: 60px 24px 52px;
+      text-align: center;
+    }
+    .policy-hero .badge {
+      display: inline-block;
+      background: rgba(251,186,0,0.15);
+      border: 1px solid rgba(251,186,0,0.35);
+      color: var(--yellow);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+    }
+    .policy-hero h1 {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .policy-hero p {
+      color: rgba(255,255,255,0.55);
+      font-size: 0.9rem;
+    }
+
+    /* ===== MAIN CONTENT ===== */
+    .policy-wrap {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* Table of contents */
+    .toc {
+      background: var(--white);
+      border: 1px solid var(--grey-mid);
+      border-left: 4px solid var(--purple);
+      border-radius: 10px;
+      padding: 28px 32px;
+      margin-bottom: 48px;
+    }
+    .toc h2 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 14px;
+    }
+    .toc ol {
+      padding-left: 18px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px 24px;
+    }
+    .toc li { font-size: 0.85rem; color: var(--text-muted); }
+    .toc a { color: var(--purple); text-decoration: none; font-weight: 500; transition: color 0.15s; }
+    .toc a:hover { color: var(--purple-light); text-decoration: underline; }
+
+    /* Sections */
+    .policy-section {
+      background: var(--white);
+      border-radius: 12px;
+      border: 1px solid var(--grey-mid);
+      padding: 36px 40px;
+      margin-bottom: 20px;
+      scroll-margin-top: 24px;
+    }
+    .policy-section h2 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--purple-dark);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+    .section-num {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px; height: 28px;
+      background: var(--purple);
+      color: var(--white);
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-right: 4px;
+    }
+    .policy-section h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--purple);
+      margin: 20px 0 8px;
+    }
+    .policy-section p {
+      font-size: 0.9rem;
+      color: #3a3a5c;
+      margin-bottom: 12px;
+      line-height: 1.75;
+    }
+    .policy-section p:last-child { margin-bottom: 0; }
+    .policy-section ul {
+      padding-left: 20px;
+      margin-bottom: 12px;
+    }
+    .policy-section ul li {
+      font-size: 0.875rem;
+      color: #3a3a5c;
+      margin-bottom: 5px;
+      line-height: 1.65;
+    }
+    .policy-section a { color: var(--purple); font-weight: 500; }
+    .policy-section a:hover { color: var(--purple-light); }
+
+    /* Tables */
+    .policy-table-wrap { overflow-x: auto; margin: 16px 0; }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.845rem;
+    }
+    thead tr { background: var(--purple); color: var(--white); }
+    thead th {
+      text-align: left;
+      padding: 10px 14px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+    tbody tr:nth-child(odd)  { background: var(--grey-light); }
+    tbody tr:nth-child(even) { background: var(--white); }
+    tbody td {
+      padding: 10px 14px;
+      color: #3a3a5c;
+      vertical-align: top;
+      line-height: 1.6;
+      border-bottom: 1px solid var(--grey-mid);
+    }
+    tbody td:first-child { font-weight: 600; color: var(--purple-dark); }
+
+    /* Lawful basis badge */
+    .basis {
+      display: inline-block;
+      background: rgba(67,22,92,0.08);
+      color: var(--purple);
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+
+    /* Info callout */
+    .callout {
+      background: rgba(0,159,227,0.07);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 16px 0;
+      font-size: 0.85rem;
+      color: #1a3a5c;
+      line-height: 1.65;
+    }
+    .callout strong { color: var(--purple-dark); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--purple-dark);
+      border-top: 3px solid var(--yellow);
+      padding: 36px 24px;
+      text-align: center;
+    }
+    .footer-logo img { height: 34px; width: auto; margin: 0 auto 10px; display: block; }
+    footer p {
+      font-size: 0.78rem;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 6px;
+    }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--yellow); }
+
+    @media (max-width: 640px) {
+      .policy-section { padding: 24px 20px; }
+      .toc ol { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+      <span class="nav-logo-text" style="display:none;">Plan <span>Grow</span> Do</span>
+    </a>
+    <a href="/" class="nav-back">← Back to Always On</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="policy-hero">
+  <div class="badge">Legal</div>
+  <h1>Platform Privacy Policy</h1>
+  <p>Always On &nbsp;·&nbsp; alwayson.plangrowdo.com &nbsp;·&nbsp; Version 1.0 &nbsp;·&nbsp; April 2026</p>
+</div>
+
+<!-- CONTENT -->
+<div class="policy-wrap">
+
+  <!-- Table of Contents -->
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#s1">About This Policy</a></li>
+      <li><a href="#s2">Data Controllers &amp; Processors</a></li>
+      <li><a href="#s3">Data the Platform Holds</a></li>
+      <li><a href="#s4">How We Use Platform Data</a></li>
+      <li><a href="#s5">Where Data Is Stored</a></li>
+      <li><a href="#s6">Data Isolation &amp; Security</a></li>
+      <li><a href="#s7">Email Sync</a></li>
+      <li><a href="#s8">Data Retention</a></li>
+      <li><a href="#s9">Your Rights</a></li>
+      <li><a href="#s10">Complaints</a></li>
+      <li><a href="#s11">Changes to This Policy</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="policy-section" id="s1">
+    <h2><span class="section-num">1</span> About This Policy</h2>
+    <p>This Privacy Policy explains how personal data is collected, stored and used within the Always On platform (alwayson.plangrowdo.com). It is intended for:</p>
+    <ul>
+      <li>Sales representatives and managers who use Always On on behalf of their employer</li>
+      <li>Contacts and prospects whose data is entered into the platform</li>
+    </ul>
+    <p>Always On is operated by Plan Grow Do, a trading name of Plan Grow Do Ltd ('PGD', 'we', 'us'). The platform is provided to business clients ('tenants') as a B2B sales management tool.</p>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="policy-section" id="s2">
+    <h2><span class="section-num">2</span> Data Controllers and Processors</h2>
+    <div class="policy-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Party</th>
+            <th>Responsible for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Data Controller</td>
+            <td>The tenant (your employer / the business that subscribes to Always On)</td>
+            <td>All contact and prospect data entered into the platform; how that data is used for sales and qualification</td>
+          </tr>
+          <tr>
+            <td>Data Processor</td>
+            <td>Plan Grow Do</td>
+            <td>Operating the platform infrastructure; processing data strictly on the tenant's instruction</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="callout">
+      If you have a question about how your employer uses your contact data within Always On, you should contact them directly as the Data Controller. If your question is about how the platform itself works or how PGD handles data, contact <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a>.
+    </div>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="policy-section" id="s3">
+    <h2><span class="section-num">3</span> Data the Platform Holds</h2>
+
+    <h3>3.1 User Account Data (Reps and Managers)</h3>
+    <p>When you are invited to Always On as a team member, the following data is held:</p>
+    <ul>
+      <li>Name, email address, job title</li>
+      <li>Profile picture (if uploaded)</li>
+      <li>LinkedIn URL, regions, specialities, sectors (if provided)</li>
+      <li>Connected email account information (Gmail or Outlook OAuth token — encrypted at rest)</li>
+      <li>Login timestamps and activity logs within the platform</li>
+    </ul>
+    <p><strong>Lawful basis:</strong> <span class="basis">Contract performance</span> — providing access to the platform under the tenant's subscription.</p>
+
+    <h3>3.2 Contact and Prospect Data</h3>
+    <p>The platform holds data about your company's contacts and prospects. Your employer (the tenant) is the Data Controller for this data. It includes:</p>
+    <ul>
+      <li>Name, email address, phone number</li>
+      <li>Company name, job title, sector, region</li>
+      <li>Enquiry content and communication history</li>
+      <li>BANT qualification scores and notes</li>
+      <li>Pipeline stage, assigned rep, meeting notes</li>
+      <li>Resources and documents shared with the contact</li>
+    </ul>
+    <div class="callout">
+      If you are a contact whose data has been entered into Always On by a business, the lawful basis for that processing is determined by the tenant (Data Controller). To exercise your data rights, contact the business directly.
+    </div>
+
+    <h3>3.3 Communication Data</h3>
+    <p>Where email sync is enabled by a rep, the platform captures:</p>
+    <ul>
+      <li>Emails sent to and received from contacts whose records exist in the platform</li>
+      <li>WhatsApp conversations handled by the Sally AI agent (where enabled by the tenant)</li>
+      <li>Form submissions received through tenant-embedded web forms</li>
+    </ul>
+
+    <h3>3.4 AI-Processed Data</h3>
+    <p>Always On uses AI agents (Sally, Dan, Caroline) powered by Google Gemini. When the AI processes a contact interaction:</p>
+    <ul>
+      <li>Contact record data and communication history are sent to the Gemini API for analysis and response generation</li>
+      <li>The AI does not store data independently between sessions</li>
+      <li>Google does not use API data to train its models (API usage terms)</li>
+      <li>Data processed by the AI is subject to Google's Cloud API data handling policies</li>
+    </ul>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="policy-section" id="s4">
+    <h2><span class="section-num">4</span> How We Use Platform Data</h2>
+    <div class="policy-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Purpose</th><th>Lawful basis</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Provide and operate the Always On platform</td><td><span class="basis">Contract performance</span></td></tr>
+          <tr><td>Authenticate users and manage access</td><td><span class="basis">Contract performance / legitimate interest</span></td></tr>
+          <tr><td>Enable AI-assisted qualification and communication</td><td><span class="basis">Contract performance (on behalf of tenant)</span></td></tr>
+          <tr><td>Sync emails between rep mailboxes and contact records</td><td><span class="basis">Consent</span> — rep explicitly authorises via OAuth</td></tr>
+          <tr><td>Send transactional emails (invites, notifications)</td><td><span class="basis">Contract performance</span></td></tr>
+          <tr><td>Security monitoring and fraud prevention</td><td><span class="basis">Legitimate interest</span></td></tr>
+          <tr><td>Platform analytics and improvement</td><td><span class="basis">Legitimate interest</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="policy-section" id="s5">
+    <h2><span class="section-num">5</span> Where Data Is Stored</h2>
+    <div class="policy-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Component</th><th>Provider</th><th>Location</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Database</td><td>Supabase (PostgreSQL)</td><td>EU — Ireland (eu-west-1)</td></tr>
+          <tr><td>File storage</td><td>Supabase Storage</td><td>EU — Ireland (eu-west-1)</td></tr>
+          <tr><td>Email sending</td><td>Resend</td><td>EU region</td></tr>
+          <tr><td>Application hosting</td><td>Vercel</td><td>Edge — primarily EU</td></tr>
+          <tr><td>AI processing</td><td>Google Gemini API</td><td>Google Cloud</td></tr>
+          <tr><td>WhatsApp messages</td><td>Meta Cloud API</td><td>Meta infrastructure</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>All primary data storage is within the EU. Where data is processed outside the EU (Google, Meta), appropriate safeguards are in place under Standard Contractual Clauses.</p>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="policy-section" id="s6">
+    <h2><span class="section-num">6</span> Data Isolation and Security</h2>
+    <p>Always On is a multi-tenant platform. Your employer's data is strictly isolated from all other tenants:</p>
+    <ul>
+      <li>Every record is tagged with a <code>tenant_id</code> at the database level</li>
+      <li>Row Level Security (RLS) enforces that queries can only return data belonging to the authenticated user's tenant</li>
+      <li>No cross-tenant data access is possible at any level</li>
+      <li>All data is encrypted in transit (TLS/HTTPS) and at rest</li>
+      <li>OAuth tokens for email sync are encrypted separately with a dedicated encryption key</li>
+      <li>Platform access is invite-only — no self-registration</li>
+    </ul>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="policy-section" id="s7">
+    <h2><span class="section-num">7</span> Email Sync</h2>
+    <p>If you connect your Gmail or Outlook account to Always On:</p>
+    <ul>
+      <li>You explicitly authorise access via OAuth — you can disconnect at any time from your profile settings</li>
+      <li>Only emails matching existing contact records in the platform are synced</li>
+      <li>OAuth tokens are encrypted at rest and are never visible to other users or PGD staff</li>
+      <li>Disconnecting your account immediately stops further sync</li>
+    </ul>
+  </div>
+
+  <!-- Section 8 -->
+  <div class="policy-section" id="s8">
+    <h2><span class="section-num">8</span> Data Retention</h2>
+    <div class="policy-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Data type</th><th>Retention</th><th>Deletion</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Contact and prospect records</td><td>Until deleted by the tenant</td><td>Tenant manager can delete any record</td></tr>
+          <tr><td>Communication history</td><td>Tied to contact record</td><td>Deleted with the contact record</td></tr>
+          <tr><td>User accounts</td><td>Until removed by the tenant manager</td><td>Manager removes team members</td></tr>
+          <tr><td>Email sync history</td><td>Tied to contact record</td><td>Deleted with the contact record</td></tr>
+          <tr><td>Platform logs</td><td>30 days</td><td>Automatic</td></tr>
+          <tr><td>Bug reports</td><td>12 months</td><td>PGD admin managed</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Section 9 -->
+  <div class="policy-section" id="s9">
+    <h2><span class="section-num">9</span> Your Rights</h2>
+    <h3>As a platform user (rep or manager)</h3>
+    <ul>
+      <li>Access, correct or request deletion of your account data — contact your manager or <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a></li>
+      <li>Disconnect your email account at any time from your profile settings</li>
+      <li>Request deletion of your Always On account — contact your manager</li>
+    </ul>
+    <h3>As a contact whose data is in the platform</h3>
+    <ul>
+      <li>Your rights should be exercised with the business (tenant) that entered your data — they are the Data Controller</li>
+      <li>If you cannot reach them, contact <a href="mailto:rob@plangrowdo.com">rob@plangrowdo.com</a> and we will direct your request appropriately</li>
+    </ul>
+  </div>
+
+  <!-- Section 10 -->
+  <div class="policy-section" id="s10">
+    <h2><span class="section-num">10</span> Complaints</h2>
+    <p>If you have a concern about how data is handled within Always On, contact <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a> in the first instance.</p>
+    <p>You also have the right to complain to the Information Commissioner's Office (ICO) at <a href="https://ico.org.uk" target="_blank" rel="noopener">ico.org.uk</a> or by calling <a href="tel:03031231113">0303 123 1113</a>.</p>
+  </div>
+
+  <!-- Section 11 -->
+  <div class="policy-section" id="s11">
+    <h2><span class="section-num">11</span> Changes to This Policy</h2>
+    <p>We may update this policy as the platform evolves. The version date at the top indicates when it was last revised. Significant changes will be notified to tenant administrators.</p>
+  </div>
+
+</div><!-- /policy-wrap -->
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+         onerror="this.style.display='none';" />
+  </div>
+  <p>Always On is operated by <a href="https://www.plangrowdo.com" target="_blank" rel="noopener">Plan Grow Do</a> · DIFR Ltd t/a Plan Grow Do</p>
+  <p><a href="mailto:rob@plangrowdo.com">rob@plangrowdo.com</a></p>
+  <p style="margin-top:12px;"><a href="/">← Back to Always On</a></p>
+</footer>
+
+</body>
+</html>
