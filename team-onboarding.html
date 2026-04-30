@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Onboarding | Always On | Plan Grow Do</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body { font-family: 'Poppins', system-ui, sans-serif; background: #f5f4f7; color: #1a1a2e; line-height: 1.6; min-height: 100vh; }
+
+    :root {
+      --purple: #43165c; --purple-dark: #2d0e3e; --purple-light: #6b2a8f;
+      --yellow: #fbba00; --yellow-dark: #d9a200;
+      --green: #76b82a; --blue: #009fe3;
+      --white: #ffffff; --grey-light: #f5f4f7; --grey-mid: #e8e4ef;
+      --text-muted: #6b6b8a; --error: #e53935;
+    }
+
+    /* ── NAV ── */
+    nav { background: var(--purple-dark); border-bottom: 2px solid var(--yellow); padding: 14px 0; position: sticky; top: 0; z-index: 100; }
+    .nav-inner { max-width: 1000px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; }
+    .nav-logo img { height: 38px; width: auto; display: block; }
+    .nav-logo-text { color: var(--white); font-size: 1rem; font-weight: 700; text-decoration: none; }
+    .nav-logo-text span { color: var(--yellow); }
+    .nav-back { color: rgba(255,255,255,0.55); font-size: 0.82rem; font-weight: 500; text-decoration: none; transition: color 0.2s; }
+    .nav-back:hover { color: var(--yellow); }
+
+    /* ── PAGE HEADER ── */
+    .page-header { background: linear-gradient(135deg, var(--purple-dark), var(--purple)); padding: 40px 24px 32px; text-align: center; }
+    .page-header .badge { display: inline-block; background: rgba(251,186,0,0.15); border: 1px solid rgba(251,186,0,0.35); color: var(--yellow); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; margin-bottom: 12px; }
+    .page-header h1 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: var(--white); letter-spacing: -0.02em; margin-bottom: 6px; }
+    .page-header p { color: rgba(255,255,255,0.55); font-size: 0.88rem; }
+
+    /* ── PROGRESS BAR ── */
+    .progress-wrap { background: var(--purple-dark); padding: 0 24px 20px; }
+    .progress-meta { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .progress-label { font-size: 0.78rem; font-weight: 700; color: rgba(255,255,255,0.6); text-transform: uppercase; letter-spacing: 0.1em; }
+    .progress-step-title { font-size: 0.88rem; font-weight: 600; color: var(--yellow); }
+    .progress-bar-track { max-width: 1000px; margin: 0 auto; height: 5px; background: rgba(255,255,255,0.12); border-radius: 3px; overflow: hidden; }
+    .progress-bar-fill { height: 100%; background: var(--yellow); border-radius: 3px; transition: width 0.4s ease; }
+
+    /* ── MAIN WRAPPER ── */
+    .form-outer { max-width: 1000px; margin: 0 auto; padding: 32px 24px 80px; }
+
+    /* ── FORM CARD ── */
+    .form-card { background: var(--white); border-radius: 16px; border: 1px solid var(--grey-mid); box-shadow: 0 4px 24px rgba(67,22,92,0.08); overflow: hidden; }
+    .form-card-header { background: linear-gradient(135deg, var(--purple), var(--purple-light)); padding: 28px 36px 24px; }
+    .step-icon { font-size: 2rem; margin-bottom: 8px; }
+    .form-card-header h2 { font-size: 1.35rem; font-weight: 800; color: var(--white); letter-spacing: -0.02em; margin-bottom: 4px; }
+    .form-card-header p { font-size: 0.85rem; color: rgba(255,255,255,0.6); }
+    .form-card-body { padding: 36px; }
+
+    /* ── STEP PANELS ── */
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    /* ── FIELD GROUPS ── */
+    .field-group { margin-bottom: 22px; }
+    .field-group label { display: block; font-size: 0.85rem; font-weight: 600; color: var(--purple-dark); margin-bottom: 7px; }
+    .field-group label .req { color: var(--error); margin-left: 3px; }
+    .field-hint { font-size: 0.72rem; color: var(--text-muted); margin-top: 4px; }
+    .field-error { font-size: 0.72rem; color: var(--error); margin-top: 4px; display: none; }
+    .field-group.has-error input, .field-group.has-error textarea, .field-group.has-error select { border-color: var(--error); }
+    .field-group.has-error .field-error { display: block; }
+
+    input[type="text"], input[type="email"], input[type="url"], textarea, select {
+      width: 100%; padding: 11px 14px; border: 1.5px solid var(--grey-mid); border-radius: 8px;
+      font-family: 'Poppins', sans-serif; font-size: 0.875rem; color: var(--purple-dark);
+      background: var(--white); transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    input:focus, textarea:focus, select:focus { outline: none; border-color: var(--purple); box-shadow: 0 0 0 3px rgba(67,22,92,0.1); }
+    textarea { min-height: 110px; resize: vertical; }
+    select { cursor: pointer; }
+    input::placeholder, textarea::placeholder { color: #b0b0c8; }
+
+    /* Two-column grid for short fields */
+    .field-row-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+
+    /* ── FILE UPLOAD ZONE ── */
+    .file-zone { border: 2px dashed var(--grey-mid); border-radius: 10px; padding: 24px 20px; text-align: center; cursor: pointer; transition: border-color 0.2s, background 0.2s; position: relative; }
+    .file-zone:hover, .file-zone.drag-over { border-color: var(--purple); background: rgba(67,22,92,0.03); }
+    .file-zone input[type="file"] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+    .file-zone-icon { font-size: 1.6rem; margin-bottom: 6px; }
+    .file-zone-text { font-size: 0.82rem; font-weight: 600; color: var(--purple); }
+    .file-zone-sub { font-size: 0.72rem; color: var(--text-muted); margin-top: 3px; }
+    .file-selected { margin-top: 10px; display: none; }
+    .file-selected.show { display: block; }
+    .file-tag { display: inline-flex; align-items: center; gap: 6px; background: rgba(67,22,92,0.08); border: 1px solid rgba(67,22,92,0.2); color: var(--purple-dark); font-size: 0.75rem; font-weight: 600; padding: 4px 10px; border-radius: 20px; margin: 3px; }
+    .file-tag .remove-file { cursor: pointer; opacity: 0.5; font-size: 0.85rem; line-height: 1; }
+    .file-tag .remove-file:hover { opacity: 1; color: var(--error); }
+
+    /* ── TEAM MEMBERS ── */
+    .team-section { margin-top: 8px; }
+    .team-section-label { font-size: 0.85rem; font-weight: 600; color: var(--purple-dark); margin-bottom: 10px; display: block; }
+    .team-member-row { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 10px; align-items: center; margin-bottom: 10px; padding: 14px; background: var(--grey-light); border-radius: 8px; border: 1px solid var(--grey-mid); }
+    .team-member-row select { font-size: 0.8rem; padding: 8px 10px; }
+    .team-member-row input { font-size: 0.8rem; padding: 8px 10px; }
+    .remove-member { width: 32px; height: 32px; border: none; background: none; color: var(--text-muted); font-size: 1.1rem; cursor: pointer; border-radius: 6px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: background 0.15s, color 0.15s; }
+    .remove-member:hover { background: rgba(229,57,53,0.1); color: var(--error); }
+    .add-member-btn { display: inline-flex; align-items: center; gap: 7px; padding: 9px 18px; border: 1.5px dashed var(--purple); border-radius: 7px; background: none; color: var(--purple); font-family: 'Poppins', sans-serif; font-size: 0.82rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+    .add-member-btn:hover { background: rgba(67,22,92,0.06); }
+
+    /* ── SECTION DIVIDER ── */
+    .section-divider { height: 1px; background: var(--grey-mid); margin: 28px 0; }
+
+    /* ── NAV BUTTONS ── */
+    .form-nav { display: flex; align-items: center; justify-content: space-between; padding: 24px 36px; border-top: 1px solid var(--grey-mid); background: var(--grey-light); }
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 28px; border-radius: 8px; font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.9rem; cursor: pointer; transition: background 0.2s, transform 0.15s, box-shadow 0.2s; border: none; white-space: nowrap; text-decoration: none; }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+    .btn-yellow { background: var(--yellow); color: var(--purple-dark); }
+    .btn-yellow:hover:not(:disabled) { background: var(--yellow-dark); box-shadow: 0 4px 14px rgba(251,186,0,0.4); }
+    .btn-ghost { background: transparent; color: var(--text-muted); border: 1.5px solid var(--grey-mid); }
+    .btn-ghost:hover { border-color: var(--purple); color: var(--purple); }
+    .btn-submit { background: var(--purple); color: var(--white); padding: 14px 36px; font-size: 1rem; }
+    .btn-submit:hover:not(:disabled) { background: var(--purple-light); box-shadow: 0 4px 14px rgba(67,22,92,0.4); }
+    .step-counter { font-size: 0.78rem; font-weight: 600; color: var(--text-muted); }
+
+    /* Spinner */
+    .spinner { width: 18px; height: 18px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; flex-shrink: 0; }
+    .btn-yellow .spinner { border-color: rgba(67,22,92,0.3); border-top-color: var(--purple-dark); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── TOAST ── */
+    #toast { position: fixed; bottom: 28px; left: 50%; transform: translateX(-50%) translateY(80px); background: var(--purple-dark); color: #fff; padding: 12px 22px; border-radius: 8px; font-size: 0.82rem; font-weight: 500; border-left: 3px solid var(--yellow); white-space: nowrap; transition: transform 0.35s ease; z-index: 9999; pointer-events: none; box-shadow: 0 8px 24px rgba(0,0,0,0.25); }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
+    /* ── CONFIRMATION ── */
+    #confirmation { display: none; text-align: center; padding: 64px 36px; }
+    #confirmation .conf-icon { font-size: 4rem; margin-bottom: 20px; }
+    #confirmation h2 { font-size: 1.8rem; font-weight: 800; color: var(--purple-dark); letter-spacing: -0.02em; margin-bottom: 16px; }
+    #confirmation p { font-size: 1rem; color: var(--text-muted); max-width: 480px; margin: 0 auto 12px; line-height: 1.7; }
+    #confirmation .back-link { display: inline-block; margin-top: 28px; color: var(--purple); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
+    #confirmation .back-link:hover { text-decoration: underline; }
+
+    /* ── CONDITIONAL FIELDS ── */
+    .conditional-field { display: none; }
+    .conditional-field.visible { display: block; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      .form-card-body { padding: 24px 20px; }
+      .form-nav { padding: 18px 20px; flex-wrap: wrap; gap: 12px; }
+      .field-row-2 { grid-template-columns: 1fr; }
+      .team-member-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 480px) {
+      .team-member-row { grid-template-columns: 1fr; }
+      .btn { padding: 11px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='inline';" />
+      <span class="nav-logo-text" style="display:none;">Plan <span>Grow</span> Do</span>
+    </a>
+    <a href="/" class="nav-back">← Back to Always On</a>
+  </div>
+</nav>
+
+<!-- ── PAGE HEADER ── -->
+<div class="page-header">
+  <div class="badge">New Client Setup</div>
+  <h1>Always On — Client Onboarding</h1>
+  <p>9 short sections · your progress is saved automatically</p>
+</div>
+
+<!-- ── PROGRESS BAR ── -->
+<div class="progress-wrap">
+  <div class="progress-meta">
+    <span class="progress-label" id="progress-label">Step 1 of 9</span>
+    <span class="progress-step-title" id="progress-step-title">Your Business</span>
+  </div>
+  <div class="progress-bar-track">
+    <div class="progress-bar-fill" id="progress-fill" style="width:11.1%"></div>
+  </div>
+</div>
+
+<!-- ── MAIN ── -->
+<div class="form-outer">
+  <div class="form-card" id="form-card">
+
+    <!-- Dynamically rendered step header -->
+    <div class="form-card-header" id="step-header">
+      <div class="step-icon" id="step-icon">🏢</div>
+      <h2 id="step-title">Your Business</h2>
+      <p id="step-subtitle">Let's start with the basics about your company</p>
+    </div>
+
+    <!-- Dynamically rendered steps -->
+    <div class="form-card-body" id="form-body">
+      <!-- Steps injected by JS -->
+    </div>
+
+    <!-- Confirmation screen (hidden until submit) -->
+    <div id="confirmation">
+      <div class="conf-icon">✅</div>
+      <h2>Thank you — we've received everything.</h2>
+      <p>Your Plan Grow Do contact will be in touch shortly to confirm your setup timeline.</p>
+      <p style="font-size:0.85rem;">A copy of your responses has been sent to <strong>rob@plangrowdo.com</strong>.</p>
+      <a href="/" class="back-link">← Return to Always On</a>
+    </div>
+
+    <!-- Navigation footer -->
+    <div class="form-nav" id="form-nav">
+      <button class="btn btn-ghost" id="btn-back" onclick="prevStep()">← Back</button>
+      <span class="step-counter" id="step-counter">1 / 9</span>
+      <button class="btn btn-yellow" id="btn-next" onclick="nextStep()">Next →</button>
+    </div>
+
+  </div>
+</div>
+
+<!-- Toast notification -->
+<div id="toast"></div>
+
+<!-- ── SCRIPT ── -->
+<script>
+/* ============================================================
+   ⚙️  SETUP — Fill in these values before going live
+   ============================================================
+   1. Web3Forms (email): Sign up free at https://web3forms.com
+      → Create account → copy your Access Key below.
+      The email to rob@plangrowdo.com is sent automatically.
+
+   2. Uploadcare (file storage): Sign up free at https://uploadcare.com
+      → Dashboard → API Keys → copy your Public Key below.
+      Files are stored on Uploadcare CDN; download links go in the email.
+
+   If keys are left as placeholders, the form will still work but
+   email won't send and files won't upload to CDN — use for testing.
+   ============================================================ */
+const WEB3FORMS_KEY      = 'YOUR_WEB3FORMS_ACCESS_KEY';   // web3forms.com → Account → Access Key
+const UPLOADCARE_PUB_KEY = 'YOUR_UPLOADCARE_PUBLIC_KEY';  // uploadcare.com → Dashboard → API Keys
+
+/* ── STEP DEFINITIONS ── */
+const STEPS = [
+  {
+    id: 1, title: 'Your Business', icon: '🏢',
+    subtitle: "Let's start with the basics about your company",
+    fields: [
+      { id:'company_name',    label:'Company name',                                   type:'text',     required:true },
+      { id:'trading_name',   label:'Trading name (if different)',                    type:'text' },
+      { id:'industry',       label:'Industry / sector',                              type:'text' },
+      { id:'website',        label:'Company website',                                type:'url',      placeholder:'https://' },
+      { id:'linkedin',       label:'LinkedIn company page',                          type:'url',      placeholder:'https://linkedin.com/company/...' },
+      { id:'social_handles', label:'Other key social handles',                       type:'text',     placeholder:'@handle or full URL' },
+      { id:'description',    label:'Brief description of what you do (2–3 sentences)', type:'textarea' },
+    ]
+  },
+  {
+    id: 2, title: 'Your Brand', icon: '🎨',
+    subtitle: "Help us understand your visual identity and tone",
+    fields: [
+      { id:'logo',             label:'Upload your logo',                       type:'file',   accept:'.png,.svg,.jpg,.jpeg', hint:'PNG or SVG preferred' },
+      { id:'brand_assets',     label:'Upload brand guidelines or assets',      type:'file',   accept:'*',                   hint:'Any files — PDF, ZIP, images', multiple:true },
+      { id:'primary_colour',   label:'Primary brand colour',                   type:'text',   placeholder:'#43165c or "deep purple"' },
+      { id:'secondary_colours',label:'Secondary brand colour(s)',              type:'text' },
+      { id:'tone_of_voice',    label:'Brand tone of voice',                    type:'select', options:['Professional','Friendly','Technical','Conversational','Other'] },
+      { id:'tone_other',       label:'If other, describe your tone',           type:'text',   showIf:{field:'tone_of_voice', value:'Other'} },
+      { id:'tagline',          label:'Tagline or strapline (if you have one)', type:'text' },
+    ]
+  },
+  {
+    id: 3, title: 'Products & Services', icon: '📦',
+    subtitle: "What you sell and what makes it worth buying",
+    fields: [
+      { id:'products_services',label:'List your main products or services',                    type:'textarea' },
+      { id:'price_range',      label:'Typical price range or deal value',                      type:'text',    placeholder:'e.g. £5k–£50k per contract' },
+      { id:'min_order',        label:'Minimum order / engagement size (if applicable)',        type:'text' },
+      { id:'top_reasons',      label:'Top 3 reasons customers choose you over competitors',   type:'textarea' },
+      { id:'exclusions',       label:'Anything you do NOT want enquiries about',              type:'textarea' },
+    ]
+  },
+  {
+    id: 4, title: 'Your Ideal Customer', icon: '🎯',
+    subtitle: "Describe your best-fit buyer",
+    fields: [
+      { id:'target_industry',    label:'Target industry / sector(s)',                     type:'text' },
+      { id:'company_size',       label:'Ideal company size',                              type:'select', options:['1–10','11–50','51–200','200+','Any'] },
+      { id:'job_titles',         label:'Job titles you typically sell to',                type:'text',   placeholder:'e.g. Sales Director, Commercial Manager' },
+      { id:'geography',          label:'Geography',                                       type:'select', options:['UK only','UK & Europe','Global','Other'] },
+      { id:'best_fit_customer',  label:'Describe your best-fit customer in a sentence',  type:'textarea' },
+    ]
+  },
+  {
+    id: 5, title: 'Your Sales Process', icon: '🔄',
+    subtitle: "How you currently find and win business",
+    fields: [
+      { id:'lead_sources',  label:'Where do your leads currently come from?',              type:'textarea' },
+      { id:'sales_cycle',   label:'How long is a typical sales cycle?',                   type:'text',    placeholder:'e.g. 2–4 weeks' },
+      { id:'objections',    label:'What are the most common objections you face?',        type:'textarea' },
+      { id:'quoting_info',  label:'What information do you need before quoting?',         type:'textarea' },
+      { id:'crm',           label:'Do you use a CRM? If so, which one?',                 type:'text',    placeholder:'e.g. HubSpot, Salesforce, none' },
+    ]
+  },
+  {
+    id: 6, title: 'Your Competitors', icon: '🏁',
+    subtitle: "Know your landscape so we can position you well",
+    fields: [
+      { id:'competitors',       label:'Who are your main competitors?',                              type:'textarea' },
+      { id:'advantages',        label:'What do you do better than them?',                            type:'textarea' },
+      { id:'avoid_competitors', label:'Any competitors we should NOT mention in communications?',    type:'text' },
+    ]
+  },
+  {
+    id: 7, title: 'Your Team', icon: '👥',
+    subtitle: "Who we'll be working with",
+    special: 'team',
+    fields: [
+      { id:'primary_contact_name',  label:'Primary contact full name',   type:'text',  required:true },
+      { id:'primary_contact_email', label:'Primary contact email',       type:'email', required:true },
+      { id:'prospect_list',         label:'Upload existing prospect or customer list', type:'file', accept:'.csv,.xlsx,.xls', hint:'CSV or Excel' },
+    ]
+  },
+  {
+    id: 8, title: 'Forms & Follow-Up', icon: '✉️',
+    subtitle: "How you want to handle inbound enquiries",
+    fields: [
+      { id:'enquiry_questions', label:'What questions should your enquiry form ask?',          type:'textarea' },
+      { id:'has_resource',      label:'Is there a resource you'd like sent on form submission?', type:'select', options:['Yes','No'], placeholder:'e.g. brochure, price list' },
+      { id:'resource_upload',   label:'Upload the resource',                                   type:'file',   accept:'.pdf,.docx,.pptx,.png,.jpg', showIf:{field:'has_resource',value:'Yes'} },
+      { id:'followup_speed',    label:'How quickly should enquiries be followed up?',          type:'select', options:['Immediately','Within 1 hour','Same day','Next working day'] },
+      { id:'automated_tone',    label:'Ideal tone for automated responses',                    type:'select', options:['Professional','Warm & friendly','Direct','Consultative'] },
+      { id:'message_rules',     label:'Anything automated messages should always say or never say?', type:'textarea' },
+    ]
+  },
+  {
+    id: 9, title: 'Legal & Compliance', icon: '🔒',
+    subtitle: "Almost done — just a few compliance questions",
+    fields: [
+      { id:'has_privacy_policy', label:'Do you have a privacy policy on your website?', type:'select', options:['Yes','No','Not yet'] },
+      { id:'privacy_policy_url', label:'Privacy policy URL',                            type:'url',    placeholder:'https://', showIf:{field:'has_privacy_policy',value:'Yes'} },
+      { id:'has_dnc_list',       label:'Do you have an existing do-not-contact list?',  type:'select', options:['Yes','No'] },
+      { id:'dnc_upload',         label:'Upload your do-not-contact list',               type:'file',   accept:'.csv,.xlsx', showIf:{field:'has_dnc_list',value:'Yes'} },
+      { id:'compliance_notes',   label:'Any other compliance notes we should be aware of?', type:'textarea' },
+    ]
+  }
+];
+
+/* ── STATE ── */
+const STORAGE_KEY = 'ao_onboarding_v2';
+let currentStep  = 1;
+let teamMembers  = []; // [{ name, email, title, role }]
+let selectedFiles = {}; // { fieldId: [File, ...] }
+let submitted    = false;
+
+/* ── INIT ── */
+document.addEventListener('DOMContentLoaded', () => {
+  renderAllSteps();
+  loadFromStorage();
+  showStep(currentStep);
+  checkConditionals();
+});
+
+/* ── RENDER ALL STEPS ── */
+function renderAllSteps() {
+  const body = document.getElementById('form-body');
+  body.innerHTML = STEPS.map(step => renderStep(step)).join('');
+}
+
+function renderStep(step) {
+  return `<div class="step-panel" id="step-${step.id}" data-step="${step.id}">
+    ${step.fields.map(f => renderField(f)).join('')}
+    ${step.special === 'team' ? renderTeamSection() : ''}
+  </div>`;
+}
+
+function renderField(f) {
+  const isConditional = !!f.showIf;
+  const wrapClass = `field-group${isConditional ? ' conditional-field' : ''}`;
+  const dataAttr  = isConditional ? ` data-show-if-field="${f.showIf.field}" data-show-if-value="${f.showIf.value}"` : '';
+  const reqSpan   = f.required ? '<span class="req">*</span>' : '';
+
+  let input = '';
+  if (f.type === 'textarea') {
+    input = `<textarea id="${f.id}" name="${f.id}" placeholder="${f.placeholder||''}" oninput="saveToStorage()">${''}</textarea>`;
+  } else if (f.type === 'select') {
+    const opts = (f.options||[]).map(o => `<option value="${o}">${o}</option>`).join('');
+    input = `<select id="${f.id}" name="${f.id}" onchange="saveToStorage();checkConditionals()"><option value="">— Select —</option>${opts}</select>`;
+  } else if (f.type === 'file') {
+    const multi = f.multiple ? 'multiple' : '';
+    input = `<div class="file-zone" id="zone-${f.id}">
+      <input type="file" id="${f.id}" accept="${f.accept||'*'}" ${multi} onchange="handleFileSelect(event,'${f.id}')">
+      <div class="file-zone-icon">📎</div>
+      <div class="file-zone-text">Click to upload or drag &amp; drop</div>
+      <div class="file-zone-sub">${f.hint||'Up to 20MB per file'}</div>
+    </div>
+    <div class="file-selected" id="files-${f.id}"></div>`;
+  } else {
+    input = `<input type="${f.type}" id="${f.id}" name="${f.id}" placeholder="${f.placeholder||''}" ${f.required?'required':''} oninput="saveToStorage()">`;
+  }
+
+  const hint  = f.hint && f.type !== 'file' ? `<div class="field-hint">${f.hint}</div>` : '';
+  const error = `<div class="field-error" id="err-${f.id}">This field is required</div>`;
+
+  return `<div class="${wrapClass}" id="wrap-${f.id}"${dataAttr}>
+    <label for="${f.id}">${f.label}${reqSpan}</label>
+    ${input}${hint}${f.required ? error : ''}
+  </div>`;
+}
+
+function renderTeamSection() {
+  return `<div class="section-divider"></div>
+  <div class="team-section">
+    <span class="team-section-label">Additional Team Members <span style="font-weight:400;color:var(--text-muted)">(optional)</span></span>
+    <div id="team-rows"></div>
+    <button type="button" class="add-member-btn" onclick="addTeamMember()">+ Add team member</button>
+  </div>`;
+}
+
+/* ── STEP NAVIGATION ── */
+function showStep(n) {
+  document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
+  const panel = document.getElementById(`step-${n}`);
+  if (panel) panel.classList.add('active');
+
+  const step = STEPS[n - 1];
+  document.getElementById('step-icon').textContent       = step.icon;
+  document.getElementById('step-title').textContent      = step.title;
+  document.getElementById('step-subtitle').textContent   = step.subtitle;
+  document.getElementById('progress-label').textContent  = `Step ${n} of ${STEPS.length}`;
+  document.getElementById('progress-step-title').textContent = step.title;
+  document.getElementById('progress-fill').style.width   = `${(n / STEPS.length) * 100}%`;
+  document.getElementById('step-counter').textContent    = `${n} / ${STEPS.length}`;
+
+  const btnBack = document.getElementById('btn-back');
+  const btnNext = document.getElementById('btn-next');
+  btnBack.style.visibility = n === 1 ? 'hidden' : 'visible';
+
+  if (n === STEPS.length) {
+    btnNext.textContent = '';
+    btnNext.className   = 'btn btn-submit';
+    btnNext.innerHTML   = 'Submit ✓';
+    btnNext.onclick     = handleSubmit;
+  } else {
+    btnNext.className   = 'btn btn-yellow';
+    btnNext.innerHTML   = 'Next →';
+    btnNext.onclick     = nextStep;
+  }
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  if (!validateCurrentStep()) return;
+  if (currentStep < STEPS.length) { currentStep++; showStep(currentStep); }
+}
+
+function prevStep() {
+  if (currentStep > 1) { currentStep--; showStep(currentStep); }
+}
+
+/* ── VALIDATION ── */
+function validateCurrentStep() {
+  const step    = STEPS[currentStep - 1];
+  const required = step.fields.filter(f => f.required);
+  let valid = true;
+  required.forEach(f => {
+    const el  = document.getElementById(f.id);
+    const grp = document.getElementById(`wrap-${f.id}`);
+    if (!el || !el.value.trim()) {
+      grp.classList.add('has-error');
+      valid = false;
+    } else {
+      grp.classList.remove('has-error');
+    }
+  });
+  if (!valid) showToast('Please fill in the required fields');
+  return valid;
+}
+
+/* ── CONDITIONAL FIELDS ── */
+function checkConditionals() {
+  document.querySelectorAll('.conditional-field').forEach(wrap => {
+    const triggerField = wrap.dataset.showIfField;
+    const triggerValue = wrap.dataset.showIfValue;
+    const el = document.getElementById(triggerField);
+    if (!el) return;
+    wrap.classList.toggle('visible', el.value === triggerValue);
+  });
+}
+
+/* ── FILE HANDLING ── */
+function handleFileSelect(event, fieldId) {
+  const files = Array.from(event.target.files);
+  if (!selectedFiles[fieldId]) selectedFiles[fieldId] = [];
+  files.forEach(f => {
+    if (f.size > 20 * 1024 * 1024) { showToast(`${f.name} exceeds 20MB — skipped`); return; }
+    selectedFiles[fieldId].push(f);
+  });
+  renderFileTags(fieldId);
+}
+
+function renderFileTags(fieldId) {
+  const container = document.getElementById(`files-${fieldId}`);
+  if (!container) return;
+  const files = selectedFiles[fieldId] || [];
+  if (!files.length) { container.classList.remove('show'); container.innerHTML = ''; return; }
+  container.classList.add('show');
+  container.innerHTML = files.map((f, i) =>
+    `<span class="file-tag">📄 ${f.name} <span class="remove-file" onclick="removeFile('${fieldId}',${i})">×</span></span>`
+  ).join('');
+}
+
+function removeFile(fieldId, index) {
+  if (selectedFiles[fieldId]) {
+    selectedFiles[fieldId].splice(index, 1);
+    renderFileTags(fieldId);
+  }
+}
+
+/* ── TEAM MEMBERS ── */
+function addTeamMember() {
+  const id = Date.now();
+  teamMembers.push({ id, name:'', email:'', title:'', role:'Rep' });
+  renderTeamRows();
+}
+
+function removeTeamMember(id) {
+  teamMembers = teamMembers.filter(m => m.id !== id);
+  renderTeamRows();
+}
+
+function renderTeamRows() {
+  const container = document.getElementById('team-rows');
+  if (!container) return;
+  container.innerHTML = teamMembers.map(m => `
+    <div class="team-member-row" id="tm-${m.id}">
+      <input type="text"  placeholder="Full name"  value="${m.name||''}"  oninput="updateMember(${m.id},'name',this.value)">
+      <input type="email" placeholder="Email"       value="${m.email||''}" oninput="updateMember(${m.id},'email',this.value)">
+      <input type="text"  placeholder="Job title"  value="${m.title||''}" oninput="updateMember(${m.id},'title',this.value)">
+      <select onchange="updateMember(${m.id},'role',this.value)">
+        <option value="Rep"     ${m.role==='Rep'?'selected':''}>Rep</option>
+        <option value="Manager" ${m.role==='Manager'?'selected':''}>Manager</option>
+      </select>
+      <button class="remove-member" onclick="removeTeamMember(${m.id})" title="Remove">×</button>
+    </div>
+  `).join('');
+}
+
+function updateMember(id, key, value) {
+  const m = teamMembers.find(m => m.id === id);
+  if (m) m[key] = value;
+}
+
+/* ── LOCAL STORAGE ── */
+function saveToStorage() {
+  const data = {};
+  STEPS.forEach(step => {
+    step.fields.forEach(f => {
+      if (f.type === 'file') return;
+      const el = document.getElementById(f.id);
+      if (el) data[f.id] = el.value;
+    });
+  });
+  data._step        = currentStep;
+  data._teamMembers = JSON.stringify(teamMembers);
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+function loadFromStorage() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const data = JSON.parse(raw);
+    Object.keys(data).forEach(key => {
+      if (key.startsWith('_')) return;
+      const el = document.getElementById(key);
+      if (el) el.value = data[key];
+    });
+    if (data._step) currentStep = parseInt(data._step) || 1;
+    if (data._teamMembers) {
+      try { teamMembers = JSON.parse(data._teamMembers) || []; renderTeamRows(); } catch(e){}
+    }
+    checkConditionals();
+  } catch(e) {}
+}
+
+function clearStorage() {
+  try { localStorage.removeItem(STORAGE_KEY); } catch(e) {}
+}
+
+/* ── UPLOADCARE FILE UPLOAD ── */
+async function uploadFile(file) {
+  if (!UPLOADCARE_PUB_KEY || UPLOADCARE_PUB_KEY === 'YOUR_UPLOADCARE_PUBLIC_KEY') {
+    return { url: null, name: file.name, note: '(file upload key not configured)' };
+  }
+  const fd = new FormData();
+  fd.append('UPLOADCARE_PUB_KEY', UPLOADCARE_PUB_KEY);
+  fd.append('UPLOADCARE_STORE', '1');
+  fd.append('file', file, file.name);
+  try {
+    const res  = await fetch('https://upload.uploadcare.com/base/', { method:'POST', body:fd });
+    const json = await res.json();
+    return { url: `https://ucarecdn.com/${json.file}/${encodeURIComponent(file.name)}`, name: file.name };
+  } catch(e) {
+    return { url: null, name: file.name, note: '(upload failed)' };
+  }
+}
+
+async function uploadAllFiles() {
+  const allUploads = {};
+  for (const [fieldId, files] of Object.entries(selectedFiles)) {
+    if (!files.length) continue;
+    allUploads[fieldId] = [];
+    for (const f of files) {
+      const result = await uploadFile(f);
+      allUploads[fieldId].push(result);
+    }
+  }
+  return allUploads;
+}
+
+/* ── COLLECT FORM DATA ── */
+function collectFormData() {
+  const data = {};
+  STEPS.forEach(step => {
+    step.fields.forEach(f => {
+      if (f.type === 'file') return;
+      const el = document.getElementById(f.id);
+      if (el) data[f.id] = el.value;
+    });
+  });
+  data._teamMembers = teamMembers;
+  return data;
+}
+
+/* ── BUILD EMAIL HTML ── */
+function buildEmailHTML(formData, fileUploads) {
+  const f = formData;
+  const companyName = f.company_name || 'New Client';
+
+  function row(label, value) {
+    if (!value) return '';
+    return `<tr><td style="padding:8px 14px;font-weight:600;color:#43165c;width:35%;vertical-align:top;border-bottom:1px solid #e8e4ef;font-size:13px;">${label}</td>
+      <td style="padding:8px 14px;color:#3a3a5c;border-bottom:1px solid #e8e4ef;font-size:13px;">${value.replace(/\n/g,'<br>')}</td></tr>`;
+  }
+
+  function section(title, rows) {
+    const filled = rows.filter(Boolean).join('');
+    if (!filled) return '';
+    return `<h3 style="font-family:sans-serif;color:#2d0e3e;font-size:14px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin:28px 0 8px;padding-bottom:6px;border-bottom:2px solid #fbba00;">${title}</h3>
+    <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;margin-bottom:8px;">${filled}</table>`;
+  }
+
+  function fileLinks(fieldId, label) {
+    const files = fileUploads[fieldId];
+    if (!files || !files.length) return '';
+    const links = files.map(f => f.url
+      ? `<a href="${f.url}" style="color:#43165c;font-weight:600;">${f.name}</a>`
+      : `${f.name} ${f.note||''}`
+    ).join(' &nbsp;|&nbsp; ');
+    return row(label, links);
+  }
+
+  const teamHTML = f._teamMembers && f._teamMembers.length
+    ? `<table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px;">
+        <tr style="background:#43165c;color:#fff;"><th style="padding:8px 12px;text-align:left;">Name</th><th style="padding:8px 12px;text-align:left;">Email</th><th style="padding:8px 12px;text-align:left;">Title</th><th style="padding:8px 12px;text-align:left;">Role</th></tr>
+        ${f._teamMembers.map(m =>
+          `<tr style="background:#f5f4f7;"><td style="padding:7px 12px;">${m.name}</td><td style="padding:7px 12px;">${m.email}</td><td style="padding:7px 12px;">${m.title}</td><td style="padding:7px 12px;">${m.role}</td></tr>`
+        ).join('')}
+      </table>`
+    : '';
+
+  return `<!DOCTYPE html><html><body style="font-family:sans-serif;background:#f5f4f7;padding:24px;color:#1a1a2e;">
+  <div style="max-width:720px;margin:0 auto;">
+    <div style="background:linear-gradient(135deg,#2d0e3e,#43165c);padding:28px 32px;border-radius:12px 12px 0 0;">
+      <div style="color:#fbba00;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;">New Client Onboarding</div>
+      <h1 style="color:#fff;font-size:24px;font-weight:800;margin:0 0 6px;">${companyName}</h1>
+      <p style="color:rgba(255,255,255,0.6);font-size:13px;margin:0;">Always On Sales Control System</p>
+    </div>
+    <div style="background:#fff;padding:32px;border-radius:0 0 12px 12px;border:1px solid #e8e4ef;border-top:none;">
+      ${section('1 · Your Business', [
+        row('Company name', f.company_name),
+        row('Trading name', f.trading_name),
+        row('Industry / sector', f.industry),
+        row('Website', f.website ? `<a href="${f.website}" style="color:#43165c;">${f.website}</a>` : ''),
+        row('LinkedIn', f.linkedin ? `<a href="${f.linkedin}" style="color:#43165c;">${f.linkedin}</a>` : ''),
+        row('Social handles', f.social_handles),
+        row('Description', f.description),
+      ])}
+      ${section('2 · Your Brand', [
+        fileLinks('logo', 'Logo'),
+        fileLinks('brand_assets', 'Brand assets'),
+        row('Primary colour', f.primary_colour),
+        row('Secondary colours', f.secondary_colours),
+        row('Tone of voice', f.tone_of_voice),
+        row('Tone (other)', f.tone_other),
+        row('Tagline', f.tagline),
+      ])}
+      ${section('3 · Products & Services', [
+        row('Products / services', f.products_services),
+        row('Price range', f.price_range),
+        row('Minimum order', f.min_order),
+        row('Top 3 reasons', f.top_reasons),
+        row('Exclusions', f.exclusions),
+      ])}
+      ${section('4 · Ideal Customer', [
+        row('Target industry', f.target_industry),
+        row('Company size', f.company_size),
+        row('Job titles', f.job_titles),
+        row('Geography', f.geography),
+        row('Best-fit customer', f.best_fit_customer),
+      ])}
+      ${section('5 · Sales Process', [
+        row('Lead sources', f.lead_sources),
+        row('Sales cycle', f.sales_cycle),
+        row('Objections', f.objections),
+        row('Quoting information', f.quoting_info),
+        row('CRM', f.crm),
+      ])}
+      ${section('6 · Competitors', [
+        row('Competitors', f.competitors),
+        row('Advantages', f.advantages),
+        row('Avoid mentioning', f.avoid_competitors),
+      ])}
+      ${section('7 · Team', [
+        row('Primary contact', f.primary_contact_name),
+        row('Primary email', f.primary_contact_email),
+        teamHTML ? `<tr><td colspan="2" style="padding:10px 14px;border-bottom:1px solid #e8e4ef;">${teamHTML}</td></tr>` : '',
+        fileLinks('prospect_list', 'Prospect list'),
+      ])}
+      ${section('8 · Forms & Follow-Up', [
+        row('Enquiry form questions', f.enquiry_questions),
+        row('Resource on submit', f.has_resource),
+        fileLinks('resource_upload', 'Resource file'),
+        row('Follow-up speed', f.followup_speed),
+        row('Automated tone', f.automated_tone),
+        row('Message rules', f.message_rules),
+      ])}
+      ${section('9 · Legal & Compliance', [
+        row('Has privacy policy', f.has_privacy_policy),
+        row('Privacy policy URL', f.privacy_policy_url ? `<a href="${f.privacy_policy_url}" style="color:#43165c;">${f.privacy_policy_url}</a>` : ''),
+        row('Do-not-contact list', f.has_dnc_list),
+        fileLinks('dnc_upload', 'DNC file'),
+        row('Compliance notes', f.compliance_notes),
+      ])}
+    </div>
+    <p style="text-align:center;font-size:11px;color:#b0b0c8;margin-top:16px;">Always On · Plan Grow Do · alwaysonscs.com</p>
+  </div></body></html>`;
+}
+
+/* ── SUBMIT ── */
+async function handleSubmit() {
+  if (submitted) return;
+  if (!validateCurrentStep()) return;
+
+  const btn = document.getElementById('btn-next');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Uploading files…';
+
+  try {
+    // 1. Upload files
+    const fileUploads = await uploadAllFiles();
+    btn.innerHTML = '<span class="spinner"></span> Sending…';
+
+    // 2. Collect data
+    const formData = collectFormData();
+    const companyName = formData.company_name || 'New Client';
+
+    // 3. Build HTML email
+    const messageHTML = buildEmailHTML(formData, fileUploads);
+
+    // 4. Send via Web3Forms
+    if (WEB3FORMS_KEY && WEB3FORMS_KEY !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
+      const payload = {
+        access_key: WEB3FORMS_KEY,
+        subject:    `New Always On Onboarding — ${companyName}`,
+        from_name:  'Always On Onboarding',
+        to_email:   'rob@plangrowdo.com',
+        message:    messageHTML,
+        botcheck:   false,
+      };
+      const res = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json();
+      if (!json.success) throw new Error(json.message || 'Email send failed');
+    }
+
+    // 5. Mark as submitted, clear storage
+    submitted = true;
+    clearStorage();
+    showConfirmation();
+
+  } catch(err) {
+    console.error(err);
+    btn.disabled = false;
+    btn.innerHTML = 'Submit ✓';
+    showToast('Something went wrong — please try again');
+  }
+}
+
+/* ── CONFIRMATION ── */
+function showConfirmation() {
+  document.getElementById('form-body').style.display   = 'none';
+  document.getElementById('step-header').style.display = 'none';
+  document.getElementById('form-nav').style.display    = 'none';
+  document.getElementById('confirmation').style.display = 'block';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+/* ── TOAST ── */
+function showToast(msg, duration = 3000) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), duration);
+}
+
+/* ── DRAG & DROP ── */
+document.addEventListener('dragover', e => {
+  const zone = e.target.closest('.file-zone');
+  if (zone) { e.preventDefault(); zone.classList.add('drag-over'); }
+});
+document.addEventListener('dragleave', e => {
+  const zone = e.target.closest('.file-zone');
+  if (zone) zone.classList.remove('drag-over');
+});
+document.addEventListener('drop', e => {
+  const zone = e.target.closest('.file-zone');
+  if (!zone) return;
+  e.preventDefault();
+  zone.classList.remove('drag-over');
+  const input = zone.querySelector('input[type="file"]');
+  if (!input) return;
+  const fieldId = input.id;
+  const files = Array.from(e.dataTransfer.files);
+  if (!selectedFiles[fieldId]) selectedFiles[fieldId] = [];
+  files.forEach(f => {
+    if (f.size > 20 * 1024 * 1024) { showToast(`${f.name} exceeds 20MB — skipped`); return; }
+    selectedFiles[fieldId].push(f);
+  });
+  renderFileTags(fieldId);
+});
+
+/* ── SAVE ON CHANGE ── */
+document.addEventListener('change', e => {
+  if (e.target.tagName === 'SELECT') { checkConditionals(); saveToStorage(); }
+});
+document.addEventListener('input', () => saveToStorage());
+</script>
+</body>
+</html>
