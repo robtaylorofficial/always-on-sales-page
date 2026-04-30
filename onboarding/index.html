@@ -641,115 +641,112 @@ function collectFormData() {
 function buildEmailHTML(formData, fileUploads) {
   const f = formData;
   const companyName = f.company_name || 'New Client';
+  const date = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+  const LINE  = '─'.repeat(60);
+  const BREAK = '\n\n';
 
-  function row(label, value) {
+  function field(label, value) {
     if (!value) return '';
-    return `<tr><td style="padding:8px 14px;font-weight:600;color:#43165c;width:35%;vertical-align:top;border-bottom:1px solid #e8e4ef;font-size:13px;">${label}</td>
-      <td style="padding:8px 14px;color:#3a3a5c;border-bottom:1px solid #e8e4ef;font-size:13px;">${value.replace(/\n/g,'<br>')}</td></tr>`;
+    return `\n${label}:\n${value}\n`;
   }
 
-  function section(title, rows) {
-    const filled = rows.filter(Boolean).join('');
-    if (!filled) return '';
-    return `<h3 style="font-family:sans-serif;color:#2d0e3e;font-size:14px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;margin:28px 0 8px;padding-bottom:6px;border-bottom:2px solid #fbba00;">${title}</h3>
-    <table style="width:100%;border-collapse:collapse;background:#fff;border-radius:8px;overflow:hidden;margin-bottom:8px;">${filled}</table>`;
-  }
-
-  function fileLinks(fieldId, label) {
+  function fileField(fieldId, label) {
     const files = fileUploads[fieldId];
     if (!files || !files.length) return '';
-    const links = files.map(f => f.url
-      ? `<a href="${f.url}" style="color:#43165c;font-weight:600;">${f.name}</a>`
-      : `${f.name} ${f.note||''}`
-    ).join(' &nbsp;|&nbsp; ');
-    return row(label, links);
+    const links = files.map(fi => fi.url ? `${fi.name}\n${fi.url}` : fi.name).join('\n');
+    return `\n${label}:\n${links}\n`;
   }
 
-  const teamHTML = f._teamMembers && f._teamMembers.length
-    ? `<table style="width:100%;border-collapse:collapse;font-size:12px;margin-bottom:8px;">
-        <tr style="background:#43165c;color:#fff;"><th style="padding:8px 12px;text-align:left;">Name</th><th style="padding:8px 12px;text-align:left;">Email</th><th style="padding:8px 12px;text-align:left;">Title</th><th style="padding:8px 12px;text-align:left;">Role</th></tr>
-        ${f._teamMembers.map(m =>
-          `<tr style="background:#f5f4f7;"><td style="padding:7px 12px;">${m.name}</td><td style="padding:7px 12px;">${m.email}</td><td style="padding:7px 12px;">${m.title}</td><td style="padding:7px 12px;">${m.role}</td></tr>`
-        ).join('')}
-      </table>`
-    : '';
+  function section(title, parts) {
+    const content = parts.filter(Boolean).join('');
+    if (!content) return '';
+    return `\n${LINE}\n${title}\n${LINE}${content}`;
+  }
 
-  return `<!DOCTYPE html><html><body style="font-family:sans-serif;background:#f5f4f7;padding:24px;color:#1a1a2e;">
-  <div style="max-width:720px;margin:0 auto;">
-    <div style="background:linear-gradient(135deg,#2d0e3e,#43165c);padding:28px 32px;border-radius:12px 12px 0 0;">
-      <div style="color:#fbba00;font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:8px;">New Client Onboarding</div>
-      <h1 style="color:#fff;font-size:24px;font-weight:800;margin:0 0 6px;">${companyName}</h1>
-      <p style="color:rgba(255,255,255,0.6);font-size:13px;margin:0;">Always On Sales Control System</p>
-    </div>
-    <div style="background:#fff;padding:32px;border-radius:0 0 12px 12px;border:1px solid #e8e4ef;border-top:none;">
-      ${section('1 · Your Business', [
-        row('Company name', f.company_name),
-        row('Trading name', f.trading_name),
-        row('Industry / sector', f.industry),
-        row('Website', f.website ? `<a href="${f.website}" style="color:#43165c;">${f.website}</a>` : ''),
-        row('LinkedIn', f.linkedin ? `<a href="${f.linkedin}" style="color:#43165c;">${f.linkedin}</a>` : ''),
-        row('Social handles', f.social_handles),
-        row('Description', f.description),
-      ])}
-      ${section('2 · Your Brand', [
-        fileLinks('logo', 'Logo'),
-        fileLinks('brand_assets', 'Brand assets'),
-        row('Primary colour', f.primary_colour),
-        row('Secondary colours', f.secondary_colours),
-        row('Tone of voice', f.tone_of_voice),
-        row('Tone (other)', f.tone_other),
-        row('Tagline', f.tagline),
-      ])}
-      ${section('3 · Products & Services', [
-        row('Products / services', f.products_services),
-        row('Price range', f.price_range),
-        row('Minimum order', f.min_order),
-        row('Top 3 reasons', f.top_reasons),
-        row('Exclusions', f.exclusions),
-      ])}
-      ${section('4 · Ideal Customer', [
-        row('Target industry', f.target_industry),
-        row('Company size', f.company_size),
-        row('Job titles', f.job_titles),
-        row('Geography', f.geography),
-        row('Best-fit customer', f.best_fit_customer),
-      ])}
-      ${section('5 · Sales Process', [
-        row('Lead sources', f.lead_sources),
-        row('Sales cycle', f.sales_cycle),
-        row('Objections', f.objections),
-        row('Quoting information', f.quoting_info),
-        row('CRM', f.crm),
-      ])}
-      ${section('6 · Competitors', [
-        row('Competitors', f.competitors),
-        row('Advantages', f.advantages),
-        row('Avoid mentioning', f.avoid_competitors),
-      ])}
-      ${section('7 · Team', [
-        row('Primary contact', f.primary_contact_name),
-        row('Primary email', f.primary_contact_email),
-        teamHTML ? `<tr><td colspan="2" style="padding:10px 14px;border-bottom:1px solid #e8e4ef;">${teamHTML}</td></tr>` : '',
-        fileLinks('prospect_list', 'Prospect list'),
-      ])}
-      ${section('8 · Forms & Follow-Up', [
-        row('Enquiry form questions', f.enquiry_questions),
-        row('Resource on submit', f.has_resource),
-        fileLinks('resource_upload', 'Resource file'),
-        row('Follow-up speed', f.followup_speed),
-        row('Automated tone', f.automated_tone),
-        row('Message rules', f.message_rules),
-      ])}
-      ${section('9 · Legal & Compliance', [
-        row('Has privacy policy', f.has_privacy_policy),
-        row('Privacy policy URL', f.privacy_policy_url ? `<a href="${f.privacy_policy_url}" style="color:#43165c;">${f.privacy_policy_url}</a>` : ''),
-        row('Do-not-contact list', f.has_dnc_list),
-        fileLinks('dnc_upload', 'DNC file'),
-        row('Compliance notes', f.compliance_notes),
-      ])}
-    </div>
-    <p style="text-align:center;font-size:11px;color:#b0b0c8;margin-top:16px;">Always On · Plan Grow Do · alwaysonscs.com</p>
-  </div></body></html>`;
+  let teamBlock = '';
+  if (f._teamMembers && f._teamMembers.length) {
+    teamBlock = `\nAdditional team members:\n`;
+    f._teamMembers.forEach(m => {
+      teamBlock += `  • ${m.name} | ${m.email} | ${m.title} | ${m.role}\n`;
+    });
+  }
+
+  const body = [
+    `NEW ALWAYS ON ONBOARDING SUBMISSION`,
+    `${'='.repeat(40)}`,
+    `Company:   ${companyName}`,
+    `Submitted: ${date}`,
+    ``,
+    section('1 — YOUR BUSINESS', [
+      field('Company name', f.company_name),
+      field('Trading name', f.trading_name),
+      field('Industry / sector', f.industry),
+      field('Website', f.website),
+      field('LinkedIn', f.linkedin),
+      field('Social handles', f.social_handles),
+      field('Description', f.description),
+    ]),
+    section('2 — YOUR BRAND', [
+      fileField('logo', 'Logo'),
+      fileField('brand_assets', 'Brand assets'),
+      field('Primary colour', f.primary_colour),
+      field('Secondary colours', f.secondary_colours),
+      field('Tone of voice', f.tone_of_voice),
+      field('Tone (other)', f.tone_other),
+      field('Tagline', f.tagline),
+    ]),
+    section('3 — PRODUCTS & SERVICES', [
+      field('Products / services', f.products_services),
+      field('Price range', f.price_range),
+      field('Minimum order', f.min_order),
+      field('Top 3 reasons', f.top_reasons),
+      field('Exclusions', f.exclusions),
+    ]),
+    section('4 — IDEAL CUSTOMER', [
+      field('Target industry', f.target_industry),
+      field('Company size', f.company_size),
+      field('Job titles', f.job_titles),
+      field('Geography', f.geography),
+      field('Best-fit customer', f.best_fit_customer),
+    ]),
+    section('5 — SALES PROCESS', [
+      field('Lead sources', f.lead_sources),
+      field('Sales cycle', f.sales_cycle),
+      field('Objections', f.objections),
+      field('Quoting information', f.quoting_info),
+      field('CRM', f.crm),
+    ]),
+    section('6 — COMPETITORS', [
+      field('Competitors', f.competitors),
+      field('Advantages', f.advantages),
+      field('Avoid mentioning', f.avoid_competitors),
+    ]),
+    section('7 — TEAM', [
+      field('Primary contact', f.primary_contact_name),
+      field('Primary email', f.primary_contact_email),
+      teamBlock,
+      fileField('prospect_list', 'Prospect list'),
+    ]),
+    section('8 — FORMS & FOLLOW-UP', [
+      field('Enquiry form questions', f.enquiry_questions),
+      field('Resource on submit', f.has_resource),
+      fileField('resource_upload', 'Resource file'),
+      field('Follow-up speed', f.followup_speed),
+      field('Automated tone', f.automated_tone),
+      field('Message rules', f.message_rules),
+    ]),
+    section('9 — LEGAL & COMPLIANCE', [
+      field('Has privacy policy', f.has_privacy_policy),
+      field('Privacy policy URL', f.privacy_policy_url),
+      field('Do-not-contact list', f.has_dnc_list),
+      fileField('dnc_upload', 'DNC file'),
+      field('Compliance notes', f.compliance_notes),
+    ]),
+    `\n${LINE}`,
+    `Always On · Plan Grow Do · alwaysonscs.com`,
+  ].join('\n');
+
+  return body;
 }
 
 /* ── SUBMIT ── */
@@ -770,7 +767,7 @@ async function handleSubmit() {
     const formData = collectFormData();
     const companyName = formData.company_name || 'New Client';
 
-    // 3. Build HTML email
+    // 3. Build plain text email
     const messageHTML = buildEmailHTML(formData, fileUploads);
 
     // 4. Send via Web3Forms
