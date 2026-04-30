@@ -31,7 +31,8 @@
     .nav-back:hover { color: var(--yellow); }
 
     /* ── PAGE HEADER ── */
-    .page-header { background: linear-gradient(135deg, var(--purple-dark), var(--purple)); padding: 40px 24px 32px; text-align: center; }
+    .page-header { background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 55%, #5a1a7a 100%); padding: 40px 24px 32px; text-align: center; position: relative; overflow: hidden; }
+    .page-header::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 70% 50%, rgba(251,186,0,0.07) 0%, transparent 60%), radial-gradient(ellipse at 20% 80%, rgba(0,159,227,0.06) 0%, transparent 50%); pointer-events: none; }
     .page-header .badge { display: inline-block; background: rgba(251,186,0,0.15); border: 1px solid rgba(251,186,0,0.35); color: var(--yellow); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; padding: 4px 12px; border-radius: 50px; margin-bottom: 12px; }
     .page-header h1 { font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: var(--white); letter-spacing: -0.02em; margin-bottom: 6px; }
     .page-header p { color: rgba(255,255,255,0.55); font-size: 0.88rem; }
@@ -329,7 +330,7 @@ const STEPS = [
     subtitle: "How you want to handle inbound enquiries",
     fields: [
       { id:'enquiry_questions', label:'What questions should your enquiry form ask?',          type:'textarea' },
-      { id:'has_resource',      label:'Is there a resource you'd like sent on form submission?', type:'select', options:['Yes','No'], placeholder:'e.g. brochure, price list' },
+      { id:'has_resource',      label:'Is there a resource you\u2019d like sent on form submission?', type:'select', options:['Yes','No'], placeholder:'e.g. brochure, price list' },
       { id:'resource_upload',   label:'Upload the resource',                                   type:'file',   accept:'.pdf,.docx,.pptx,.png,.jpg', showIf:{field:'has_resource',value:'Yes'} },
       { id:'followup_speed',    label:'How quickly should enquiries be followed up?',          type:'select', options:['Immediately','Within 1 hour','Same day','Next working day'] },
       { id:'automated_tone',    label:'Ideal tone for automated responses',                    type:'select', options:['Professional','Warm & friendly','Direct','Consultative'] },
