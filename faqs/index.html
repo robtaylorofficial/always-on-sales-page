@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAQs | Always On Sales Control System | Plan Grow Do</title>
+  <meta name="description" content="Frequently asked questions about Always On — the commercial control system from Plan Grow Do. Everything you need to know before making a decision." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', system-ui, sans-serif; background: #f5f4f7; color: #1a1a2e; line-height: 1.6; }
+
+    :root {
+      --purple: #43165c; --purple-dark: #2d0e3e; --purple-light: #6b2a8f;
+      --yellow: #fbba00; --green: #76b82a; --blue: #009fe3;
+      --white: #ffffff; --grey-light: #f5f4f7; --grey-mid: #e8e4ef;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--purple-dark);
+      padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 64px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+    }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 32px; width: auto; }
+    .nav-logo-text { font-size: 1rem; font-weight: 700; color: #fff; }
+    .nav-logo-text span { color: var(--yellow); }
+    .nav-actions { display: flex; gap: 12px; align-items: center; }
+    .btn-nav-ghost {
+      color: rgba(255,255,255,0.75); font-size: 0.85rem; font-weight: 500;
+      text-decoration: none; padding: 6px 12px; border-radius: 6px;
+      transition: color 0.2s;
+    }
+    .btn-nav-ghost:hover { color: #fff; }
+    .btn-nav-yellow {
+      background: var(--yellow); color: var(--purple-dark);
+      font-size: 0.85rem; font-weight: 700; padding: 8px 18px;
+      border-radius: 8px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-nav-yellow:hover { background: #ffd040; transform: translateY(-1px); }
+
+    /* ── HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 55%, #5a1a7a 100%);
+      padding: 72px 24px 60px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(251,186,0,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(0,159,227,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .page-hero .section-label {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+      background: rgba(251,186,0,0.15); color: var(--yellow);
+      margin-bottom: 16px;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 800;
+      color: #fff; margin-bottom: 16px; line-height: 1.15;
+    }
+    .page-hero p {
+      font-size: 1.1rem; color: rgba(255,255,255,0.7);
+      max-width: 600px; margin: 0 auto 32px;
+    }
+    .hero-meta {
+      display: flex; justify-content: center; gap: 32px; flex-wrap: wrap;
+      font-size: 0.85rem; color: rgba(255,255,255,0.5);
+    }
+    .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+    /* ── SEARCH ── */
+    .search-bar {
+      max-width: 560px; margin: 0 auto 0;
+      position: relative;
+    }
+    .search-bar input {
+      width: 100%; padding: 14px 48px 14px 18px;
+      border: none; border-radius: 10px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 0.95rem; color: #1a1a2e;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      outline: none;
+    }
+    .search-bar input:focus { box-shadow: 0 4px 20px rgba(0,0,0,0.2), 0 0 0 3px rgba(251,186,0,0.3); }
+    .search-icon {
+      position: absolute; right: 16px; top: 50%;
+      transform: translateY(-50%);
+      font-size: 1rem; color: #999; pointer-events: none;
+    }
+    .search-results-count {
+      text-align: center; margin-top: 10px;
+      font-size: 0.8rem; color: rgba(255,255,255,0.5);
+      min-height: 20px;
+    }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+    .faq-page-body { padding: 56px 24px 80px; }
+
+    /* ── CATEGORY PILLS ── */
+    .category-pills {
+      display: flex; gap: 10px; flex-wrap: wrap;
+      justify-content: center; margin-bottom: 40px;
+    }
+    .pill {
+      padding: 8px 18px; border-radius: 24px; cursor: pointer;
+      font-size: 0.82rem; font-weight: 600; border: 2px solid var(--grey-mid);
+      background: #fff; color: #666;
+      transition: all 0.2s;
+    }
+    .pill:hover { border-color: var(--purple); color: var(--purple); }
+    .pill.active { background: var(--purple); border-color: var(--purple); color: #fff; }
+
+    /* ── FAQ GROUPS ── */
+    .faq-groups { max-width: 860px; margin: 0 auto; }
+    .faq-group { margin-bottom: 12px; border-radius: 12px; overflow: hidden; box-shadow: 0 2px 8px rgba(67,22,92,0.08); }
+    .faq-group[data-hidden="true"] { display: none; }
+
+    .faq-group-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 18px 24px; cursor: pointer;
+      background: #fff;
+      transition: background 0.2s;
+      user-select: none;
+    }
+    .faq-group-header:hover { background: var(--grey-mid); }
+    .faq-group-header.open { background: var(--purple-dark); }
+
+    .faq-group-title {
+      font-size: 1rem; font-weight: 700; color: var(--purple-dark);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .faq-group-header.open .faq-group-title { color: var(--yellow); }
+    .faq-group-icon { font-size: 1.1rem; }
+    .faq-group-chevron { font-size: 0.75rem; color: #999; transition: transform 0.3s; }
+    .faq-group-header.open .faq-group-chevron { transform: rotate(180deg); color: rgba(255,255,255,0.5); }
+
+    .faq-group-body { display: none; background: #fff; }
+    .faq-group-body.open { display: block; }
+
+    .faq-item { border-top: 1px solid var(--grey-mid); }
+    .faq-item:first-child { border-top: none; }
+
+    .faq-question {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 16px 24px; cursor: pointer;
+      font-weight: 600; font-size: 0.95rem; color: var(--purple-dark);
+      transition: color 0.2s;
+      user-select: none; gap: 12px;
+    }
+    .faq-question:hover { color: var(--purple-light); }
+    .faq-question.open { color: var(--purple); }
+    .faq-chevron { font-size: 0.7rem; color: #bbb; flex-shrink: 0; transition: transform 0.3s; }
+    .faq-question.open .faq-chevron { transform: rotate(180deg); color: var(--purple); }
+
+    .faq-answer {
+      display: none; padding: 0 24px 20px 24px;
+      font-size: 0.92rem; color: #555; line-height: 1.75;
+    }
+    .faq-answer.open { display: block; }
+
+    /* ── NO RESULTS ── */
+    .no-results {
+      display: none; text-align: center; padding: 60px 24px;
+      color: #999;
+    }
+    .no-results.show { display: block; }
+    .no-results p { font-size: 1rem; }
+
+    /* ── HIGHLIGHT ── */
+    mark { background: rgba(251,186,0,0.35); border-radius: 3px; padding: 0 2px; }
+
+    /* ── CTA STRIP ── */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      border-radius: 16px; padding: 48px 40px;
+      text-align: center; margin-top: 64px;
+    }
+    .cta-strip h2 { color: #fff; font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; }
+    .cta-strip p { color: rgba(255,255,255,0.7); margin-bottom: 28px; font-size: 0.95rem; }
+    .cta-strip .btn-yellow {
+      display: inline-block;
+      background: var(--yellow); color: var(--purple-dark);
+      font-weight: 700; font-size: 1rem; padding: 14px 32px;
+      border-radius: 10px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .cta-strip .btn-yellow:hover { background: #ffd040; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--purple-dark); padding: 32px 24px;
+      text-align: center; color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+    }
+    footer a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--yellow); }
+    .footer-inner {
+      max-width: 900px; margin: 0 auto 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand p { color: rgba(255,255,255,0.4); font-size: 0.8rem; margin: 0; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.45); font-size: 0.8rem; }
+    .footer-bottom { max-width: 900px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; }
+
+    /* ── FADE IN ── */
+    .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
+    .fade-in.visible { opacity: 1; transform: none; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .page-hero { padding: 48px 20px 40px; }
+      .faq-question { font-size: 0.88rem; }
+      .cta-strip { padding: 36px 24px; }
+      .hero-meta { gap: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="/" class="nav-logo">
+    <img src="../Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+         onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+    <span class="nav-logo-text" style="display:none;">Plan <span>Grow</span> Do</span>
+  </a>
+  <div class="nav-actions">
+    <a href="/" class="btn-nav-ghost">← Back to Always On</a>
+    <a href="/onboarding" class="btn-nav-yellow">Get Started</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="page-hero">
+  <div style="position:relative;z-index:1;">
+    <span class="section-label">Frequently Asked Questions</span>
+    <h1>Everything you need to know.</h1>
+    <p>No waffle — just straight answers about what Always On is, how it works, and whether it's right for you.</p>
+    <div class="hero-meta">
+      <span>🔍 5 categories</span>
+      <span>💬 30 questions</span>
+      <span>⚡ Straight answers</span>
+    </div>
+    <div style="height:28px;"></div>
+    <div class="search-bar">
+      <input type="text" id="faq-search" placeholder="Search questions…" oninput="searchFAQs(this.value)" autocomplete="off" />
+      <span class="search-icon">🔍</span>
+    </div>
+    <div class="search-results-count" id="search-count"></div>
+  </div>
+</div>
+
+<!-- ── BODY ── -->
+<div class="faq-page-body">
+  <div class="container">
+
+    <!-- Category pills -->
+    <div class="category-pills fade-in" id="pills">
+      <button class="pill active" onclick="filterCategory('all', this)">All questions</button>
+      <button class="pill" onclick="filterCategory('what-is', this)">🔍 What is Always On?</button>
+      <button class="pill" onclick="filterCategory('who-for', this)">👤 Who is it for?</button>
+      <button class="pill" onclick="filterCategory('tools', this)">🔧 Tools & CRM</button>
+      <button class="pill" onclick="filterCategory('tech', this)">🔒 Technical & Data</button>
+      <button class="pill" onclick="filterCategory('getting-started', this)">🚀 Getting Started</button>
+    </div>
+
+    <div class="faq-groups fade-in" id="faq-groups">
+
+      <!-- Group 1 -->
+      <div class="faq-group" data-category="what-is">
+        <div class="faq-group-header" onclick="toggleGroup(this)">
+          <div class="faq-group-title"><span class="faq-group-icon">🔍</span> What is Always On?</div>
+          <span class="faq-group-chevron">▼</span>
+        </div>
+        <div class="faq-group-body">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What actually is Always On?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Always On is a commercial control system designed to help businesses capture, qualify, route and progress buyer interest more effectively. It is not just a chatbot, a form tool, or a CRM add-on. It sits across the front end of the customer journey, helping web visitors, inbound enquiries and sales teams move from scattered activity to a more joined-up process. It connects marketing and sales, improves first response, supports qualification, and gives the team more context before human conversations happen.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Is this just a chatbot with a fancy name?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">No. A chatbot might be one visible component, but Always On is broader than that. It is a system for handling commercial attention and intent more effectively across channels. That can include forms, web chat, email, routing logic, qualification workflows, internal prompts, meeting prep, reporting and intelligence. The point is not to add a bot for the sake of it — it's to design a joined-up process that helps buyers get what they need and helps the business respond properly.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What problem does this solve?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">It solves the gap between buyer intent and business response. In many companies, people visit the website, fill in a form, send an email, or show clear interest — but the follow-up is slow, fragmented, inconsistent or unclear. Always On is designed to reduce those leaks. It helps ensure attention is captured, acknowledged, qualified, routed and progressed in a more controlled way, so the business has a better chance of turning interest into conversation and conversation into revenue.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Why is this relevant now?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Buyers increasingly research independently, expect timely responses, and compare experiences long before a salesperson knows they exist. At the same time, businesses are under pressure to improve performance without simply throwing more people at the problem. Missed or mishandled inbound demand is expensive. Slow response feels careless. Always On is relevant because it addresses those practical pressures directly — helping businesses become more responsive, more connected and more commercially disciplined.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 2 -->
+      <div class="faq-group" data-category="who-for">
+        <div class="faq-group-header" onclick="toggleGroup(this)">
+          <div class="faq-group-title"><span class="faq-group-icon">👤</span> Who is it for?</div>
+          <span class="faq-group-chevron">▼</span>
+        </div>
+        <div class="faq-group-body">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Is this mainly for big businesses?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">No. In many ways, smaller and mid-sized businesses often feel the benefit sooner because missed leads, slow response and fragmented ownership hurt them quickly. Larger businesses may have more complexity and greater scale, but smaller firms often have fewer buffers. Always On is valuable wherever there is inbound demand, inconsistent handling, and a desire to improve how buyer interest becomes commercial progress.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>How does it help Sales Directors specifically?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">For Sales Directors, Always On creates more control where businesses often have the least: early buyer engagement, response speed, lead routing, qualification quality, and team consistency. Many leaders know pipeline outcomes are affected long before an opportunity appears in forecast, but they cannot always see what happened earlier. This system helps close that gap — making leadership conversations more grounded, coaching more targeted, and commercial management far less dependent on guesswork.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>How does it help sales professionals on the ground?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">For sales professionals, the value is practical. They receive better-qualified opportunities, faster internal notification, and more context before they engage. That reduces the feeling of walking into conversations cold. Less time wasted chasing unclear enquiries, digging around for background, or dealing with leads that sat untouched for too long. The system is meant to support, not burden — making it easier to respond well, prepare well, and use selling time where a human being adds the most value.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Can this help with technical sales or complex product environments?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Yes, and that is one of the more interesting use cases. In technical sectors, the problem is often not just lead volume — it is matching the enquiry to the right expertise quickly and equipping the commercial team with enough context to respond properly. Always On can help capture more structured information up front, route the enquiry based on product or application area, and support the rep with internal prompts or knowledge before the conversation.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 3 -->
+      <div class="faq-group" data-category="tools">
+        <div class="faq-group-header" onclick="toggleGroup(this)">
+          <div class="faq-group-title"><span class="faq-group-icon">🔧</span> Does it replace my existing tools?</div>
+          <span class="faq-group-chevron">▼</span>
+        </div>
+        <div class="faq-group-body">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Is this just another CRM?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">No. A CRM is primarily a system of record — it stores contact details, pipeline stages, notes and tasks once something is already in the sales process. Always On is different. It focuses on the stages before and around that handover, where many businesses lose momentum. It can feed a CRM, support a CRM, and improve what goes into a CRM, but it is not simply another place to log activity.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Do we still need our CRM if we use this?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">In most cases, yes. Always On is designed to improve what happens before and around CRM entry, not replace every function a CRM performs. What it does is strengthen the quality of what enters that system — ensuring enquiries aren't missed, the right information is captured, and the rep receives context before taking over. That means the CRM becomes more useful because the data entering it is more timely, relevant and commercially meaningful.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Is this replacing salespeople?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">No. It is meant to strengthen the work of salespeople, not remove the need for them. Buyers still need reassurance, commercial judgement, experience, credibility and conversation — especially when the decision is complex or carries risk. What the system can do is handle repetitive first-touch activity, reduce delays, improve qualification, and make sure the salesperson steps in with better context. The aim is better use of people, not fewer people by default.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What makes this different from hiring another salesperson?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Hiring another salesperson may increase capacity, but it doesn't automatically fix poor lead handling, slow response, weak qualification or fragmented handoff. In fact, a new salesperson dropped into a messy process often inherits the same problems. Always On addresses the system around the person — ensuring enquiries are captured properly, responded to promptly, and passed across with better context. That can make existing people more effective before headcount is added.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Will it integrate with the tools we already use?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">That is usually the right goal. Always On should not be designed in isolation from the wider commercial stack. In most cases, it should connect to or complement existing tools such as CRM systems, websites, forms, calendars, email, workflow tools and reporting environments. The principle is straightforward: reduce fragmentation rather than create more of it.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 4 -->
+      <div class="faq-group" data-category="tech">
+        <div class="faq-group-header" onclick="toggleGroup(this)">
+          <div class="faq-group-title"><span class="faq-group-icon">🔒</span> Technical &amp; Data</div>
+          <span class="faq-group-chevron">▼</span>
+        </div>
+        <div class="faq-group-body">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What about data security?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Data security has to be taken seriously from the start, not treated as an afterthought. Any Always On deployment should be designed around appropriate permissions, secure storage, controlled access, clear data handling rules, and compliance with relevant legislation such as GDPR where applicable. Personal data should only be collected where needed, stored appropriately, and made visible only to the people who require it to do their jobs.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Is it GDPR compliant?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Compliance is not a label you casually stick on a system — it depends on how the solution is designed, configured and governed in practice. That said, Always On can absolutely be implemented in a GDPR-conscious way: data minimisation, lawful basis for processing, appropriate consent where relevant, secure storage, clear access controls, sensible retention periods, and transparency around what is collected and why.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Who can see what inside the system?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Access should be role-based. Not everyone needs to see everything. A good Always On setup allows managers, sales reps, marketing users and administrators to see the information relevant to their role while restricting wider access where appropriate. Good visibility is useful. Excess visibility is not.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What if the AI gets something wrong?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">That is a fair concern, and it is exactly why this should not be treated as magic. The system should be designed with clear rules, review points, guardrails and sensible limits. In most businesses, the role of AI here is to support speed, consistency, routing, summarising and preparation, while humans retain responsibility for judgement, commercial decisions and relationship management. You want reliability, auditability and continuous improvement, not blind trust.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Do we need perfect data before we start?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">No. Perfect data is rarely available, and waiting for perfection usually delays progress. What you do need is enough clarity to define sensible workflows, routing rules, basic qualification logic, and the key commercial outcomes you want to improve. A good implementation can start with what is known, learn from live use, and improve iteratively.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 5 -->
+      <div class="faq-group" data-category="getting-started">
+        <div class="faq-group-header" onclick="toggleGroup(this)">
+          <div class="faq-group-title"><span class="faq-group-icon">🚀</span> Getting Started &amp; Adoption</div>
+          <span class="faq-group-chevron">▼</span>
+        </div>
+        <div class="faq-group-body">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Is this just another tool my team has to learn?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">It should feel less like "another tool" and more like a layer that removes friction from how the business already works. The goal is not to create extra admin or force teams into a clunky new routine. Good implementation matters here. If built properly, the system should reduce manual chasing, improve routing, and help reps prepare better without adding unnecessary complexity. The measure of success is simple: does it save time, improve response, and help people do their jobs better?</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>How hard is it for the team to adopt?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Adoption depends less on the software itself and more on whether the system solves a real problem in a clear, practical way. If the team experiences it as extra admin, forced change, or surveillance, adoption will be weak. If they experience it as faster handover, better information, less chaos and more support, adoption improves quickly. Good onboarding, clear ownership, role-based views and a sensible workflow matter far more than a long feature list.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>How will we know it is working?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Success should be judged through practical commercial indicators: response times, lead acknowledgement speed, routing accuracy, contact rates, qualification quality, meeting preparedness, progression rates, and the percentage of inbound opportunities that move meaningfully forward. The point is not to celebrate the tool being live. The point is to see whether the business is handling opportunities more effectively than before.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What if we already respond quite well now?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">That is good, but it is still worth asking how consistent that really is across channels, people and busy periods. Many businesses respond well when things are calm or when the right person spots the enquiry quickly. The question is whether the process is robust, measurable and repeatable. Always On is also for businesses that want to protect standards, reduce reliance on heroics, and build a more scalable front end to growth.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Will this make our team more robotic?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">It should do the opposite when implemented well. Good automation removes delay and admin while preserving or even improving relevance. Always On should be designed around useful, human-sounding responses, sensible qualification, and a clear transition to the right person when human input is needed. By taking care of repetitive first-stage tasks, it can free the team to be more human where it matters most: listening well, solving problems, applying judgement, and building trust.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Will buyers actually want this kind of experience?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Buyers don't usually care what technology sits behind the process. They care whether the experience is useful, timely and relevant. If Always On helps them get a faster response, clearer direction, better information, and access to the right person without unnecessary delay, then yes — it supports a better buyer experience. The test is whether it helps the buyer make progress, not whether it feels clever internally.</div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /faq-groups -->
+
+    <!-- No results -->
+    <div class="no-results" id="no-results">
+      <p>No questions match your search. Try different keywords or <button onclick="clearSearch()" style="background:none;border:none;color:var(--purple);font-weight:700;cursor:pointer;font-size:1rem;">clear the search</button>.</p>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-strip fade-in">
+      <h2>Still got questions?</h2>
+      <p>Jump on the next webinar — we walk through Always On live inside a real business. Ask anything.</p>
+      <a href="/#webinar" class="btn-yellow">See the next webinar →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="../Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do" style="height:28px;width:auto;"
+           onerror="this.style.display='none';" />
+      <p>Always On is a Plan Grow Do product</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/#problems">The Problem</a>
+      <a href="/#roi">ROI Calculator</a>
+      <a href="/#wiifm">Benefits</a>
+      <a href="/faqs">FAQs</a>
+      <a href="/#webinar">Webinar</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 <a href="https://www.plangrowdo.com" target="_blank" rel="noopener">Plan Grow Do</a>. Always On Sales Control System. All rights reserved. &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a></p>
+  </div>
+</footer>
+
+<script>
+  /* ── ACCORDION ── */
+  function toggleGroup(header) {
+    const body = header.nextElementSibling;
+    const isOpen = header.classList.contains('open');
+    header.classList.toggle('open', !isOpen);
+    body.classList.toggle('open', !isOpen);
+  }
+
+  function toggleFaq(question) {
+    const answer = question.nextElementSibling;
+    const isOpen = question.classList.contains('open');
+    question.classList.toggle('open', !isOpen);
+    answer.classList.toggle('open', !isOpen);
+  }
+
+  /* ── SEARCH ── */
+  function searchFAQs(query) {
+    const q = query.trim().toLowerCase();
+    const groups = document.querySelectorAll('.faq-group');
+    const countEl = document.getElementById('search-count');
+    const noResults = document.getElementById('no-results');
+    let totalVisible = 0;
+
+    // Reset pill state
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    document.getElementById('pills').querySelector('.pill').classList.add('active');
+
+    groups.forEach(group => {
+      group.removeAttribute('data-hidden');
+      let groupHasMatch = false;
+
+      group.querySelectorAll('.faq-item').forEach(item => {
+        const questionEl = item.querySelector('.faq-question span:first-child');
+        const answerEl = item.querySelector('.faq-answer');
+        const qText = questionEl.textContent.toLowerCase();
+        const aText = answerEl.textContent.toLowerCase();
+
+        if (!q || qText.includes(q) || aText.includes(q)) {
+          item.style.display = '';
+          groupHasMatch = true;
+          totalVisible++;
+
+          // Highlight
+          if (q) {
+            highlight(questionEl, q);
+            highlight(answerEl, q);
+            // Auto-open matching items
+            item.querySelector('.faq-question').classList.add('open');
+            answerEl.classList.add('open');
+          } else {
+            clearHighlight(questionEl);
+            clearHighlight(answerEl);
+            item.querySelector('.faq-question').classList.remove('open');
+            answerEl.classList.remove('open');
+          }
+        } else {
+          item.style.display = 'none';
+          clearHighlight(questionEl);
+          clearHighlight(answerEl);
+        }
+      });
+
+      if (groupHasMatch || !q) {
+        group.style.display = '';
+        if (q) {
+          group.querySelector('.faq-group-header').classList.add('open');
+          group.querySelector('.faq-group-body').classList.add('open');
+        }
+      } else {
+        group.style.display = 'none';
+      }
+    });
+
+    if (q) {
+      countEl.textContent = totalVisible === 0 ? 'No matches found' : `${totalVisible} question${totalVisible !== 1 ? 's' : ''} found`;
+      noResults.classList.toggle('show', totalVisible === 0);
+    } else {
+      countEl.textContent = '';
+      noResults.classList.remove('show');
+      groups.forEach(g => {
+        g.style.display = '';
+        g.querySelector('.faq-group-header').classList.remove('open');
+        g.querySelector('.faq-group-body').classList.remove('open');
+        g.querySelectorAll('.faq-item').forEach(i => { i.style.display = ''; });
+      });
+    }
+  }
+
+  function highlight(el, query) {
+    const original = el.dataset.original || el.textContent;
+    el.dataset.original = original;
+    const escaped = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+    el.innerHTML = original.replace(new RegExp(`(${escaped})`, 'gi'), '<mark>$1</mark>');
+  }
+
+  function clearHighlight(el) {
+    if (el.dataset.original) {
+      el.textContent = el.dataset.original;
+      delete el.dataset.original;
+    }
+  }
+
+  function clearSearch() {
+    document.getElementById('faq-search').value = '';
+    searchFAQs('');
+  }
+
+  /* ── CATEGORY FILTER ── */
+  function filterCategory(cat, btn) {
+    clearSearch();
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+
+    document.querySelectorAll('.faq-group').forEach(group => {
+      if (cat === 'all' || group.dataset.category === cat) {
+        group.style.display = '';
+      } else {
+        group.style.display = 'none';
+      }
+    });
+  }
+
+  /* ── FADE IN ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
