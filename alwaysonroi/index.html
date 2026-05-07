@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ROI Calculator | Always On Sales Control System | Plan Grow Do</title>
+  <meta name="description" content="Calculate the real commercial impact of Always On — put in your numbers and see what closing the gap in your sales process is worth to your business." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', system-ui, sans-serif; background: #f5f4f7; color: #1a1a2e; line-height: 1.6; }
+
+    :root {
+      --purple: #43165c; --purple-dark: #2d0e3e; --purple-light: #6b2a8f;
+      --yellow: #fbba00; --green: #76b82a; --blue: #009fe3;
+      --white: #ffffff; --grey-light: #f5f4f7; --grey-mid: #e8e4ef;
+    }
+
+    /* ── TOP RIBBON ── */
+    #top-ribbon {
+      background: var(--purple);
+      padding: 7px 0;
+      text-align: center;
+      font-size: 0.78rem;
+      font-weight: 600;
+      position: sticky; top: 0; z-index: 1001;
+    }
+    .ribbon-inner { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .ribbon-label { color: rgba(255,255,255,0.5); }
+    .ribbon-link {
+      color: var(--yellow); text-decoration: none;
+      padding: 2px 10px; border-radius: 20px;
+      border: 1px solid rgba(251,186,0,0.3);
+      transition: background 0.2s;
+    }
+    .ribbon-link:hover { background: rgba(251,186,0,0.12); }
+    .ribbon-divider { color: rgba(255,255,255,0.2); }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 33px; z-index: 1000;
+      background: var(--purple-dark);
+      border-bottom: 2px solid var(--yellow);
+      padding: 14px 0;
+    }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+    .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+    .nav-logo img { height: 40px; width: auto; }
+    .nav-logo-text { font-size: 1rem; font-weight: 700; color: #fff; }
+    .nav-logo-text span { color: var(--yellow); }
+    .nav-actions { display: flex; gap: 12px; align-items: center; }
+    .btn-ghost {
+      color: rgba(255,255,255,0.75); font-size: 0.85rem; font-weight: 500;
+      text-decoration: none; padding: 6px 12px; border-radius: 6px;
+      transition: color 0.2s; background: none; border: none; cursor: pointer;
+    }
+    .btn-ghost:hover { color: #fff; }
+    .btn-yellow {
+      background: var(--yellow); color: var(--purple-dark);
+      font-size: 0.9rem; font-weight: 700; padding: 10px 22px;
+      border-radius: 8px; text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-yellow:hover { background: #ffd040; transform: translateY(-1px); }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 55%, #5a1a7a 100%);
+      padding: 60px 24px 48px;
+      text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse at 70% 50%, rgba(251,186,0,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse at 20% 80%, rgba(0,159,227,0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .page-hero > * { position: relative; z-index: 1; }
+    .section-label {
+      display: inline-block;
+      font-size: 0.7rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 20px;
+      background: rgba(251,186,0,0.15); color: var(--yellow);
+      margin-bottom: 16px;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 5vw, 3rem); font-weight: 800;
+      color: #fff; margin-bottom: 14px; line-height: 1.15;
+    }
+    .page-hero h1 span { color: var(--yellow); }
+    .page-hero p {
+      font-size: 1.05rem; color: rgba(255,255,255,0.7);
+      max-width: 580px; margin: 0 auto;
+    }
+
+    /* ── CALCULATOR SECTION ── */
+    .calc-section { padding: 48px 24px 80px; }
+    .calc-wrap {
+      max-width: 960px; margin: 0 auto;
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 4px 32px rgba(67,22,92,0.1);
+      overflow: hidden;
+    }
+    .calc-frame {
+      width: 100%;
+      min-height: 680px;
+      border: none;
+      display: block;
+    }
+    .calc-fallback {
+      text-align: center; padding: 20px;
+      font-size: 0.85rem; color: #999;
+      border-top: 1px solid var(--grey-mid);
+    }
+    .calc-fallback a { color: var(--purple); font-weight: 600; }
+
+    /* ── BELOW CALC ── */
+    .below-calc {
+      max-width: 960px; margin: 32px auto 0;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .stat-card {
+      background: #fff; border-radius: 12px; padding: 24px;
+      box-shadow: 0 2px 12px rgba(67,22,92,0.07);
+      text-align: center;
+    }
+    .stat-card .stat-num { font-size: 2rem; font-weight: 800; color: var(--purple); line-height: 1; margin-bottom: 6px; }
+    .stat-card .stat-num span { color: var(--yellow); }
+    .stat-card p { font-size: 0.82rem; color: #777; }
+
+    /* ── CTA ── */
+    .cta-strip {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      border-radius: 16px; padding: 48px 40px;
+      text-align: center; margin: 48px auto 0; max-width: 960px;
+    }
+    .cta-strip h2 { color: #fff; font-size: 1.6rem; font-weight: 800; margin-bottom: 10px; }
+    .cta-strip p { color: rgba(255,255,255,0.7); margin-bottom: 28px; }
+    .cta-strip a {
+      display: inline-block; background: var(--yellow); color: var(--purple-dark);
+      font-weight: 700; font-size: 1rem; padding: 14px 32px;
+      border-radius: 10px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .cta-strip a:hover { background: #ffd040; transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--purple-dark); padding: 32px 24px; margin-top: 64px; }
+    .footer-inner {
+      max-width: 1100px; margin: 0 auto 20px;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 16px;
+    }
+    .footer-brand { display: flex; align-items: center; gap: 12px; }
+    .footer-brand p { color: rgba(255,255,255,0.4); font-size: 0.8rem; margin: 0; }
+    .footer-links { display: flex; gap: 20px; flex-wrap: wrap; }
+    .footer-links a { color: rgba(255,255,255,0.45); font-size: 0.8rem; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--yellow); }
+    .footer-bottom { max-width: 1100px; margin: 0 auto; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 16px; text-align: center; }
+    .footer-bottom p { color: rgba(255,255,255,0.35); font-size: 0.78rem; }
+    .footer-bottom a { color: rgba(255,255,255,0.35); text-decoration: none; }
+    .footer-bottom a:hover { color: var(--yellow); }
+
+    @media (max-width: 600px) {
+      .page-hero { padding: 48px 20px 36px; }
+      .calc-frame { min-height: 520px; }
+      .cta-strip { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── TOP RIBBON ── -->
+<div id="top-ribbon">
+  <div class="container ribbon-inner">
+    <span class="ribbon-label">Explore:</span>
+    <a href="/faqs" class="ribbon-link">FAQs</a>
+    <span class="ribbon-divider">·</span>
+    <a href="/alwaysonroi" class="ribbon-link">ROI Calculator</a>
+  </div>
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">
+        <img src="../Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+             onerror="this.style.display='none'; this.nextElementSibling.style.display='block';" />
+        <span class="nav-logo-text" style="display:none;">Plan <span>Grow</span> Do</span>
+      </a>
+      <div class="nav-actions">
+        <a href="/" class="btn-ghost">← Back to Always On</a>
+        <a href="/onboarding" class="btn-yellow">Get Started →</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="page-hero">
+  <span class="section-label">ROI Calculator</span>
+  <h1>What's this worth to <span>your</span> business?</h1>
+  <p>Put in your numbers and see the real commercial impact of closing the gap in your sales process.</p>
+</div>
+
+<!-- ── CALCULATOR ── -->
+<div class="calc-section">
+  <div class="container">
+
+    <div class="calc-wrap">
+      <iframe
+        class="calc-frame"
+        src="https://robtaylorofficial.github.io/Always-On-ROI/"
+        title="Always On ROI Calculator"
+        loading="lazy"
+        allowfullscreen>
+      </iframe>
+      <div class="calc-fallback">
+        Calculator not loading? <a href="https://robtaylorofficial.github.io/Always-On-ROI/" target="_blank" rel="noopener">Open it in a new tab →</a>
+      </div>
+    </div>
+
+    <!-- Supporting stats -->
+    <div class="below-calc">
+      <div class="stat-card">
+        <div class="stat-num"><span>78</span>%</div>
+        <p>of B2B buyers go with the first vendor to respond meaningfully</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span>5</span>×</div>
+        <p>more likely to qualify a lead if contacted within the first hour</p>
+      </div>
+      <div class="stat-card">
+        <div class="stat-num"><span>£0</span></div>
+        <p>cost per lead that's already showing intent — if you capture it in time</p>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta-strip">
+      <h2>Like what you see?</h2>
+      <p>Get Always On set up for your business — we'll walk you through everything.</p>
+      <a href="/onboarding">Start your onboarding →</a>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img src="../Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do" style="height:28px;width:auto;"
+           onerror="this.style.display:'none';" />
+      <p>Always On is a Plan Grow Do product</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/faqs">FAQs</a>
+      <a href="/alwaysonroi">ROI Calculator</a>
+      <a href="/onboarding">Get Started</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 <a href="https://www.plangrowdo.com" target="_blank" rel="noopener">Plan Grow Do</a>. Always On Sales Control System. All rights reserved. &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a></p>
+  </div>
+</footer>
+
+</body>
+</html>

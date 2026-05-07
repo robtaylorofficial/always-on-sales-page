@@ -20,9 +20,25 @@
       --white: #ffffff; --grey-light: #f5f4f7; --grey-mid: #e8e4ef;
     }
 
+    /* ── TOP RIBBON ── */
+    #top-ribbon {
+      background: var(--purple); padding: 7px 0;
+      text-align: center; font-size: 0.78rem; font-weight: 600;
+      position: sticky; top: 0; z-index: 1001;
+    }
+    .ribbon-inner { display: flex; align-items: center; justify-content: center; gap: 8px; flex-wrap: wrap; }
+    .ribbon-label { color: rgba(255,255,255,0.5); }
+    .ribbon-link {
+      color: var(--yellow); text-decoration: none;
+      padding: 2px 10px; border-radius: 20px;
+      border: 1px solid rgba(251,186,0,0.3); transition: background 0.2s;
+    }
+    .ribbon-link:hover { background: rgba(251,186,0,0.12); }
+    .ribbon-divider { color: rgba(255,255,255,0.2); }
+
     /* ── NAV ── */
     nav {
-      position: sticky; top: 0; z-index: 100;
+      position: sticky; top: 33px; z-index: 100;
       background: var(--purple-dark);
       padding: 0 24px;
       display: flex; align-items: center; justify-content: space-between;
@@ -268,6 +284,16 @@
   </style>
 </head>
 <body>
+
+<!-- ── TOP RIBBON ── -->
+<div id="top-ribbon">
+  <div class="container ribbon-inner">
+    <span class="ribbon-label">Explore:</span>
+    <a href="/faqs" class="ribbon-link">FAQs</a>
+    <span class="ribbon-divider">·</span>
+    <a href="/alwaysonroi" class="ribbon-link">ROI Calculator</a>
+  </div>
+</div>
 
 <!-- ── NAV ── -->
 <nav>
