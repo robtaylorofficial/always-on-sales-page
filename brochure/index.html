@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Always On Brochure | The B2B Sales Control System | Plan Grow Do</title>
+  <meta name="description" content="Download the Always On brochure — the B2B Sales Control System that never clocks off. Free PDF, no sign-up required." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Poppins', system-ui, sans-serif; background: #f5f4f7; color: #1a1a2e; line-height: 1.6; }
+
+    :root {
+      --purple: #43165c; --purple-dark: #2d0e3e;
+      --yellow: #fbba00; --green: #76b82a; --blue: #009fe3;
+    }
+
+    /* ── STANDALONE NAV (hidden when embedded) ── */
+    .standalone-nav {
+      background: var(--purple-dark); padding: 14px 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .standalone-nav img { height: 32px; width: auto; }
+    .standalone-nav a {
+      color: rgba(255,255,255,0.7); font-size: 0.82rem;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .standalone-nav a:hover { color: #fff; }
+
+    /* ── CARD (the embeddable unit) ── */
+    .brochure-card {
+      max-width: 680px; margin: 40px auto;
+      background: #fff; border-radius: 20px;
+      box-shadow: 0 8px 40px rgba(67,22,92,0.12);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .card-header {
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      padding: 36px 40px 32px;
+      display: flex; align-items: center; gap: 28px; flex-wrap: wrap;
+    }
+    .card-header img {
+      width: 110px; flex-shrink: 0;
+      border-radius: 8px;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.4);
+      transform: rotate(-2deg);
+    }
+    .card-header-text { flex: 1; min-width: 180px; }
+    .card-tag {
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--yellow);
+      background: rgba(251,186,0,0.12); padding: 4px 12px;
+      border-radius: 20px; display: inline-block; margin-bottom: 10px;
+    }
+    .card-header h1 {
+      color: #fff; font-size: 1.5rem; font-weight: 800;
+      line-height: 1.2; margin-bottom: 6px;
+    }
+    .card-header p { color: rgba(255,255,255,0.6); font-size: 0.85rem; }
+
+    /* Body */
+    .card-body { padding: 32px 40px; }
+
+    .card-intro {
+      font-size: 0.95rem; color: #444; margin-bottom: 24px; line-height: 1.7;
+    }
+
+    .key-points { list-style: none; margin-bottom: 28px; }
+    .key-points li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid #f0edf5;
+      font-size: 0.88rem; color: #333;
+    }
+    .key-points li:last-child { border-bottom: none; }
+    .key-points .tick {
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--green); color: #fff;
+      font-size: 0.72rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .key-points strong { color: var(--purple); }
+
+    /* CTA */
+    .card-cta { text-align: center; }
+    .btn-download {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--yellow); color: var(--purple-dark);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700; font-size: 1.05rem; padding: 15px 36px;
+      border-radius: 12px; text-decoration: none; border: none; cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      width: 100%; justify-content: center;
+    }
+    .btn-download:hover { background: #ffd040; transform: translateY(-2px); }
+    .btn-download svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .cta-note {
+      font-size: 0.75rem; color: #bbb; margin-top: 10px;
+    }
+
+    /* Footer link */
+    .card-footer {
+      padding: 16px 40px 20px;
+      text-align: center;
+      border-top: 1px solid #f0edf5;
+      font-size: 0.78rem; color: #bbb;
+    }
+    .card-footer a { color: var(--purple); text-decoration: none; font-weight: 600; }
+    .card-footer a:hover { text-decoration: underline; }
+
+    /* ── EMBED MODE — hide nav and outer padding ── */
+    body.embed .standalone-nav { display: none; }
+    body.embed .brochure-card { margin: 0; border-radius: 0; box-shadow: none; max-width: 100%; }
+    body.embed { background: transparent; }
+
+    @media (max-width: 520px) {
+      .card-header { padding: 28px 24px; }
+      .card-body { padding: 24px; }
+      .card-footer { padding: 14px 24px 18px; }
+      .card-header img { width: 80px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hidden when embedded -->
+  <nav class="standalone-nav">
+    <a href="/"><img src="../Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+       onerror="this.style.display='none'" /></a>
+    <a href="/">← Back to Always On</a>
+  </nav>
+
+  <div class="brochure-card">
+
+    <!-- Header with cover -->
+    <div class="card-header">
+      <img src="/brochure-cover.png" alt="Always On Brochure Cover" />
+      <div class="card-header-text">
+        <div class="card-tag">Free Download</div>
+        <h1>Always On.<br/>The B2B Sales Control System That Never Clocks Off</h1>
+        <p>By Plan Grow Do · PDF · 1.5MB</p>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="card-body">
+
+      <p class="card-intro">
+        Most businesses lose revenue not because their product is wrong — but because the gap between buyer intent and sales response is too wide. Always On closes that gap.
+      </p>
+
+      <ul class="key-points">
+        <li>
+          <span class="tick">✓</span>
+          <span><strong>What Always On actually is</strong> — a commercial control system, not just a chatbot or CRM add-on</span>
+        </li>
+        <li>
+          <span class="tick">✓</span>
+          <span><strong>The 5-part connected journey</strong> — capture, qualify, route, prepare, close the loop</span>
+        </li>
+        <li>
+          <span class="tick">✓</span>
+          <span><strong>What's in it for your team</strong> — tailored benefits for Sales Directors, Marketing Leaders and Sales Professionals</span>
+        </li>
+        <li>
+          <span class="tick">✓</span>
+          <span><strong>How it fits your existing stack</strong> — works alongside your CRM, not instead of it</span>
+        </li>
+        <li>
+          <span class="tick">✓</span>
+          <span><strong>The commercial case</strong> — why missed and slow responses cost more than you think</span>
+        </li>
+      </ul>
+
+      <div class="card-cta">
+        <a href="/always-on-brochure.pdf" download="Always-On-Brochure.pdf" class="btn-download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download Free PDF
+        </a>
+        <p class="cta-note">No email required · Instant download</p>
+      </div>
+
+    </div>
+
+    <div class="card-footer">
+      Want to see it in action? <a href="/alwaysonroi">Try the ROI Calculator</a> &nbsp;·&nbsp; <a href="/faqs">Read the FAQs</a> &nbsp;·&nbsp; <a href="/onboarding">Get Started</a>
+    </div>
+
+  </div>
+
+<script>
+  // Add ?embed=true to URL to hide nav and strip outer spacing
+  if (new URLSearchParams(window.location.search).get('embed') === 'true') {
+    document.body.classList.add('embed');
+  }
+</script>
+</body>
+</html>
