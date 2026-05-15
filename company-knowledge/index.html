@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
 
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,6 +51,24 @@
     }
     .btn-nav:hover { background: #ffd040; transform: translateY(-1px); }
 
+    /* ── SAVED PROGRESS BANNER ── */
+    #resume-banner {
+      display: none; background: #fff8e1; border-bottom: 2px solid var(--yellow);
+      padding: 14px 24px; text-align: center;
+    }
+    .resume-inner { display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; font-size: 0.88rem; }
+    .resume-inner strong { color: var(--purple); }
+    .resume-inner span { color: #666; }
+    .resume-btn {
+      padding: 6px 16px; border-radius: 8px; font-family: 'Poppins', sans-serif;
+      font-size: 0.82rem; font-weight: 600; cursor: pointer; border: none;
+      transition: background 0.2s;
+    }
+    .resume-btn.primary { background: var(--purple); color: #fff; }
+    .resume-btn.primary:hover { background: var(--purple-dark); }
+    .resume-btn.ghost { background: transparent; color: #999; text-decoration: underline; }
+    .resume-btn.ghost:hover { color: #555; }
+
     /* ── HERO ── */
     .hero {
       background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
@@ -63,10 +82,7 @@
     }
     .hero h1 { color: #fff; font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; line-height: 1.2; margin-bottom: 14px; }
     .hero p { color: rgba(255,255,255,0.7); font-size: 1rem; max-width: 560px; margin: 0 auto 28px; }
-    .hero-steps {
-      display: flex; justify-content: center; gap: 24px; flex-wrap: wrap;
-      margin-top: 28px;
-    }
+    .hero-steps { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-top: 28px; }
     .hero-step {
       display: flex; align-items: center; gap: 8px;
       background: rgba(255,255,255,0.08); border-radius: 10px;
@@ -92,9 +108,7 @@
     .intro-card h2 { font-size: 1.1rem; font-weight: 700; color: var(--purple); margin-bottom: 10px; }
     .intro-card p { font-size: 0.9rem; color: #555; line-height: 1.7; margin-bottom: 12px; }
     .intro-card p:last-child { margin-bottom: 0; }
-    .intro-agents {
-      display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px;
-    }
+    .intro-agents { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 20px; }
     .agent-chip {
       display: flex; align-items: center; gap: 8px;
       background: #f5f4f7; border-radius: 10px; padding: 10px 16px;
@@ -111,12 +125,33 @@
 
     /* ── PROGRESS BAR ── */
     .progress-wrap { max-width: 820px; margin: 0 auto 8px; padding: 0 24px; }
-    .progress-label { font-size: 0.78rem; color: #999; margin-bottom: 6px; display: flex; justify-content: space-between; }
+    .progress-label { font-size: 0.78rem; color: #999; margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
     .progress-bar { background: #e8e4f0; border-radius: 99px; height: 6px; overflow: hidden; }
     .progress-fill { background: var(--green); height: 100%; border-radius: 99px; transition: width 0.4s ease; width: 0%; }
+    #autosave-indicator { font-size: 0.72rem; color: #bbb; opacity: 0; transition: opacity 0.4s; }
+    #autosave-indicator.show { opacity: 1; }
 
     /* ── FORM ── */
     .form-wrap { max-width: 820px; margin: 0 auto 48px; padding: 0 24px; }
+
+    /* Contact details card */
+    .contact-card {
+      background: #fff; border-radius: 16px;
+      box-shadow: 0 4px 24px rgba(67,22,92,0.07);
+      margin-bottom: 20px; overflow: hidden;
+    }
+    .contact-header {
+      background: #1a1a2e; padding: 18px 28px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .contact-header .icon {
+      width: 32px; height: 32px; border-radius: 50%;
+      background: rgba(251,186,0,0.2); color: var(--yellow);
+      font-size: 1rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .contact-header h3 { color: #fff; font-size: 1rem; font-weight: 700; }
+    .contact-header p { color: rgba(255,255,255,0.5); font-size: 0.78rem; margin-top: 2px; }
+    .contact-body { padding: 24px 28px; }
 
     .form-section {
       background: #fff; border-radius: 16px;
@@ -145,10 +180,7 @@
       color: var(--purple); margin-bottom: 6px;
     }
     label .req { color: var(--yellow); margin-left: 2px; }
-    .field-hint {
-      font-size: 0.76rem; color: #999; font-weight: 400;
-      margin-top: 2px; margin-bottom: 6px; line-height: 1.4;
-    }
+    .field-hint { font-size: 0.76rem; color: #999; font-weight: 400; margin-top: 2px; margin-bottom: 6px; line-height: 1.4; }
 
     input[type="text"], input[type="email"], textarea, select {
       width: 100%; font-family: 'Poppins', sans-serif; font-size: 0.88rem;
@@ -157,11 +189,9 @@
       padding: 10px 14px; transition: border-color 0.2s, box-shadow 0.2s;
       resize: vertical;
     }
-    input[type="text"]:focus, input[type="email"]:focus,
-    textarea:focus, select:focus {
+    input[type="text"]:focus, input[type="email"]:focus, textarea:focus, select:focus {
       outline: none; border-color: var(--purple);
-      box-shadow: 0 0 0 3px rgba(67,22,92,0.1);
-      background: #fff;
+      box-shadow: 0 0 0 3px rgba(67,22,92,0.1); background: #fff;
     }
     textarea { min-height: 90px; }
     textarea.tall { min-height: 120px; }
@@ -176,12 +206,23 @@
     }
     .submit-section h3 { color: #fff; font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
     .submit-section p { color: rgba(255,255,255,0.6); font-size: 0.85rem; margin-bottom: 24px; }
+    .submit-what-happens {
+      display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 28px; text-align: left;
+    }
+    .submit-what-item {
+      flex: 1; min-width: 180px; background: rgba(255,255,255,0.06);
+      border-radius: 10px; padding: 14px 16px;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .submit-what-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
+    .submit-what-text { font-size: 0.8rem; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    .submit-what-text strong { color: #fff; display: block; margin-bottom: 2px; }
     .btn-submit {
       display: inline-flex; align-items: center; gap: 10px;
       background: var(--yellow); color: var(--purple-dark);
       font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem;
       padding: 14px 40px; border-radius: 12px; border: none; cursor: pointer;
-      transition: background 0.2s, transform 0.15s; text-decoration: none;
+      transition: background 0.2s, transform 0.15s;
     }
     .btn-submit:hover { background: #ffd040; transform: translateY(-2px); }
     .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
@@ -195,18 +236,27 @@
     }
     .success-icon {
       width: 64px; height: 64px; border-radius: 50%;
-      background: var(--green); color: #fff;
-      font-size: 1.8rem; display: flex; align-items: center; justify-content: center;
-      margin: 0 auto 20px;
+      background: var(--green); color: #fff; font-size: 1.8rem;
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;
     }
     #success-msg h3 { font-size: 1.3rem; font-weight: 800; color: var(--purple); margin-bottom: 8px; }
-    #success-msg p { color: #666; font-size: 0.9rem; line-height: 1.7; }
+    #success-msg p { color: #666; font-size: 0.9rem; line-height: 1.7; margin-bottom: 12px; }
+    .success-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 28px; }
+    .success-btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 12px 24px; border-radius: 10px; font-family: 'Poppins', sans-serif;
+      font-size: 0.88rem; font-weight: 700; text-decoration: none; cursor: pointer; border: none;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .success-btn:hover { transform: translateY(-1px); }
+    .success-btn.primary { background: var(--yellow); color: var(--purple-dark); }
+    .success-btn.primary:hover { background: #ffd040; }
+    .success-btn.ghost { background: #f5f4f7; color: var(--purple); }
+    .success-btn.ghost:hover { background: #ede9f5; }
+    .download-note { font-size: 0.76rem; color: #bbb; margin-top: 8px; }
 
     /* ── FOOTER ── */
-    footer {
-      background: var(--purple-dark); padding: 28px 32px;
-      text-align: center;
-    }
+    footer { background: var(--purple-dark); padding: 28px 32px; text-align: center; }
     footer img { height: 28px; width: auto; margin-bottom: 10px; opacity: 0.7; }
     footer p { color: rgba(255,255,255,0.4); font-size: 0.75rem; }
   </style>
@@ -236,6 +286,16 @@
     </div>
   </nav>
 
+  <!-- Saved progress banner -->
+  <div id="resume-banner">
+    <div class="resume-inner">
+      <strong>💾 You have saved progress</strong>
+      <span>Pick up where you left off?</span>
+      <button class="resume-btn primary" onclick="restoreProgress()">Continue</button>
+      <button class="resume-btn ghost" onclick="clearProgress()">Start fresh</button>
+    </div>
+  </div>
+
   <!-- Hero -->
   <div class="hero">
     <div class="hero-tag">Step 2 of Onboarding</div>
@@ -253,7 +313,7 @@
     <div class="intro-card">
       <h2>Why this matters</h2>
       <p>Your Always On agents — Sally (web chat), Dan (email response), and Caroline (sales prep) — draw everything they know about your business from this document. The more accurate and detailed your answers, the more confidently they can qualify leads, answer questions, and represent you.</p>
-      <p>Work through each section at your own pace. There are no right or wrong answers — just be as specific as you can. You can always update it later.</p>
+      <p>Work through each section at your own pace. <strong>Your progress is saved automatically</strong> — you can close the page and return any time. There are no right or wrong answers — just be as specific as you can.</p>
       <div class="intro-agents">
         <div class="agent-chip">
           <div class="agent-icon" style="background: var(--blue);">S</div>
@@ -283,8 +343,8 @@
   <!-- Progress bar -->
   <div class="progress-wrap">
     <div class="progress-label">
-      <span id="progress-text">0 of 8 sections completed</span>
-      <span id="progress-pct">0%</span>
+      <span id="progress-text">0 of 8 sections started</span>
+      <span id="autosave-indicator">✓ Progress saved</span>
     </div>
     <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
   </div>
@@ -293,11 +353,39 @@
   <div class="form-wrap">
     <form id="knowledge-form" novalidate>
 
-      <!-- Web3Forms hidden fields -->
-      <input type="hidden" name="access_key" value="1c6295d4-4b6f-4ed7-b5d7-04a421efb19e" />
-      <input type="hidden" name="subject" value="Always On — Company Knowledge Base Submission" />
-      <input type="hidden" name="from_name" value="Always On Knowledge Form" />
-      <input type="checkbox" name="botcheck" style="display:none" />
+      <!-- ── YOUR CONTACT DETAILS ── -->
+      <div class="contact-card">
+        <div class="contact-header">
+          <div class="icon">👤</div>
+          <div>
+            <h3>Your Contact Details</h3>
+            <p>So we know who submitted this — and where to send your copy</p>
+          </div>
+        </div>
+        <div class="contact-body">
+          <div class="field-row">
+            <div class="field-group">
+              <label>Your name <span class="req">*</span></label>
+              <input type="text" name="submitter_name" id="submitter_name" placeholder="e.g. Sarah Booth" required />
+            </div>
+            <div class="field-group">
+              <label>Your email <span class="req">*</span></label>
+              <div class="field-hint">Your 8 knowledge files will be sent here</div>
+              <input type="email" name="submitter_email" id="submitter_email" placeholder="e.g. sarah@yourcompany.co.uk" required />
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field-group">
+              <label>Your job title / role</label>
+              <input type="text" name="submitter_role" id="submitter_role" placeholder="e.g. Sales Director" />
+            </div>
+            <div class="field-group">
+              <label>Company name <span class="req">*</span></label>
+              <input type="text" name="company_name" id="company_name" placeholder="e.g. Midshire Lubricants Ltd" required />
+            </div>
+          </div>
+        </div>
+      </div>
 
       <!-- ── SECTION 1: Company Overview ── -->
       <div class="form-section" data-section="1">
@@ -309,17 +397,6 @@
           </div>
         </div>
         <div class="section-body">
-          <div class="field-row">
-            <div class="field-group">
-              <label>Company name <span class="req">*</span></label>
-              <input type="text" name="company_name" placeholder="e.g. Midshire Lubricants Ltd" required />
-            </div>
-            <div class="field-group">
-              <label>Company size</label>
-              <div class="field-hint">Number of staff, year founded, ownership structure</div>
-              <input type="text" name="company_size" placeholder="e.g. 12 staff, founded 1987, family-owned" />
-            </div>
-          </div>
           <div class="field-group">
             <label>What does the company do? <span class="req">*</span></label>
             <div class="field-hint">Describe your business clearly — what you supply or provide, to whom, and how</div>
@@ -337,10 +414,17 @@
               <textarea name="geographic_coverage" placeholder="e.g. East and West Midlands, with national delivery available on orders over £500"></textarea>
             </div>
           </div>
-          <div class="field-group">
-            <label>Key differentiators</label>
-            <div class="field-hint">What makes you genuinely different from competitors? Be specific.</div>
-            <textarea name="key_differentiators" placeholder="e.g. Same-day delivery within 30 miles, technical on-site support, own-brand product range, 37 years of specialist knowledge"></textarea>
+          <div class="field-row">
+            <div class="field-group">
+              <label>Company size</label>
+              <div class="field-hint">Number of staff, year founded, ownership structure</div>
+              <input type="text" name="company_size" placeholder="e.g. 12 staff, founded 1987, family-owned" />
+            </div>
+            <div class="field-group">
+              <label>Key differentiators</label>
+              <div class="field-hint">What makes you genuinely different from competitors?</div>
+              <input type="text" name="key_differentiators" placeholder="e.g. Same-day delivery, own-brand range, 37 years of specialist knowledge" />
+            </div>
           </div>
         </div>
       </div>
@@ -519,7 +603,7 @@
           <div class="field-group">
             <label>Handoff message style</label>
             <div class="field-hint">How should your agents introduce a rep to the prospect? Tone and example wording.</div>
-            <textarea name="handoff_style" placeholder='e.g. Warm and confident — "I&apos;ll get our local rep Sarah to give you a call within 2 hours to run through the options."'></textarea>
+            <textarea name="handoff_style" placeholder="e.g. Warm and confident — 'I'll get our local rep to give you a call within 2 hours to run through the options.'"></textarea>
           </div>
         </div>
       </div>
@@ -588,14 +672,37 @@
       <!-- ── SUBMIT ── -->
       <div class="submit-section" id="submit-section">
         <h3>Ready to submit?</h3>
-        <p>Once we receive your knowledge base, we'll review it and load it into your agents within 1–2 business days.</p>
+        <p>Here's what happens the moment you hit submit:</p>
+        <div class="submit-what-happens">
+          <div class="submit-what-item">
+            <div class="submit-what-icon">📦</div>
+            <div class="submit-what-text">
+              <strong>Your files download automatically</strong>
+              8 individual .txt files — one per section — ready to upload to your platform knowledge base
+            </div>
+          </div>
+          <div class="submit-what-item">
+            <div class="submit-what-icon">📬</div>
+            <div class="submit-what-text">
+              <strong>We receive your knowledge base</strong>
+              8 section files sent to the Plan Grow Do team as backup, and to load on your behalf
+            </div>
+          </div>
+          <div class="submit-what-item">
+            <div class="submit-what-icon">🚀</div>
+            <div class="submit-what-text">
+              <strong>We review and go live</strong>
+              Your agents will be configured within 1–2 business days of receiving this
+            </div>
+          </div>
+        </div>
         <button type="submit" class="btn-submit" id="submit-btn">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
             <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
           </svg>
-          <span id="submit-label">Submit Knowledge Base</span>
+          <span id="submit-label">Submit &amp; Download Files</span>
         </button>
-        <p class="submit-note">Sent securely to the Plan Grow Do team</p>
+        <p class="submit-note">Sent securely to the Plan Grow Do team · Your files download automatically</p>
       </div>
 
     </form>
@@ -603,9 +710,20 @@
     <!-- Success message -->
     <div id="success-msg">
       <div class="success-icon">✓</div>
-      <h3>Knowledge base received!</h3>
-      <p>Thank you — we'll review your submission and load it into your Always On agents within 1–2 business days.<br/><br/>
-      If you have any questions in the meantime, email us at <a href="mailto:rob@plangrowdo.com" style="color: var(--purple); font-weight: 600;">rob@plangrowdo.com</a></p>
+      <h3>Done — your knowledge base is on its way!</h3>
+      <p><strong>Your 8 knowledge files should be downloading now.</strong><br/>
+      Check your downloads folder for a ZIP called <em>[CompanyName]-Always-On-Knowledge-Base.zip</em>.<br/>
+      Each file corresponds to one section of your knowledge base — ready to upload to your platform.</p>
+      <p>The Plan Grow Do team has also received all 8 sections as individual files. We'll review them and have your agents configured within 1–2 business days.</p>
+      <p style="font-size:0.82rem; color:#bbb;">Questions? Email <a href="mailto:rob@plangrowdo.com" style="color: var(--purple); font-weight: 600;">rob@plangrowdo.com</a></p>
+      <div class="success-actions">
+        <button class="success-btn primary" id="redownload-btn" onclick="redownloadZip()">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download Files Again
+        </button>
+        <a href="/" class="success-btn ghost">← Return to Always On</a>
+      </div>
+      <p class="download-note">Didn't get the download? Click "Download Files Again" above.</p>
     </div>
 
   </div>
@@ -619,137 +737,315 @@
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    // ── PROGRESS TRACKER ──
-    const sections = document.querySelectorAll('.form-section');
-    const fill = document.getElementById('progress-fill');
+    const STORAGE_KEY = 'ao_knowledge_draft';
+    const SECTION_COUNT = 8;
+
+    // All field names for save/restore
+    const ALL_FIELDS = [
+      'submitter_name','submitter_email','submitter_role','company_name',
+      'what_company_does','sectors_served','geographic_coverage','company_size','key_differentiators',
+      'ideal_customer','sectors_targeted','who_we_dont_serve','min_order_value','restrictions',
+      'core_products','key_brands','popular_products','services_offered','what_we_dont_do',
+      'pricing_structure','moq','lead_times','credit_terms','delivery_charges',
+      'common_questions','key_answers','certifications','technical_support',
+      'enquiry_handling','escalation_triggers','qualifying_questions','handoff_style',
+      'sales_reps','internal_contacts','office_hours','out_of_hours',
+      'main_competitors','competitive_positioning','differentiators_to_emphasise'
+    ];
+
+    // ── PROGRESS ──
+    const sections = document.querySelectorAll('.form-section[data-section]');
+    const progressFill = document.getElementById('progress-fill');
     const progressText = document.getElementById('progress-text');
-    const progressPct = document.getElementById('progress-pct');
-    const TOTAL = sections.length;
 
     function sectionHasInput(section) {
-      const inputs = section.querySelectorAll('input[type="text"], input[type="email"], textarea');
-      return [...inputs].some(el => el.value.trim().length > 0);
+      return [...section.querySelectorAll('input[type="text"], input[type="email"], textarea')]
+        .some(el => el.value.trim().length > 0);
     }
 
     function updateProgress() {
       let done = 0;
       sections.forEach(s => { if (sectionHasInput(s)) done++; });
-      const pct = Math.round((done / TOTAL) * 100);
-      fill.style.width = pct + '%';
-      progressText.textContent = `${done} of ${TOTAL} sections completed`;
-      progressPct.textContent = pct + '%';
+      const pct = Math.round((done / SECTION_COUNT) * 100);
+      progressFill.style.width = pct + '%';
+      progressText.textContent = `${done} of ${SECTION_COUNT} sections started`;
     }
 
-    document.getElementById('knowledge-form').addEventListener('input', updateProgress);
+    // ── AUTO-SAVE ──
+    let saveTimer;
+    const saveIndicator = document.getElementById('autosave-indicator');
+
+    function saveToStorage() {
+      clearTimeout(saveTimer);
+      saveTimer = setTimeout(() => {
+        const data = {};
+        ALL_FIELDS.forEach(name => {
+          const el = document.querySelector(`[name="${name}"]`);
+          if (el) data[name] = el.value;
+        });
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+        saveIndicator.classList.add('show');
+        setTimeout(() => saveIndicator.classList.remove('show'), 2000);
+      }, 800);
+    }
+
+    function restoreProgress() {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      try {
+        const data = JSON.parse(raw);
+        ALL_FIELDS.forEach(name => {
+          const el = document.querySelector(`[name="${name}"]`);
+          if (el && data[name] !== undefined) el.value = data[name];
+        });
+      } catch(e) {}
+      document.getElementById('resume-banner').style.display = 'none';
+      updateProgress();
+    }
+
+    function clearProgress() {
+      localStorage.removeItem(STORAGE_KEY);
+      document.getElementById('resume-banner').style.display = 'none';
+    }
+
+    // Check for saved progress on load
+    window.addEventListener('DOMContentLoaded', () => {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        try {
+          const data = JSON.parse(raw);
+          const hasContent = Object.values(data).some(v => v && v.trim().length > 0);
+          if (hasContent) {
+            document.getElementById('resume-banner').style.display = 'block';
+          }
+        } catch(e) {}
+      }
+    });
+
+    // Track input for progress + autosave
+    document.getElementById('knowledge-form').addEventListener('input', () => {
+      updateProgress();
+      saveToStorage();
+    });
+
+    // ── ZIP GENERATION ──
+    let generatedZip = null;
+    let zipFilename = 'Always-On-Knowledge-Base.zip';
+
+    function getVal(name) {
+      return (document.querySelector(`[name="${name}"]`)?.value || '').trim();
+    }
+
+    function sectionFile(num, title, fields) {
+      const LINE = '─'.repeat(60);
+      const company = getVal('company_name') || 'Your Company';
+      const submitter = getVal('submitter_name') || '';
+      const date = new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' });
+      let content = `ALWAYS ON — COMPANY KNOWLEDGE BASE\n`;
+      content += `Section ${num}: ${title}\n`;
+      content += `Company: ${company}\n`;
+      if (submitter) content += `Submitted by: ${submitter}\n`;
+      content += `Date: ${date}\n`;
+      content += LINE + '\n\n';
+      fields.forEach(([label, value]) => {
+        if (value) {
+          content += `${label}:\n${value}\n\n`;
+        }
+      });
+      return content;
+    }
+
+    function buildAllSections() {
+      return [
+        {
+          num: 1, title: 'Company Overview',
+          filename: '1-Company-Overview.txt',
+          fields: [
+            ['What the company does', getVal('what_company_does')],
+            ['Industries / sectors served', getVal('sectors_served')],
+            ['Geographic coverage', getVal('geographic_coverage')],
+            ['Company size', getVal('company_size')],
+            ['Key differentiators', getVal('key_differentiators')],
+          ]
+        },
+        {
+          num: 2, title: 'Who We Serve & Don\'t Serve',
+          filename: '2-Who-We-Serve.txt',
+          fields: [
+            ['Ideal customer profile', getVal('ideal_customer')],
+            ['Sectors actively targeted', getVal('sectors_targeted')],
+            ['Who we do NOT serve', getVal('who_we_dont_serve')],
+            ['Minimum order value', getVal('min_order_value')],
+            ['Restrictions / exclusions', getVal('restrictions')],
+          ]
+        },
+        {
+          num: 3, title: 'Products & Services',
+          filename: '3-Products-and-Services.txt',
+          fields: [
+            ['Core product categories', getVal('core_products')],
+            ['Key brands stocked', getVal('key_brands')],
+            ['Most popular products', getVal('popular_products')],
+            ['Services offered (beyond core supply)', getVal('services_offered')],
+            ['What we don\'t do / don\'t supply', getVal('what_we_dont_do')],
+          ]
+        },
+        {
+          num: 4, title: 'Pricing & MOQs',
+          filename: '4-Pricing-and-MOQs.txt',
+          fields: [
+            ['Pricing structure', getVal('pricing_structure')],
+            ['Minimum order quantities', getVal('moq')],
+            ['Lead times', getVal('lead_times')],
+            ['Credit terms', getVal('credit_terms')],
+            ['Delivery charges', getVal('delivery_charges')],
+          ]
+        },
+        {
+          num: 5, title: 'Technical Knowledge & FAQs',
+          filename: '5-Technical-Knowledge.txt',
+          fields: [
+            ['Most common customer questions', getVal('common_questions')],
+            ['Key answers', getVal('key_answers')],
+            ['Certifications & accreditations', getVal('certifications')],
+            ['Technical support available', getVal('technical_support')],
+          ]
+        },
+        {
+          num: 6, title: 'Sales Process',
+          filename: '6-Sales-Process.txt',
+          fields: [
+            ['How to handle new enquiries', getVal('enquiry_handling')],
+            ['Escalation triggers', getVal('escalation_triggers')],
+            ['Key qualifying questions', getVal('qualifying_questions')],
+            ['Handoff message style', getVal('handoff_style')],
+          ]
+        },
+        {
+          num: 7, title: 'Team & Territories',
+          filename: '7-Team-and-Territories.txt',
+          fields: [
+            ['Sales reps and areas', getVal('sales_reps')],
+            ['Internal contacts', getVal('internal_contacts')],
+            ['Office hours', getVal('office_hours')],
+            ['Out-of-hours / emergency contact', getVal('out_of_hours')],
+          ]
+        },
+        {
+          num: 8, title: 'Competitors & Positioning',
+          filename: '8-Competitors-and-Positioning.txt',
+          fields: [
+            ['Main competitors', getVal('main_competitors')],
+            ['How we position against them', getVal('competitive_positioning')],
+            ['Key differentiators to emphasise', getVal('differentiators_to_emphasise')],
+          ]
+        },
+      ];
+    }
+
+    async function generateZip() {
+      const zip = new JSZip();
+      const sections = buildAllSections();
+      sections.forEach(s => {
+        zip.file(s.filename, sectionFile(s.num, s.title, s.fields));
+      });
+      return zip;
+    }
+
+    function triggerZipDownload(zip, filename) {
+      zip.generateAsync({ type: 'blob' }).then(blob => {
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      });
+    }
+
+    function redownloadZip() {
+      if (generatedZip) triggerZipDownload(generatedZip, zipFilename);
+    }
 
     // ── FORM SUBMIT ──
     document.getElementById('knowledge-form').addEventListener('submit', async function(e) {
       e.preventDefault();
 
+      // Basic validation
+      const required = ['submitter_name','submitter_email','company_name','what_company_does',
+        'ideal_customer','core_products','common_questions','key_answers',
+        'enquiry_handling','qualifying_questions'];
+      let firstMissing = null;
+      required.forEach(name => {
+        const el = document.querySelector(`[name="${name}"]`);
+        if (el && !el.value.trim() && !firstMissing) firstMissing = el;
+      });
+      if (firstMissing) {
+        firstMissing.focus();
+        firstMissing.style.borderColor = '#e53935';
+        firstMissing.addEventListener('input', () => firstMissing.style.borderColor = '', { once: true });
+        return;
+      }
+
       const btn = document.getElementById('submit-btn');
       const label = document.getElementById('submit-label');
       btn.disabled = true;
-      label.textContent = 'Sending…';
+      label.textContent = 'Generating files…';
 
-      // Build plain-text message body
-      const f = this;
-      function val(name) { return (f.elements[name]?.value || '').trim(); }
-      const LINE = '─'.repeat(60);
+      const company = getVal('company_name');
+      const submitterName = getVal('submitter_name');
+      const submitterEmail = getVal('submitter_email');
+      const submitterRole = getVal('submitter_role');
 
-      const body = [
-        'ALWAYS ON — COMPANY KNOWLEDGE BASE SUBMISSION',
-        LINE,
-        '',
-        '1. COMPANY OVERVIEW',
-        LINE,
-        `Company name: ${val('company_name')}`,
-        `Company size: ${val('company_size')}`,
-        `What the company does:\n${val('what_company_does')}`,
-        `Industries/sectors served: ${val('sectors_served')}`,
-        `Geographic coverage: ${val('geographic_coverage')}`,
-        `Key differentiators:\n${val('key_differentiators')}`,
-        '',
-        '2. WHO WE SERVE / DON\'T SERVE',
-        LINE,
-        `Ideal customer profile:\n${val('ideal_customer')}`,
-        `Sectors actively targeted: ${val('sectors_targeted')}`,
-        `Who we do NOT serve:\n${val('who_we_dont_serve')}`,
-        `Minimum order value: ${val('min_order_value')}`,
-        `Restrictions/exclusions: ${val('restrictions')}`,
-        '',
-        '3. PRODUCTS & SERVICES',
-        LINE,
-        `Core product categories:\n${val('core_products')}`,
-        `Key brands stocked: ${val('key_brands')}`,
-        `Most popular products: ${val('popular_products')}`,
-        `Services offered:\n${val('services_offered')}`,
-        `What we don't do:\n${val('what_we_dont_do')}`,
-        '',
-        '4. PRICING & MOQs',
-        LINE,
-        `Pricing structure:\n${val('pricing_structure')}`,
-        `Minimum order quantities: ${val('moq')}`,
-        `Lead times: ${val('lead_times')}`,
-        `Credit terms: ${val('credit_terms')}`,
-        `Delivery charges: ${val('delivery_charges')}`,
-        '',
-        '5. TECHNICAL KNOWLEDGE & FAQs',
-        LINE,
-        `Most common customer questions:\n${val('common_questions')}`,
-        `Key answers:\n${val('key_answers')}`,
-        `Certifications/accreditations: ${val('certifications')}`,
-        `Technical support available:\n${val('technical_support')}`,
-        '',
-        '6. SALES PROCESS',
-        LINE,
-        `How to handle new enquiries:\n${val('enquiry_handling')}`,
-        `Escalation triggers:\n${val('escalation_triggers')}`,
-        `Key qualifying questions:\n${val('qualifying_questions')}`,
-        `Handoff message style:\n${val('handoff_style')}`,
-        '',
-        '7. TEAM & TERRITORIES',
-        LINE,
-        `Sales reps and areas:\n${val('sales_reps')}`,
-        `Internal contacts:\n${val('internal_contacts')}`,
-        `Office hours: ${val('office_hours')}`,
-        `Out-of-hours contact: ${val('out_of_hours')}`,
-        '',
-        '8. COMPETITORS & POSITIONING',
-        LINE,
-        `Main competitors: ${val('main_competitors')}`,
-        `Competitive positioning:\n${val('competitive_positioning')}`,
-        `Differentiators to emphasise:\n${val('differentiators_to_emphasise')}`,
-      ].join('\n');
-
-      const payload = {
-        access_key: '1c6295d4-4b6f-4ed7-b5d7-04a421efb19e',
-        subject: 'Always On — Company Knowledge Base Submission',
-        from_name: 'Always On Knowledge Form',
-        message: body,
-        company: val('company_name') || 'Unknown company',
-      };
-
+      // ── 1. Generate & download ZIP ──
       try {
-        const res = await fetch('https://api.web3forms.com/submit', {
+        label.textContent = 'Preparing download…';
+        generatedZip = await generateZip();
+        zipFilename = (company.replace(/[^a-z0-9]/gi, '-').replace(/-+/g, '-') || 'Company') + '-Always-On-Knowledge-Base.zip';
+        triggerZipDownload(generatedZip, zipFilename);
+      } catch (err) {
+        console.error('ZIP generation failed:', err);
+      }
+
+      // ── 2. Send 8 section emails to rob@ ──
+      label.textContent = 'Sending to team…';
+
+      const sectionData = buildAllSections();
+      const LINE = '─'.repeat(60);
+      const header = `Submitted by: ${submitterName}${submitterRole ? ' (' + submitterRole + ')' : ''}\nEmail: ${submitterEmail}\nCompany: ${company}\nDate: ${new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })}\n\n`;
+
+      const emailPromises = sectionData.map(s => {
+        const body = header + LINE + '\n\n' + s.fields
+          .filter(([,v]) => v)
+          .map(([label, value]) => `${label}:\n${value}`)
+          .join('\n\n');
+
+        return fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const data = await res.json();
+          body: JSON.stringify({
+            access_key: '1c6295d4-4b6f-4ed7-b5d7-04a421efb19e',
+            subject: `Always On Knowledge — ${company} — ${s.num}. ${s.title}`,
+            from_name: 'Always On Knowledge Form',
+            message: body,
+          })
+        }).then(r => r.json()).catch(() => ({ success: false }));
+      });
 
-        if (data.success) {
-          document.getElementById('knowledge-form').style.display = 'none';
-          document.querySelector('.progress-wrap').style.display = 'none';
-          document.getElementById('success-msg').style.display = 'block';
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        } else {
-          throw new Error(data.message || 'Submission failed');
-        }
-      } catch (err) {
-        label.textContent = 'Submit Knowledge Base';
-        btn.disabled = false;
-        alert('Something went wrong. Please try again or email rob@plangrowdo.com directly.');
+      try {
+        await Promise.all(emailPromises);
+      } catch(err) {
+        console.error('Some emails failed:', err);
       }
+
+      // ── 3. Show success ──
+      localStorage.removeItem(STORAGE_KEY);
+      document.getElementById('knowledge-form').style.display = 'none';
+      document.querySelector('.progress-wrap').style.display = 'none';
+      document.getElementById('success-msg').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
   </script>
 

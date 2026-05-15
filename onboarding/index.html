@@ -132,12 +132,41 @@
     #toast.show { transform: translateX(-50%) translateY(0); }
 
     /* ── CONFIRMATION ── */
-    #confirmation { display: none; text-align: center; padding: 64px 36px; }
+    #confirmation { display: none; text-align: center; padding: 64px 36px 48px; }
     #confirmation .conf-icon { font-size: 4rem; margin-bottom: 20px; }
     #confirmation h2 { font-size: 1.8rem; font-weight: 800; color: var(--purple-dark); letter-spacing: -0.02em; margin-bottom: 16px; }
     #confirmation p { font-size: 1rem; color: var(--text-muted); max-width: 480px; margin: 0 auto 12px; line-height: 1.7; }
     #confirmation .back-link { display: inline-block; margin-top: 28px; color: var(--purple); font-weight: 600; text-decoration: none; font-size: 0.9rem; }
     #confirmation .back-link:hover { text-decoration: underline; }
+    .step2-card {
+      max-width: 520px; margin: 36px auto 0;
+      background: linear-gradient(135deg, var(--purple-dark), var(--purple));
+      border-radius: 16px; padding: 28px 32px; text-align: left;
+    }
+    .step2-badge {
+      display: inline-block; background: rgba(251,186,0,0.18); color: var(--yellow);
+      font-size: 0.68rem; font-weight: 700; letter-spacing: 0.14em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 20px; margin-bottom: 12px;
+    }
+    .step2-card h3 { color: #fff; font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; }
+    .step2-card p { color: rgba(255,255,255,0.65); font-size: 0.85rem; line-height: 1.6; margin-bottom: 20px; }
+    .step2-card ul { list-style: none; margin-bottom: 22px; }
+    .step2-card ul li {
+      display: flex; align-items: flex-start; gap: 8px;
+      color: rgba(255,255,255,0.75); font-size: 0.82rem; margin-bottom: 8px;
+    }
+    .step2-card ul li::before {
+      content: '✓'; color: var(--green); font-weight: 700; flex-shrink: 0; margin-top: 1px;
+    }
+    .btn-step2 {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--yellow); color: var(--purple-dark);
+      font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.9rem;
+      padding: 12px 24px; border-radius: 10px; text-decoration: none;
+      transition: background 0.2s, transform 0.15s; width: 100%; justify-content: center;
+    }
+    .btn-step2:hover { background: #ffd040; transform: translateY(-1px); }
+    .step2-skip { display: block; text-align: center; margin-top: 10px; color: rgba(255,255,255,0.35); font-size: 0.75rem; }
 
     /* ── CONDITIONAL FIELDS ── */
     .conditional-field { display: none; }
@@ -210,6 +239,23 @@
       <h2>Thank you — we've received everything.</h2>
       <p>Your Plan Grow Do contact will be in touch shortly to confirm your setup timeline.</p>
       <p style="font-size:0.85rem;">A copy of your responses has been sent to <strong>rob@plangrowdo.com</strong>.</p>
+
+      <!-- Step 2 card -->
+      <div class="step2-card">
+        <div class="step2-badge">Step 2 of 2</div>
+        <h3>One more thing — your Company Knowledge Base</h3>
+        <p>This is what your AI agents use to answer questions, qualify leads, and represent your business. It takes about 15 minutes and your progress saves automatically, so you can return any time.</p>
+        <ul>
+          <li>8 sections covering your products, pricing, team, and sales process</li>
+          <li>You'll receive 8 individual files to upload to your platform</li>
+          <li>We'll also receive a copy to configure your agents on your behalf</li>
+        </ul>
+        <a href="/company-knowledge" class="btn-step2">
+          Complete Your Knowledge Base →
+        </a>
+        <span class="step2-skip">You can also do this later — we'll remind you.</span>
+      </div>
+
       <a href="/" class="back-link">← Return to Always On</a>
     </div>
 
