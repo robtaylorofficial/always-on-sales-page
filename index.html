@@ -1606,7 +1606,7 @@
 </section>
 
 <!-- ===== FORM 1 ===== -->
-<section id="form1" class="form-section">
+<section id="form1" class="form-section" style="display:none">
   <div class="container">
     <div class="form-header fade-in">
       <span class="section-label label-yellow">Get Started</span>
@@ -1655,12 +1655,15 @@
         </div>
       </div>
       <div class="fade-in">
-        <div class="video-placeholder">
-          <div class="placeholder-icon">🎥</div>
-          <div class="placeholder-title">Midshire Walkthrough Video</div>
-          <div class="placeholder-sub" style="color:rgba(255,255,255,0.35); font-size:0.78rem; margin-top:6px;">
-            Replace this with your Midshire Lubricants video embed<br/>(Vimeo, YouTube, Wistia, or iframe)
-          </div>
+        <div style="position:relative; width:100%; padding-top:56.25%; border-radius:14px; overflow:hidden; box-shadow:0 16px 48px rgba(0,0,0,0.5);">
+          <iframe
+            src="https://www.youtube.com/embed/r7Ybw095L9I?rel=0&modestbranding=1"
+            title="Always On — Midshire Lubricants Walkthrough"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+            style="position:absolute; top:0; left:0; width:100%; height:100%;"
+          ></iframe>
         </div>
       </div>
     </div>
@@ -1921,7 +1924,7 @@
 </section>
 
 <!-- ===== WEBINAR CTA ===== -->
-<section id="webinar">
+<section id="webinar" style="display:none">
   <div class="container">
     <div class="webinar-header fade-in">
       <span class="section-label label-yellow">Next Step</span>
@@ -1984,30 +1987,31 @@
 <div id="video-modal" role="dialog" aria-modal="true" aria-label="Always On Demo Video" onclick="handleModalClick(event)">
   <div class="modal-inner">
     <button class="modal-close" onclick="closeModal()" aria-label="Close video">✕</button>
-    <video id="demo-video" controls preload="none" poster="">
-      <source src="Always_On_Sales_System.mp4" type="video/mp4" />
-      Your browser does not support the video tag.
-    </video>
+    <iframe
+      id="demo-video"
+      src=""
+      title="Always On Demo"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      style="width:100%; aspect-ratio:16/9; display:block;"
+    ></iframe>
   </div>
 </div>
 
 <!-- ===== JAVASCRIPT ===== -->
 <script>
-  /* --- Video Modal --- */
+  /* --- Video Modal (YouTube) --- */
+  const YT_URL = 'https://www.youtube.com/embed/r7Ybw095L9I?autoplay=1&rel=0&modestbranding=1';
   function openModal() {
     document.getElementById('video-modal').classList.add('open');
     document.body.style.overflow = 'hidden';
-    const v = document.getElementById('demo-video');
-    v.load();
-    v.play().catch(() => {});
+    document.getElementById('demo-video').src = YT_URL;
   }
   function closeModal() {
-    const modal = document.getElementById('video-modal');
-    modal.classList.remove('open');
+    document.getElementById('video-modal').classList.remove('open');
     document.body.style.overflow = '';
-    const v = document.getElementById('demo-video');
-    v.pause();
-    v.currentTime = 0;
+    document.getElementById('demo-video').src = '';
   }
   function handleModalClick(e) {
     if (e.target === document.getElementById('video-modal')) closeModal();
