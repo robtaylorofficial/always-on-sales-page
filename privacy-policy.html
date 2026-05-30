@@ -277,7 +277,7 @@
 <div class="policy-hero">
   <div class="badge">Legal</div>
   <h1>Platform Privacy Policy</h1>
-  <p>Always On &nbsp;·&nbsp; alwayson.plangrowdo.com &nbsp;·&nbsp; Version 1.1 &nbsp;·&nbsp; May 2026</p>
+  <p>Always On &nbsp;·&nbsp; alwayson.plangrowdo.com &nbsp;·&nbsp; Version 1.2 &nbsp;·&nbsp; May 2026</p>
 </div>
 
 <!-- CONTENT -->
@@ -479,6 +479,32 @@
 
     <div class="callout">
       <strong>Note:</strong> Always On's use of Gmail data is limited to the purposes described above and complies with the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.
+    </div>
+
+    <h3>7.4 Microsoft Outlook Integration</h3>
+    <p>When you choose to connect your Microsoft (Outlook / Microsoft 365) account to Always On, we request access to the following Microsoft account data via the Microsoft Graph API:</p>
+    <ul>
+      <li><strong>Read your emails (<code>Mail.Read</code>)</strong> — We access your Outlook messages solely to match incoming and outgoing emails against contact records in your sales pipeline. Email content is stored securely and linked to the relevant contact profile within your organisation's workspace.</li>
+      <li><strong>Send emails on your behalf (<code>Mail.Send</code>)</strong> — We send emails through your Outlook account when you compose and send messages from within the platform. These sent emails are also recorded against the relevant contact record.</li>
+      <li><strong>Maintain access (<code>offline_access</code>)</strong> — We request a refresh token so your connection remains active without requiring you to re-authenticate each session. This token is encrypted at rest and never visible to other users or PGD staff.</li>
+    </ul>
+
+    <h3>7.5 What We Do Not Do (Microsoft)</h3>
+    <p>We do not:</p>
+    <ul>
+      <li>Share your Outlook or Microsoft account data with third parties</li>
+      <li>Use your email content to train AI models</li>
+      <li>Access emails unrelated to your sales activity</li>
+      <li>Access your calendar, contacts, files, or any Microsoft data beyond email</li>
+      <li>Store email content beyond what is required to display it in the platform</li>
+    </ul>
+
+    <h3>7.6 Disconnecting Your Microsoft Account</h3>
+    <p>Your Microsoft connection can be disconnected at any time from your account settings. Disconnecting immediately revokes our access and stops any further email syncing.</p>
+    <p>You can also revoke access directly via your <a href="https://myapps.microsoft.com" target="_blank" rel="noopener">Microsoft My Apps portal</a> or through your Microsoft Account permissions page at <a href="https://account.microsoft.com/privacy/app-list" target="_blank" rel="noopener">account.microsoft.com</a>.</p>
+
+    <div class="callout">
+      <strong>Note:</strong> Always On's use of Microsoft account data is limited to the purposes described above and complies with the <a href="https://learn.microsoft.com/en-us/legal/microsoft-apis/ms-apis-tos" target="_blank" rel="noopener">Microsoft API Terms of Use</a> and applicable Microsoft Graph data handling requirements.
     </div>
   </div>
 
