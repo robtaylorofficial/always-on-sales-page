@@ -277,7 +277,7 @@
 <div class="policy-hero">
   <div class="badge">Legal</div>
   <h1>Platform Privacy Policy</h1>
-  <p>Always On &nbsp;·&nbsp; alwayson.plangrowdo.com &nbsp;·&nbsp; Version 1.0 &nbsp;·&nbsp; April 2026</p>
+  <p>Always On &nbsp;·&nbsp; alwayson.plangrowdo.com &nbsp;·&nbsp; Version 1.1 &nbsp;·&nbsp; May 2026</p>
 </div>
 
 <!-- CONTENT -->
@@ -293,7 +293,7 @@
       <li><a href="#s4">How We Use Platform Data</a></li>
       <li><a href="#s5">Where Data Is Stored</a></li>
       <li><a href="#s6">Data Isolation &amp; Security</a></li>
-      <li><a href="#s7">Email Sync</a></li>
+      <li><a href="#s7">Email Sync &amp; Gmail Integration</a></li>
       <li><a href="#s8">Data Retention</a></li>
       <li><a href="#s9">Your Rights</a></li>
       <li><a href="#s10">Complaints</a></li>
@@ -448,14 +448,38 @@
 
   <!-- Section 7 -->
   <div class="policy-section" id="s7">
-    <h2><span class="section-num">7</span> Email Sync</h2>
-    <p>If you connect your Gmail or Outlook account to Always On:</p>
+    <h2><span class="section-num">7</span> Email Sync &amp; Gmail Integration</h2>
+    <p>Always On allows you to connect your email account to sync communications with your contact records. The following applies to all email connections:</p>
     <ul>
       <li>You explicitly authorise access via OAuth — you can disconnect at any time from your profile settings</li>
       <li>Only emails matching existing contact records in the platform are synced</li>
       <li>OAuth tokens are encrypted at rest and are never visible to other users or PGD staff</li>
       <li>Disconnecting your account immediately stops further sync</li>
     </ul>
+
+    <h3>7.1 Google Gmail Integration</h3>
+    <p>When you choose to connect your Gmail account to Always On, we request access to the following Google account data:</p>
+    <ul>
+      <li><strong>Read your emails (<code>gmail.readonly</code>)</strong> — We access your Gmail messages solely to match incoming and outgoing emails against contact records in your sales pipeline. Email content is stored securely and linked to the relevant contact profile within your organisation's workspace.</li>
+      <li><strong>Send emails on your behalf (<code>gmail.send</code>)</strong> — We send emails through your Gmail account when you compose and send messages from within the platform. These sent emails are also recorded against the relevant contact record.</li>
+    </ul>
+
+    <h3>7.2 What We Do Not Do</h3>
+    <p>We do not:</p>
+    <ul>
+      <li>Share your Gmail data with third parties</li>
+      <li>Use your email content to train AI models</li>
+      <li>Access emails unrelated to your sales activity</li>
+      <li>Store email content beyond what is required to display it in the platform</li>
+    </ul>
+
+    <h3>7.3 Disconnecting Your Gmail Account</h3>
+    <p>Your Gmail connection can be disconnected at any time from your account settings. Disconnecting immediately revokes our access and stops any further email syncing.</p>
+    <p>You can also revoke access directly via your <a href="https://myaccount.google.com/permissions" target="_blank" rel="noopener">Google Account permissions page</a>.</p>
+
+    <div class="callout">
+      <strong>Note:</strong> Always On's use of Gmail data is limited to the purposes described above and complies with the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements.
+    </div>
   </div>
 
   <!-- Section 8 -->
