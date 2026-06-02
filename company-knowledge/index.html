@@ -823,7 +823,7 @@
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
 
-    const SHEETS_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'; // Google Apps Script web app URL
+    const SHEETS_URL = 'https://script.google.com/macros/s/AKfycbxWN5ipu8aeUqOjXwQVf4Efqkez8K6SdSiaDZhcxTbPgx0WrPPHLBJV-rzioHz_d0hxJQ/exec'; // Google Apps Script web app URL
 
     // ── URL ENCODE / DECODE (UTF-8 safe) ──
     function encodeData(obj) {
@@ -1231,7 +1231,7 @@
       }
 
       // ── 3. Save to Google Sheets (fire-and-forget) ──
-      if (SHEETS_URL && SHEETS_URL !== 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
+      if (SHEETS_URL && SHEETS_URL !== 'https://script.google.com/macros/s/AKfycbxWN5ipu8aeUqOjXwQVf4Efqkez8K6SdSiaDZhcxTbPgx0WrPPHLBJV-rzioHz_d0hxJQ/exec') {
         const sheetPayload = { form_type: 'knowledge' };
         ALL_FIELDS.forEach(name => {
           const el = document.querySelector(`[name="${name}"]`);

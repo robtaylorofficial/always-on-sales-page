@@ -290,7 +290,7 @@
    ============================================================ */
 const WEB3FORMS_KEY      = '1c6295d4-4b6f-4ed7-b5d7-04a421efb19e';   // web3forms.com → Account → Access Key
 const UPLOADCARE_PUB_KEY = '78f51c689ae102e830e9';  // uploadcare.com → Dashboard → API Keys
-const SHEETS_URL         = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';        // Google Apps Script web app URL
+const SHEETS_URL         = 'https://script.google.com/macros/s/AKfycbxWN5ipu8aeUqOjXwQVf4Efqkez8K6SdSiaDZhcxTbPgx0WrPPHLBJV-rzioHz_d0hxJQ/exec';        // Google Apps Script web app URL
 
 /* ── STEP DEFINITIONS ── */
 const STEPS = [
@@ -839,7 +839,7 @@ async function handleSubmit() {
     }
 
     // 5. Save to Google Sheets (fire-and-forget — doesn't block submission)
-    if (SHEETS_URL && SHEETS_URL !== 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
+    if (SHEETS_URL && SHEETS_URL !== 'https://script.google.com/macros/s/AKfycbxWN5ipu8aeUqOjXwQVf4Efqkez8K6SdSiaDZhcxTbPgx0WrPPHLBJV-rzioHz_d0hxJQ/exec') {
       fetch(SHEETS_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
