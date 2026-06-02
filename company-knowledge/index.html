@@ -823,6 +823,8 @@
   <script>
     document.getElementById('yr').textContent = new Date().getFullYear();
 
+    const SHEETS_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE'; // Google Apps Script web app URL
+
     // ── URL ENCODE / DECODE (UTF-8 safe) ──
     function encodeData(obj) {
       try {
@@ -1228,7 +1230,21 @@
         console.error('Some emails failed:', err);
       }
 
-      // ── 3. Show success ──
+      // ── 3. Save to Google Sheets (fire-and-forget) ──
+      if (SHEETS_URL && SHEETS_URL !== 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
+        const sheetPayload = { form_type: 'knowledge' };
+        ALL_FIELDS.forEach(name => {
+          const el = document.querySelector(`[name="${name}"]`);
+          if (el) sheetPayload[name] = el.value || '';
+        });
+        fetch(SHEETS_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain' },
+          body: JSON.stringify(sheetPayload),
+        }).catch(err => console.warn('Sheets save failed (non-critical):', err));
+      }
+
+      // ── 4. Show success ──
       localStorage.removeItem(STORAGE_KEY);
       document.getElementById('knowledge-form').style.display = 'none';
       document.querySelector('.progress-wrap').style.display = 'none';

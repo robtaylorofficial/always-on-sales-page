@@ -290,6 +290,7 @@
    ============================================================ */
 const WEB3FORMS_KEY      = '1c6295d4-4b6f-4ed7-b5d7-04a421efb19e';   // web3forms.com → Account → Access Key
 const UPLOADCARE_PUB_KEY = '78f51c689ae102e830e9';  // uploadcare.com → Dashboard → API Keys
+const SHEETS_URL         = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';        // Google Apps Script web app URL
 
 /* ── STEP DEFINITIONS ── */
 const STEPS = [
@@ -837,7 +838,16 @@ async function handleSubmit() {
       if (!json.success) throw new Error(json.message || 'Email send failed');
     }
 
-    // 5. Mark as submitted, clear storage
+    // 5. Save to Google Sheets (fire-and-forget — doesn't block submission)
+    if (SHEETS_URL && SHEETS_URL !== 'PASTE_YOUR_APPS_SCRIPT_URL_HERE') {
+      fetch(SHEETS_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify({ form_type: 'onboarding', ...formData }),
+      }).catch(err => console.warn('Sheets save failed (non-critical):', err));
+    }
+
+    // 6. Mark as submitted, clear storage
     submitted = true;
     clearStorage();
     showConfirmation();
