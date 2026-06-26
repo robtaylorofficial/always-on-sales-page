@@ -1199,39 +1199,38 @@
         console.error('ZIP generation failed:', err);
       }
 
-      // ── 2. Send 8 section emails to rob@ ──
+      // ── 2. Send single consolidated email to rob@ ──
       label.textContent = 'Sending to team…';
 
       const sectionData = buildAllSections();
       const LINE = '─'.repeat(60);
       const header = `Submitted by: ${submitterName}${submitterRole ? ' (' + submitterRole + ')' : ''}\nEmail: ${submitterEmail}\nCompany: ${company}\nDate: ${new Date().toLocaleDateString('en-GB', { day:'numeric', month:'long', year:'numeric' })}\n\n`;
 
-      const emailPromises = sectionData.map(s => {
-        const body = header + LINE + '\n\n' + s.fields
+      const allSectionsBody = header + sectionData.map(s => {
+        const sectionContent = s.fields
           .filter(([,v]) => v)
           .map(([label, value]) => `${label}:\n${value}`)
           .join('\n\n');
+        return `${LINE}\nSection ${s.num}: ${s.title}\n${LINE}\n\n${sectionContent || '(no content submitted)'}`;
+      }).join('\n\n');
 
-        return fetch('https://api.web3forms.com/submit', {
+      try {
+        await fetch('https://api.web3forms.com/submit', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             access_key: '1c6295d4-4b6f-4ed7-b5d7-04a421efb19e',
-            subject: `Always On Knowledge — ${company} — ${s.num}. ${s.title}`,
+            subject: `Always On Knowledge — ${company} — Full Submission`,
             from_name: 'Always On Knowledge Form',
-            message: body,
+            message: allSectionsBody,
           })
-        }).then(r => r.json()).catch(() => ({ success: false }));
-      });
-
-      try {
-        await Promise.all(emailPromises);
+        }).then(r => r.json());
       } catch(err) {
-        console.error('Some emails failed:', err);
+        console.error('Email send failed:', err);
       }
 
       // ── 3. Save to Google Sheets (fire-and-forget) ──
-      if (SHEETS_URL && SHEETS_URL !== 'https://script.google.com/macros/s/AKfycbxWN5ipu8aeUqOjXwQVf4Efqkez8K6SdSiaDZhcxTbPgx0WrPPHLBJV-rzioHz_d0hxJQ/exec') {
+      if (SHEETS_URL) {
         const sheetPayload = { form_type: 'knowledge' };
         ALL_FIELDS.forEach(name => {
           const el = document.querySelector(`[name="${name}"]`);
