@@ -1133,7 +1133,137 @@
       .form-placeholder-box { padding: 32px 20px; }
       .webinar-placeholder-box { padding: 36px 20px; }
       .solution-close { padding: 32px 20px; }
+      .agents-grid { grid-template-columns: 1fr; }
+      .agent-card { height: 320px; }
     }
+  </style>
+
+  <style>
+    /* ===== AGENT TILES ===== */
+    #agents {
+      background: var(--purple-dark);
+      padding: 80px 0;
+    }
+    .agents-header { text-align: center; margin-bottom: 48px; }
+    .agents-header h2 { color: #fff; font-size: 2rem; font-weight: 800; margin-bottom: 12px; }
+    .agents-header p { color: rgba(255,255,255,0.55); font-size: 1rem; max-width: 560px; margin: 0 auto; }
+
+    .agents-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    /* Flip card wrapper */
+    .agent-card {
+      height: 340px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .agent-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transform-style: preserve-3d;
+      transition: transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .agent-card:hover .agent-card-inner,
+    .agent-card.flipped .agent-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    /* Both faces share base styles */
+    .agent-front, .agent-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border-radius: 16px;
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      padding: 32px 28px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Front */
+    .agent-front {
+      justify-content: flex-end;
+      color: #fff;
+    }
+    .agent-front.dan     { background: linear-gradient(145deg, #185fa5, #0d3d70); }
+    .agent-front.sally   { background: linear-gradient(145deg, #3d8a1e, #235210); }
+    .agent-front.caroline { background: linear-gradient(145deg, #43165c, #2d0e3e); }
+
+    .agent-icon {
+      font-size: 2.8rem;
+      margin-bottom: auto;
+    }
+    .agent-name {
+      font-size: 1.8rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .agent-tagline {
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.65);
+      font-weight: 500;
+    }
+    .agent-hint {
+      margin-top: 16px;
+      font-size: 0.7rem;
+      color: rgba(255,255,255,0.35);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* Back */
+    .agent-back {
+      transform: rotateY(180deg);
+      background: #fff;
+      justify-content: flex-start;
+    }
+    .agent-back-name {
+      font-size: 1rem;
+      font-weight: 800;
+      margin-bottom: 4px;
+    }
+    .agent-back-name.dan     { color: #185fa5; }
+    .agent-back-name.sally   { color: #3d8a1e; }
+    .agent-back-name.caroline { color: var(--purple); }
+
+    .agent-back-sub {
+      font-size: 0.72rem;
+      color: #999;
+      margin-bottom: 18px;
+      font-weight: 500;
+    }
+    .agent-bullets {
+      list-style: none;
+      padding: 0; margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .agent-bullets li {
+      font-size: 0.8rem;
+      color: #333;
+      line-height: 1.4;
+      padding-left: 18px;
+      position: relative;
+    }
+    .agent-bullets li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+    .agent-bullets.dan   li::before { color: #185fa5; }
+    .agent-bullets.sally li::before { color: #3d8a1e; }
+    .agent-bullets.caroline li::before { color: var(--purple); }
   </style>
 </head>
 <body>
@@ -1675,6 +1805,87 @@
   </div>
 </section>
 
+<!-- ===== AGENTS ===== -->
+<section id="agents">
+  <div class="container">
+    <div class="agents-header fade-in">
+      <span class="section-label label-yellow">Meet the Team</span>
+      <h2>Dan, Sally and Caroline</h2>
+      <p>Three AI agents. Each one built for a different part of your commercial operation. Hover to find out what they do.</p>
+    </div>
+
+    <div class="agents-grid fade-in">
+
+      <!-- DAN -->
+      <div class="agent-card" onclick="this.classList.toggle('flipped')">
+        <div class="agent-card-inner">
+          <div class="agent-front dan">
+            <div class="agent-icon">💼</div>
+            <div class="agent-name">Dan</div>
+            <div class="agent-tagline">Your daily sales advisor</div>
+            <div class="agent-hint">Hover to see what Dan does</div>
+          </div>
+          <div class="agent-back">
+            <div class="agent-back-name dan">Dan</div>
+            <div class="agent-back-sub">Lives on the dashboard &mdash; always on call</div>
+            <ul class="agent-bullets dan">
+              <li>Answers pipeline questions in plain English &mdash; just ask who needs chasing today</li>
+              <li>Preps you for any call or meeting from contact history in seconds</li>
+              <li>Flags contacts that have gone quiet before warm leads go cold</li>
+              <li>Prioritises your day and suggests next actions so effort lands where it matters</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- SALLY -->
+      <div class="agent-card" onclick="this.classList.toggle('flipped')">
+        <div class="agent-card-inner">
+          <div class="agent-front sally">
+            <div class="agent-icon">💬</div>
+            <div class="agent-name">Sally</div>
+            <div class="agent-tagline">Your inbound handler</div>
+            <div class="agent-hint">Hover to see what Sally does</div>
+          </div>
+          <div class="agent-back">
+            <div class="agent-back-name sally">Sally</div>
+            <div class="agent-back-sub">Processes every form submission so nothing gets missed</div>
+            <ul class="agent-bullets sally">
+              <li>Scores every inbound lead and routes it to the right rep automatically</li>
+              <li>Sends a personal acknowledgement within seconds of every enquiry</li>
+              <li>Qualifies vague submissions with a short follow-up before wasting rep time</li>
+              <li>Logs every conversation to the contact record so nothing is ever lost</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAROLINE -->
+      <div class="agent-card" onclick="this.classList.toggle('flipped')">
+        <div class="agent-card-inner">
+          <div class="agent-front caroline">
+            <div class="agent-icon">📊</div>
+            <div class="agent-name">Caroline</div>
+            <div class="agent-tagline">Your intelligence layer</div>
+            <div class="agent-hint">Hover to see what Caroline does</div>
+          </div>
+          <div class="agent-back">
+            <div class="agent-back-name caroline">Caroline</div>
+            <div class="agent-back-sub">Turns activity data into insight for leadership</div>
+            <ul class="agent-bullets caroline">
+              <li>Produces a regular activity digest so leadership never has to chase data</li>
+              <li>Surfaces contacts that went quiet before they are written off</li>
+              <li>Highlights patterns in what is and is not converting across the team</li>
+              <li>Flags pipeline health early &mdash; before a thin month becomes a bad one</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- ===== FAQ ===== -->
 <section id="faq">
   <div class="container">
@@ -1899,6 +2110,51 @@
               <span class="faq-chevron">▼</span>
             </div>
             <div class="faq-answer">Buyers don't usually care what technology sits behind the process. They care whether the experience is useful, timely and relevant. If Always On helps them get a faster response, clearer direction, better information, and access to the right person without unnecessary delay, then yes — it supports a better buyer experience. The test is whether it helps the buyer make progress, not whether it feels clever internally.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Group 6: Meet Dan, Sally and Caroline -->
+      <div class="faq-group">
+        <div class="faq-group-header" onclick="toggleGroup(this)">
+          <div class="faq-group-title"><span class="faq-group-icon">🤖</span> Meet Dan, Sally and Caroline</div>
+          <span class="faq-group-chevron">▼</span>
+        </div>
+        <div class="faq-group-body">
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Who are Dan, Sally and Caroline?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Dan, Sally and Caroline are the three AI agents that power Always On. Each one is built for a different part of your commercial operation. Dan lives on the dashboard and supports the sales team day to day. Sally handles every inbound enquiry from your website. Caroline gives leadership the intelligence layer they need to manage pipeline and performance. Together they cover the full cycle from first web visit to closed deal.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What does Dan do?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Dan is your daily sales advisor — he lives on the Always On dashboard and is always available to the team. Ask him who needs chasing and he gives you a straight answer with context. Ask him to prep you for a meeting and he pulls together everything known about that contact in seconds. He flags contacts that have gone quiet, suggests what to do next, prioritises the day, and can take you directly to any contact record from a single conversation. The goal is simple: less time in the system, more time in front of customers.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What does Sally do?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Sally handles every inbound enquiry so nothing slips through. She reads every form submission, scores the lead, and routes it to the best-fit rep based on territory, sector or capacity — with no manual handoff required. Within seconds of an enquiry arriving, the contact receives a personal acknowledgement with the rep's name and what happens next. If an enquiry is vague, Sally sends a short follow-up to gather the missing context before deciding whether it is worth a rep's time. Every conversation is logged to the contact record so the business retains the relationship even if a rep moves on.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What does Caroline do?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Caroline is the intelligence layer for leadership. She produces regular activity digests so managers see what is happening across the team without pulling a report themselves. She surfaces contacts that went quiet and never converted — bringing revenue potential that was already paid for back into view. She highlights patterns in what is and is not working so the business learns over time rather than repeating the same mistakes. And she flags pipeline health before a thin month becomes a bad one, giving leadership time to act rather than react.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Do all three agents come as standard?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Yes. Dan, Sally and Caroline are all part of the Always On platform. They are configured around your business — your products, your team structure, your sales process and your terminology — so they represent you accurately rather than giving generic responses. The knowledge base we build during onboarding is what gives each agent its context and character.</div>
           </div>
         </div>
       </div>
