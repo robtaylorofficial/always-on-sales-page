@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data Processing Agreement | Always On | Plan Grow Do</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: #f5f4f7;
+      color: #1a1a2e;
+      line-height: 1.7;
+    }
+
+    :root {
+      --purple:      #43165c;
+      --purple-dark: #2d0e3e;
+      --purple-light:#6b2a8f;
+      --yellow:      #fbba00;
+      --green:       #76b82a;
+      --blue:        #009fe3;
+      --white:       #ffffff;
+      --grey-light:  #f5f4f7;
+      --grey-mid:    #e8e4ef;
+      --text-muted:  #6b6b8a;
+    }
+
+    nav {
+      background: var(--purple-dark);
+      border-bottom: 2px solid var(--yellow);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo img { height: 38px; width: auto; display: block; }
+    .nav-logo-text { color: var(--white); font-size: 1.05rem; font-weight: 700; text-decoration: none; }
+    .nav-logo-text span { color: var(--yellow); }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: rgba(255,255,255,0.65); font-size: 0.85rem; font-weight: 500;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--yellow); }
+
+    .policy-hero {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
+      padding: 60px 24px 52px; text-align: center;
+    }
+    .policy-hero .badge {
+      display: inline-block;
+      background: rgba(251,186,0,0.15); border: 1px solid rgba(251,186,0,0.35);
+      color: var(--yellow); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 50px; margin-bottom: 18px;
+    }
+    .policy-hero h1 {
+      font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 800;
+      color: var(--white); letter-spacing: -0.02em; margin-bottom: 10px;
+    }
+    .policy-hero p { color: rgba(255,255,255,0.55); font-size: 0.9rem; }
+
+    .policy-wrap { max-width: 820px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    .parties-block {
+      background: var(--white); border: 1px solid var(--grey-mid);
+      border-left: 4px solid var(--yellow); border-radius: 10px;
+      padding: 28px 32px; margin-bottom: 28px;
+    }
+    .parties-block h2 {
+      font-size: 0.78rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--purple); margin-bottom: 16px;
+    }
+    .party-row { display: grid; grid-template-columns: 120px 1fr; gap: 8px 20px; font-size: 0.875rem; margin-bottom: 14px; }
+    .party-row:last-child { margin-bottom: 0; }
+    .party-label { font-weight: 700; color: var(--purple-dark); }
+    .party-value { color: #3a3a5c; }
+
+    .toc {
+      background: var(--white); border: 1px solid var(--grey-mid);
+      border-left: 4px solid var(--purple); border-radius: 10px;
+      padding: 28px 32px; margin-bottom: 48px;
+    }
+    .toc h2 {
+      font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--purple); margin-bottom: 14px;
+    }
+    .toc ol { padding-left: 18px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+    .toc li { font-size: 0.85rem; color: var(--text-muted); }
+    .toc a { color: var(--purple); text-decoration: none; font-weight: 500; transition: color 0.15s; }
+    .toc a:hover { color: var(--purple-light); text-decoration: underline; }
+
+    .policy-section {
+      background: var(--white); border-radius: 12px; border: 1px solid var(--grey-mid);
+      padding: 36px 40px; margin-bottom: 20px; scroll-margin-top: 24px;
+    }
+    .policy-section h2 {
+      font-size: 1.15rem; font-weight: 700; color: var(--purple-dark);
+      margin-bottom: 16px; display: flex; align-items: baseline; gap: 10px;
+    }
+    .section-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      min-width: 28px; height: 28px; background: var(--purple); color: var(--white);
+      border-radius: 6px; font-size: 0.75rem; font-weight: 700; flex-shrink: 0; margin-right: 4px;
+    }
+    .policy-section h3 { font-size: 0.95rem; font-weight: 700; color: var(--purple); margin: 20px 0 8px; }
+    .policy-section p { font-size: 0.9rem; color: #3a3a5c; margin-bottom: 12px; line-height: 1.75; }
+    .policy-section p:last-child { margin-bottom: 0; }
+    .policy-section ul, .policy-section ol { padding-left: 20px; margin-bottom: 12px; }
+    .policy-section ul li, .policy-section ol li { font-size: 0.875rem; color: #3a3a5c; margin-bottom: 5px; line-height: 1.65; }
+    .policy-section a { color: var(--purple); font-weight: 500; }
+    .policy-section a:hover { color: var(--purple-light); }
+
+    .policy-table-wrap { overflow-x: auto; margin: 16px 0; }
+    table { width: 100%; border-collapse: collapse; font-size: 0.845rem; }
+    thead tr { background: var(--purple); color: var(--white); }
+    thead th { text-align: left; padding: 10px 14px; font-weight: 600; font-size: 0.8rem; letter-spacing: 0.04em; }
+    tbody tr:nth-child(odd)  { background: var(--grey-light); }
+    tbody tr:nth-child(even) { background: var(--white); }
+    tbody td { padding: 10px 14px; color: #3a3a5c; vertical-align: top; line-height: 1.6; border-bottom: 1px solid var(--grey-mid); }
+    tbody td:first-child { font-weight: 600; color: var(--purple-dark); }
+
+    .basis {
+      display: inline-block; background: rgba(67,22,92,0.08);
+      color: var(--purple); font-size: 0.72rem; font-weight: 600;
+      padding: 2px 8px; border-radius: 4px; white-space: nowrap;
+    }
+    .callout {
+      background: rgba(0,159,227,0.07); border-left: 4px solid var(--blue);
+      border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0;
+      font-size: 0.85rem; color: #1a3a5c; line-height: 1.65;
+    }
+    .callout strong { color: var(--purple-dark); }
+    .callout-warn {
+      background: rgba(251,186,0,0.09); border-left: 4px solid var(--yellow);
+      border-radius: 0 8px 8px 0; padding: 14px 18px; margin: 16px 0;
+      font-size: 0.85rem; color: #5a4000; line-height: 1.65;
+    }
+    .callout-warn strong { color: #3a2800; }
+
+    footer {
+      background: var(--purple-dark); border-top: 3px solid var(--yellow);
+      padding: 36px 24px; text-align: center;
+    }
+    .footer-logo img { height: 34px; width: auto; margin: 0 auto 10px; display: block; }
+    footer p { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--yellow); }
+
+    @media (max-width: 640px) {
+      .policy-section { padding: 24px 20px; }
+      .toc ol { grid-template-columns: 1fr; }
+      .party-row { grid-template-columns: 1fr; gap: 2px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+      <span class="nav-logo-text" style="display:none;">Plan <span>Grow</span> Do</span>
+    </a>
+    <a href="/" class="nav-back">← Back to Always On</a>
+  </div>
+</nav>
+
+<div class="policy-hero">
+  <div class="badge">Legal</div>
+  <h1>Data Processing Agreement</h1>
+  <p>Always On &nbsp;·&nbsp; alwayson.plangrowdo.com &nbsp;·&nbsp; Version 1.1 &nbsp;·&nbsp; July 2026</p>
+</div>
+
+<div class="policy-wrap">
+
+  <div class="parties-block">
+    <h2>Parties to This Agreement</h2>
+    <div class="party-row">
+      <span class="party-label">Processor</span>
+      <span class="party-value">Plan Grow Do Ltd t/a Plan Grow Do, registered in England and Wales (Co. No. 12458083). Registered office: Vincent Works, Brough, Sheffield S33 9HG. Operator of the Always On platform (alwayson.plangrowdo.com). Contact: <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a></span>
+    </div>
+    <div class="party-row">
+      <span class="party-label">Controller</span>
+      <span class="party-value">The business entity ('Tenant') that subscribes to the Always On platform under a service agreement with Plan Grow Do Ltd. By activating an Always On workspace, the Tenant accepts this DPA.</span>
+    </div>
+  </div>
+
+  <div class="callout-warn">
+    This Data Processing Agreement forms part of the service agreement between Plan Grow Do Ltd and the Tenant. It is legally binding and sets out the terms under which Plan Grow Do Ltd processes personal data on the Tenant's behalf, as required by UK GDPR Article 28.
+  </div>
+
+  <div class="toc">
+    <h2>Contents</h2>
+    <ol>
+      <li><a href="#s1">Definitions</a></li>
+      <li><a href="#s2">Scope and Subject Matter</a></li>
+      <li><a href="#s3">Controller's Obligations</a></li>
+      <li><a href="#s4">Processor's Obligations</a></li>
+      <li><a href="#s5">Security Measures</a></li>
+      <li><a href="#s6">Sub-Processors</a></li>
+      <li><a href="#s7">Mailbox Connection and Email Sync</a></li>
+      <li><a href="#s8">AI Agents and Automated Processing</a></li>
+      <li><a href="#s9">Special Category Data</a></li>
+      <li><a href="#s10">Data Subject Rights</a></li>
+      <li><a href="#s11">Personal Data Breaches</a></li>
+      <li><a href="#s12">Data Protection Impact Assessments</a></li>
+      <li><a href="#s13">International Transfers</a></li>
+      <li><a href="#s14">Return and Deletion of Data</a></li>
+      <li><a href="#s15">Audit Rights</a></li>
+      <li><a href="#s16">Liability</a></li>
+      <li><a href="#s17">Term and Termination</a></li>
+      <li><a href="#s18">Governing Law</a></li>
+      <li><a href="#schedule">Schedule 1: Processing Details</a></li>
+    </ol>
+  </div>
+
+  <!-- Section 1 -->
+  <div class="policy-section" id="s1">
+    <h2><span class="section-num">1</span> Definitions</h2>
+    <p>In this Agreement, the following terms have the meanings set out below:</p>
+    <ul>
+      <li><strong>"Controller"</strong> means the Tenant: the business that determines the purposes and means of processing personal data within the Always On platform.</li>
+      <li><strong>"Processor"</strong> means Plan Grow Do Ltd, which processes personal data on the Controller's behalf in operating the Platform.</li>
+      <li><strong>"Data Subject"</strong> means any living individual whose personal data is processed within the Platform, including the Tenant's team members and their contacts and prospects.</li>
+      <li><strong>"Personal Data"</strong> has the meaning given in UK GDPR Article 4(1).</li>
+      <li><strong>"Processing"</strong> has the meaning given in UK GDPR Article 4(2).</li>
+      <li><strong>"Special Category Data"</strong> means personal data revealing racial or ethnic origin, political opinions, religious or philosophical beliefs, trade union membership, genetic data, biometric data (where used to uniquely identify someone), health data, or data concerning a person's sex life or sexual orientation, as defined in UK GDPR Article 9.</li>
+      <li><strong>"Platform"</strong> means the Always On sales management software accessible at alwayson.plangrowdo.com.</li>
+      <li><strong>"AI Agents"</strong> means the AI-powered assistants Sally, Dan, and Caroline, available within the Platform to assist with contact handling, sales qualification, and intelligence tasks.</li>
+      <li><strong>"Email Sync"</strong> means the feature that connects a Tenant user's Gmail or Microsoft Outlook mailbox to the Platform, enabling emails to and from contacts to be recorded against the relevant contact record.</li>
+      <li><strong>"Sub-Processor"</strong> means any third party engaged by Plan Grow Do Ltd to process personal data as part of delivering the Platform.</li>
+      <li><strong>"UK GDPR"</strong> means the UK General Data Protection Regulation as retained in UK law by the European Union (Withdrawal) Act 2018, together with the Data Protection Act 2018.</li>
+    </ul>
+  </div>
+
+  <!-- Section 2 -->
+  <div class="policy-section" id="s2">
+    <h2><span class="section-num">2</span> Scope and Subject Matter</h2>
+    <p>This DPA applies to all personal data that Plan Grow Do Ltd processes on behalf of the Tenant in connection with operating the Platform. Full details of those processing activities are set out in Schedule 1.</p>
+    <p>Plan Grow Do Ltd acts as a Data Processor in relation to all personal data entered into the Platform by or on behalf of the Tenant. The Tenant remains the Data Controller and is responsible for ensuring its use of the Platform complies with applicable data protection law.</p>
+
+    <h3>2.1 Plan Grow Do Ltd as an Independent Controller</h3>
+    <p>This DPA applies only where Plan Grow Do Ltd acts as a processor on the Tenant's behalf. For certain activities Plan Grow Do Ltd acts as an independent data controller in its own right, including:</p>
+    <ul>
+      <li>Billing, invoicing, and account administration</li>
+      <li>Service communications and support administration</li>
+      <li>Legal compliance and enforcement of its terms of service</li>
+      <li>Its own internal business records and audit trails</li>
+    </ul>
+    <p>Processing carried out by Plan Grow Do Ltd in its capacity as an independent controller is governed by Plan Grow Do Ltd's own Privacy Notice, not this DPA.</p>
+  </div>
+
+  <!-- Section 3 -->
+  <div class="policy-section" id="s3">
+    <h2><span class="section-num">3</span> Controller's Obligations</h2>
+    <p>The Tenant (Controller) agrees to:</p>
+    <ul>
+      <li>Ensure there is a valid lawful basis for all personal data entered into the Platform</li>
+      <li>Provide any required privacy notices to data subjects whose data is entered into the Platform</li>
+      <li>Ensure that any instructions given to Plan Grow Do Ltd comply with applicable data protection law</li>
+      <li>Not instruct Plan Grow Do Ltd to process personal data in a way that would breach data protection law</li>
+      <li>Inform Plan Grow Do Ltd promptly of any changes to the nature of personal data being processed that may affect Plan Grow Do Ltd's obligations under this DPA</li>
+      <li>Ensure that users are made aware of, and have authorised, any Email Sync connection they establish within the Platform</li>
+      <li>Not intentionally submit Special Category Data into the Platform unless satisfied that the processing is lawful and appropriate instructions have been provided (see Section 9)</li>
+    </ul>
+  </div>
+
+  <!-- Section 4 -->
+  <div class="policy-section" id="s4">
+    <h2><span class="section-num">4</span> Processor's Obligations</h2>
+    <p>Plan Grow Do Ltd agrees to:</p>
+
+    <h3>4.1 Process only on documented instructions</h3>
+    <p>Process personal data only on the documented instructions of the Controller, including in relation to international transfers, unless required to do so by law (in which case Plan Grow Do Ltd will inform the Controller before processing, unless prohibited by law).</p>
+
+    <h3>4.2 Confidentiality</h3>
+    <p>Ensure that all persons authorised to access personal data within the Platform are subject to appropriate confidentiality obligations.</p>
+
+    <h3>4.3 Implement security measures</h3>
+    <p>Implement and maintain appropriate technical and organisational measures to ensure a level of security appropriate to the risk, as detailed in Section 5.</p>
+
+    <h3>4.4 Sub-processor restrictions</h3>
+    <p>Not engage sub-processors without the general authorisation of the Controller, subject to Section 6 of this DPA.</p>
+
+    <h3>4.5 Assist the Controller</h3>
+    <p>Assist the Controller, by appropriate technical and organisational measures, in fulfilling obligations to respond to data subject rights requests and to comply with UK GDPR Articles 32–36 (security, breach notification, DPIAs).</p>
+
+    <h3>4.6 Deletion or return</h3>
+    <p>At the choice of the Controller, delete or return all personal data on termination of services, unless applicable law requires retention, as further detailed in Section 14.</p>
+
+    <h3>4.7 Audit cooperation</h3>
+    <p>Make available to the Controller all information reasonably necessary to demonstrate compliance with this DPA, and cooperate with audits as set out in Section 15.</p>
+  </div>
+
+  <!-- Section 5 -->
+  <div class="policy-section" id="s5">
+    <h2><span class="section-num">5</span> Security Measures</h2>
+    <p>Plan Grow Do Ltd implements the following technical and organisational measures to protect personal data processed within the Platform:</p>
+
+    <h3>5.1 Technical measures</h3>
+    <ul>
+      <li><strong>Encryption in transit:</strong> all data is encrypted using TLS 1.2 or higher (HTTPS) between users, the Platform, and sub-processors</li>
+      <li><strong>Encryption at rest:</strong> all data stored within the Supabase (PostgreSQL) database is encrypted at rest</li>
+      <li><strong>Tenant isolation:</strong> Tenant isolation is enforced at database level through Row Level Security (RLS) and <code>tenant_id</code> controls, designed to prevent users from accessing data belonging to another tenant</li>
+      <li><strong>OAuth token security:</strong> OAuth tokens for Email Sync connections are encrypted using a dedicated application-level encryption key, separate from general data encryption, and are never visible to other users or Plan Grow Do Ltd staff</li>
+      <li><strong>Invite-only access:</strong> the Platform has no public self-registration; access is granted by invitation only</li>
+      <li><strong>MFA for admin access:</strong> multi-factor authentication is enforced for Plan Grow Do Ltd administrative and infrastructure access</li>
+      <li><strong>Least privilege access:</strong> access to production systems and personal data is restricted to those who need it to perform their role</li>
+      <li><strong>Access logging:</strong> access to production systems is logged and reviewed periodically</li>
+      <li><strong>Automated backups:</strong> all tenant data is backed up regularly; backup retention follows Plan Grow Do Ltd's operational backup schedule</li>
+    </ul>
+
+    <h3>5.2 Organisational measures</h3>
+    <ul>
+      <li>All Plan Grow Do Ltd personnel with access to personal data are subject to confidentiality obligations</li>
+      <li>Access controls and security configurations are reviewed on a regular basis</li>
+      <li>Vulnerability management and patching processes are maintained for all Platform infrastructure</li>
+      <li>An incident response process is in place to detect, contain, investigate, and notify in the event of a personal data breach</li>
+      <li>Tenant isolation controls are reviewed periodically to confirm that RLS and access controls remain correctly configured</li>
+      <li>Sub-processors are selected with regard to their data security standards and contractual commitments</li>
+    </ul>
+
+    <div class="callout">
+      <strong>Note:</strong> Plan Grow Do Ltd reviews and updates these security measures periodically. The measures in place aim to provide a level of protection appropriate to the risks presented by the nature of the data processed.
+    </div>
+  </div>
+
+  <!-- Section 6 -->
+  <div class="policy-section" id="s6">
+    <h2><span class="section-num">6</span> Sub-Processors</h2>
+    <p>The Tenant gives general authorisation to Plan Grow Do Ltd to engage the sub-processors listed below. Plan Grow Do Ltd will give the Tenant reasonable advance notice of any intended change to this list (additions or replacements) and the Tenant may object within a reasonable period.</p>
+    <p>Plan Grow Do Ltd ensures all sub-processors are bound by written data processing agreements providing at least equivalent data protection obligations to those in this DPA.</p>
+
+    <div class="policy-table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Sub-Processor</th>
+            <th>Service</th>
+            <th>Data Location</th>
+            <th>Transfer Safeguard</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Supabase Inc.</td>
+            <td>Database and file storage (PostgreSQL). Primary store for all contact records, communication history, and platform data.</td>
+            <td>EU, Ireland (eu-west-1)</td>
+            <td>EU-based; adequacy applies. Supabase DPA in place.</td>
+          </tr>
+          <tr>
+            <td>Vercel Inc.</td>
+            <td>Application hosting and edge delivery. Serves the Always On platform to users.</td>
+            <td>EU-primary edge network</td>
+            <td>Standard Contractual Clauses (SCCs). Vercel DPA in place.</td>
+          </tr>
+          <tr>
+            <td>Resend Inc.</td>
+            <td>Transactional email. Sends platform invitations, notifications, and system emails.</td>
+            <td>EU region</td>
+            <td>SCCs. Resend DPA in place.</td>
+          </tr>
+          <tr>
+            <td>Google LLC (Gemini API)</td>
+            <td>AI processing. Powers the Sally, Dan, and Caroline AI agents. Contact record data and communication context are sent to the Gemini API to generate responses, qualifications, and recommendations. Based on the Gemini API service configuration used by Plan Grow Do Ltd, customer data submitted to the API is not used by Google to train foundation models, subject to applicable Google terms and settings.</td>
+            <td>Google Cloud (global)</td>
+            <td>SCCs / IDTA. Google Cloud DPA in place.</td>
+          </tr>
+          <tr>
+            <td>Google LLC (Gmail API) / Google Workspace</td>
+            <td>Gmail email sync. Where a Tenant user connects their Gmail account, the Gmail API is used to sync emails to and from contacts. Only emails matching existing contact records are synced.</td>
+            <td>Google infrastructure</td>
+            <td>SCCs / IDTA. Google Cloud DPA in place. Enabled only where user authorises via OAuth.</td>
+          </tr>
+          <tr>
+            <td>Microsoft Corporation</td>
+            <td>Outlook / Microsoft 365 email sync (Microsoft Graph API). Where a Tenant user connects their Outlook account, Microsoft Graph is used to sync emails to and from contacts. Only emails matching existing contact records are synced.</td>
+            <td>Microsoft infrastructure</td>
+            <td>SCCs / IDTA. Microsoft Online Services DPA in place. Enabled only where user authorises via OAuth.</td>
+          </tr>
+          <tr>
+            <td>Meta Platforms Ireland Ltd</td>
+            <td>WhatsApp Cloud API. Enables WhatsApp messages from contacts to be received, stored, and responded to within the Platform where the Tenant has enabled this feature.</td>
+            <td>Meta infrastructure (EU routing where available)</td>
+            <td>SCCs. Meta Business Terms and DPA in place. Enabled only where activated by the Tenant.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Section 7 -->
+  <div class="policy-section" id="s7">
+    <h2><span class="section-num">7</span> Mailbox Connection and Email Sync</h2>
+    <p>The Platform allows individual users to connect their Gmail or Microsoft Outlook mailbox. When Email Sync is enabled, the following applies:</p>
+
+    <h3>7.1 What is processed</h3>
+    <p>Once a user connects their mailbox, the Platform accesses and processes the following data:</p>
+    <ul>
+      <li><strong>Email metadata:</strong> sender, recipient, subject line, date and time</li>
+      <li><strong>Email body content:</strong> the text content of emails sent to or received from contacts whose records exist in the Platform</li>
+      <li><strong>Sent emails:</strong> where the user sends an email from within the Platform, it is sent via their connected mailbox and recorded against the contact record</li>
+      <li><strong>OAuth tokens:</strong> the access and refresh tokens that authorise the connection; these are encrypted at rest using a dedicated key and are never exposed to other users or Plan Grow Do Ltd staff</li>
+    </ul>
+    <p>The Platform does not process email attachments or access emails unrelated to contacts with existing records in the Platform. Historical emails are not bulk-imported; only emails sent or received after connection is established are synced, unless a specific historical sync is configured.</p>
+
+    <h3>7.2 Authorisation</h3>
+    <p>Mailbox connections are only established where the individual user explicitly authorises access via OAuth. Plan Grow Do Ltd does not connect mailboxes without user authorisation. Users can disconnect their mailbox at any time from their profile settings, which immediately revokes access and stops further syncing.</p>
+
+    <h3>7.3 Disconnection and token deletion</h3>
+    <p>When a user disconnects their mailbox, the Platform immediately revokes the OAuth token and deletes it from storage. No further email syncing takes place after disconnection. Emails already synced and stored against contact records remain, unless deleted by a Tenant manager.</p>
+    <p>Users may also revoke access directly via their Google Account permissions page or Microsoft My Apps portal at any time.</p>
+
+    <div class="callout">
+      <strong>Gmail:</strong> Always On's use of Gmail data complies with the <a href="https://developers.google.com/terms/api-services-user-data-policy" target="_blank" rel="noopener">Google API Services User Data Policy</a>, including the Limited Use requirements. Email data is used solely to display communications against contact records and is not used to train AI models or shared with third parties.<br/><br/>
+      <strong>Microsoft:</strong> Always On's use of Microsoft account data complies with the <a href="https://learn.microsoft.com/en-us/legal/microsoft-apis/ms-apis-tos" target="_blank" rel="noopener">Microsoft API Terms of Use</a>. Access is limited to email read and send permissions; calendar, contacts, files, and other Microsoft data are not accessed.
+    </div>
+  </div>
+
+  <!-- Section 8 -->
+  <div class="policy-section" id="s8">
+    <h2><span class="section-num">8</span> AI Agents and Automated Processing</h2>
+
+    <h3>8.1 Role of the AI agents</h3>
+    <p>The Always On platform includes three AI agents (Sally, Dan, and Caroline) powered by Google Gemini. These agents assist with inbound contact handling, sales qualification, daily pipeline management, and market intelligence. When an AI agent processes a contact interaction, relevant contact record data and communication context are sent to the Gemini API to generate a response, qualification score, recommendation, or suggested action.</p>
+
+    <h3>8.2 AI outputs are advisory only</h3>
+    <p>All outputs produced by the AI agents, including qualifications, scores, draft responses, recommendations, and suggested next actions, are advisory and assistive only. They are tools to support the Tenant's team, not decisions in themselves.</p>
+    <p>The Tenant remains responsible for reviewing, approving, and acting on any AI-generated output before it is relied upon or communicated to a contact. Plan Grow Do Ltd does not accept responsibility for decisions taken by the Tenant on the basis of AI-generated outputs without appropriate review.</p>
+
+    <h3>8.3 No solely automated decisions</h3>
+    <p>The Platform does not make solely automated decisions that produce legal effects or similarly significant effects on individuals within the meaning of UK GDPR Article 22. Human review is always part of the process.</p>
+
+    <h3>8.4 AI data handling</h3>
+    <ul>
+      <li>The AI agents do not independently retain data between sessions</li>
+      <li>Based on the Gemini API service configuration used by Plan Grow Do Ltd, customer data submitted to the API is not used by Google to train foundation models, subject to applicable Google terms and settings</li>
+      <li>Data processed by the AI agents remains subject to this DPA and is not used for any purpose beyond delivering the Platform to the Tenant</li>
+    </ul>
+  </div>
+
+  <!-- Section 9 -->
+  <div class="policy-section" id="s9">
+    <h2><span class="section-num">9</span> Special Category Data</h2>
+    <p>The Always On platform is designed for B2B sales management and is not intended for the processing of Special Category Data or criminal offence data.</p>
+    <p>The Tenant must not intentionally submit Special Category Data into the Platform unless it has:</p>
+    <ul>
+      <li>Satisfied itself that processing that data is lawful under UK GDPR Articles 9 and 10</li>
+      <li>Identified an appropriate lawful basis and condition for processing</li>
+      <li>Provided Plan Grow Do Ltd with any specific instructions required for handling that data</li>
+    </ul>
+    <p>Plan Grow Do Ltd recognises that Special Category Data may occasionally appear incidentally in free-text fields (for example in emails, WhatsApp messages, or form submissions) without having been intentionally submitted. In those cases, Plan Grow Do Ltd will process such data only as necessary to provide the Platform and in accordance with this DPA and the Tenant's instructions.</p>
+    <div class="callout-warn">
+      <strong>Note:</strong> If the Tenant becomes aware that Special Category Data has been submitted into the Platform outside of the circumstances described above, it should contact <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a> promptly so that appropriate steps can be taken.
+    </div>
+  </div>
+
+  <!-- Section 10 -->
+  <div class="policy-section" id="s10">
+    <h2><span class="section-num">10</span> Data Subject Rights</h2>
+    <p>Plan Grow Do Ltd will assist the Controller in fulfilling its obligations to respond to data subject rights requests under UK GDPR, including requests relating to:</p>
+    <ul>
+      <li>Right of access (Article 15)</li>
+      <li>Right to rectification (Article 16)</li>
+      <li>Right to erasure (Article 17)</li>
+      <li>Right to restriction of processing (Article 18)</li>
+      <li>Right to data portability (Article 20)</li>
+      <li>Right to object (Article 21)</li>
+    </ul>
+    <p>Where a data subject contacts Plan Grow Do Ltd directly regarding their rights, Plan Grow Do Ltd will promptly refer the request to the Controller. The Controller is responsible for determining how to respond.</p>
+    <p>Plan Grow Do Ltd provides tools within the Platform to enable the Controller to export, rectify, and delete personal data to support data subject requests.</p>
+  </div>
+
+  <!-- Section 11 -->
+  <div class="policy-section" id="s11">
+    <h2><span class="section-num">11</span> Personal Data Breaches</h2>
+    <p>Plan Grow Do Ltd will notify the Controller without undue delay and, where feasible, <strong>within 24 hours</strong> of becoming aware of a personal data breach affecting data processed under this DPA.</p>
+    <p>Where not all information is available within 24 hours, Plan Grow Do Ltd will provide an initial notification with the information available at that time, followed by further updates in phases as the investigation progresses. Initial notification will include, where known:</p>
+    <ul>
+      <li>The nature of the breach, including the categories and approximate number of data subjects and records likely to be affected</li>
+      <li>Contact details for Plan Grow Do Ltd's data protection point of contact</li>
+      <li>The likely consequences of the breach</li>
+      <li>Steps taken or proposed to address the breach and mitigate its effects</li>
+    </ul>
+    <p>Plan Grow Do Ltd will cooperate with the Controller throughout the investigation and provide reasonable assistance where the Controller is required to notify the ICO or affected data subjects.</p>
+    <p>To report a suspected breach: <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a></p>
+  </div>
+
+  <!-- Section 12 -->
+  <div class="policy-section" id="s12">
+    <h2><span class="section-num">12</span> Data Protection Impact Assessments</h2>
+    <p>Where the Controller is required to conduct a Data Protection Impact Assessment (DPIA) in connection with processing on the Platform, Plan Grow Do Ltd will provide reasonable assistance, including:</p>
+    <ul>
+      <li>Supplying information about the Platform's processing activities and security measures on request</li>
+      <li>Describing sub-processors and data flows involved in the processing</li>
+      <li>Cooperating with prior consultation with the ICO where required under UK GDPR Article 36</li>
+    </ul>
+  </div>
+
+  <!-- Section 13 -->
+  <div class="policy-section" id="s13">
+    <h2><span class="section-num">13</span> International Transfers</h2>
+    <p>All primary data storage is within the EU (Ireland). Where personal data is transferred to or processed by sub-processors outside the UK or EU, including Google (Gemini API, Gmail API), Microsoft (Microsoft Graph), and Meta, Plan Grow Do Ltd ensures appropriate safeguards are in place:</p>
+    <ul>
+      <li>Standard Contractual Clauses (SCCs) approved by the European Commission or ICO, as applicable</li>
+      <li>International Data Transfer Agreements (IDTAs) for UK-specific transfers where required</li>
+      <li>Transfer Impact Assessments (TIAs) conducted where required by law or guidance</li>
+    </ul>
+    <p>Details of transfer mechanisms for each sub-processor are available on request from <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a>.</p>
+  </div>
+
+  <!-- Section 14 -->
+  <div class="policy-section" id="s14">
+    <h2><span class="section-num">14</span> Return and Deletion of Data</h2>
+    <p>On termination of the service agreement, Plan Grow Do Ltd will, at the Controller's written election within 30 days of termination:</p>
+    <ul>
+      <li><strong>Return:</strong> provide an export of all personal data held in active production systems in a machine-readable format (CSV or equivalent); or</li>
+      <li><strong>Delete:</strong> securely delete all personal data held in active production systems and confirm in writing that deletion is complete.</li>
+    </ul>
+    <p>Where no election is made within 30 days of termination, Plan Grow Do Ltd will securely delete active production data by default.</p>
+
+    <h3>14.1 Backups</h3>
+    <p>The Platform maintains automated backups of all tenant data. Deletion from active production systems will be completed within the timeframe above, but backup copies may remain until they are overwritten or expire under Plan Grow Do Ltd's standard backup retention cycle.</p>
+    <p>Backup data is held solely for disaster recovery purposes and will not be accessed, used, or restored for any other purpose. If a backup containing deleted customer data is restored following a disaster recovery event, the previously deleted data will be re-deleted promptly following restoration.</p>
+
+    <div class="callout">
+      The Controller is responsible for exporting any data it requires before termination. Data export functionality is available within the Platform at any time during the active subscription.
+    </div>
+  </div>
+
+  <!-- Section 15 -->
+  <div class="policy-section" id="s15">
+    <h2><span class="section-num">15</span> Audit Rights</h2>
+    <p>The Controller has the right to audit Plan Grow Do Ltd's compliance with this DPA. Plan Grow Do Ltd will first respond to audit requests by providing relevant documentation (such as security policies, sub-processor agreements, and breach records) within a reasonable timeframe.</p>
+    <p>Where a physical audit or inspection is required, this will be agreed in advance, conducted at the Controller's cost, with no less than 30 days' written notice, and no more than once per calendar year, unless a personal data breach has occurred.</p>
+    <p>The Controller agrees not to request information that would compromise the security of other tenants' data or Plan Grow Do Ltd's commercially confidential information.</p>
+  </div>
+
+  <!-- Section 16 -->
+  <div class="policy-section" id="s16">
+    <h2><span class="section-num">16</span> Liability</h2>
+    <p>Each party's liability under this DPA is subject to the limitations and exclusions set out in the main service agreement between the Tenant and Plan Grow Do Ltd.</p>
+    <p>Where Plan Grow Do Ltd has processed personal data in breach of this DPA or UK GDPR and this has caused damage to the Controller or a data subject, Plan Grow Do Ltd accepts liability to the extent it is responsible for the breach.</p>
+    <p>Where the Controller has given inaccurate or unlawful instructions that caused a breach, the Controller bears responsibility to the extent of those instructions.</p>
+  </div>
+
+  <!-- Section 17 -->
+  <div class="policy-section" id="s17">
+    <h2><span class="section-num">17</span> Term and Termination</h2>
+    <p>This DPA comes into effect when the Tenant activates their Always On workspace and accepts the service terms. It remains in force for the duration of the service agreement between the parties.</p>
+    <p>This DPA terminates automatically on termination or expiry of the service agreement, subject to any continuing obligations under Section 14 (return and deletion of data).</p>
+  </div>
+
+  <!-- Section 18 -->
+  <div class="policy-section" id="s18">
+    <h2><span class="section-num">18</span> Governing Law</h2>
+    <p>This DPA is governed by and construed in accordance with the laws of England and Wales. Any disputes arising under this DPA are subject to the exclusive jurisdiction of the courts of England and Wales.</p>
+  </div>
+
+  <!-- Schedule 1 -->
+  <div class="policy-section" id="schedule">
+    <h2><span class="section-num">S1</span> Schedule 1: Processing Details</h2>
+    <p>This Schedule sets out the details of the processing carried out by Plan Grow Do Ltd on behalf of the Controller, as required by UK GDPR Article 28(3).</p>
+
+    <h3>Subject matter</h3>
+    <p>The provision of the Always On B2B sales management platform, including AI-assisted contact qualification, pipeline management, email and WhatsApp communication sync, and sales analytics.</p>
+
+    <h3>Duration</h3>
+    <p>For the duration of the service agreement, plus any post-termination period required to fulfil obligations under Section 14.</p>
+
+    <h3>Nature and purpose of processing</h3>
+    <div class="policy-table-wrap">
+      <table>
+        <thead>
+          <tr><th>Nature</th><th>Purpose</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Storage and retrieval</td><td>Holding contact, prospect, and communication records within the Platform</td></tr>
+          <tr><td>AI analysis and generation</td><td>Qualifying contacts, generating responses and recommendations via the Sally, Dan, and Caroline AI agents (advisory outputs only; see Section 8)</td></tr>
+          <tr><td>Email synchronisation</td><td>Syncing emails between a user's connected Gmail or Outlook mailbox and contact records where the user has authorised Email Sync</td></tr>
+          <tr><td>Form handling</td><td>Receiving and storing web form enquiries submitted by contacts via Tenant-embedded forms</td></tr>
+          <tr><td>WhatsApp messaging</td><td>Receiving, storing, and responding to WhatsApp messages from contacts where the Tenant has enabled this feature</td></tr>
+          <tr><td>Reporting and analytics</td><td>Generating pipeline reports, activity metrics, and sales dashboards for the Tenant</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Types of personal data</h3>
+    <ul>
+      <li>Contact identity data: name, email address, telephone number, job title, company name</li>
+      <li>Commercial data: enquiry content, pipeline stage, BANT qualification scores, meeting notes, AI-generated outputs</li>
+      <li>Communication data: email metadata and body content, WhatsApp messages, form submission content</li>
+      <li>User account data: rep and manager name, email address, profile details, login activity</li>
+      <li>OAuth tokens: encrypted mailbox connection tokens (Email Sync users only)</li>
+    </ul>
+
+    <h3>Categories of data subjects</h3>
+    <ul>
+      <li>The Tenant's sales representatives and managers (platform users)</li>
+      <li>The Tenant's contacts, prospects, and customers whose data is entered into or captured by the Platform</li>
+    </ul>
+
+    <div class="callout-warn">
+      <strong>Tenant responsibility:</strong> The Tenant is responsible for ensuring that all personal data entered into the Platform has been obtained lawfully and that appropriate notices have been given to data subjects. The Platform is not designed for Special Category Data and the Tenant should not submit such data without satisfying the requirements of Section 9.
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <img src="Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do" onerror="this.style.display='none';" />
+  </div>
+  <p>Always On is operated by <a href="https://www.plangrowdo.com" target="_blank" rel="noopener">Plan Grow Do</a> · Plan Grow Do Ltd t/a Plan Grow Do</p>
+  <p><a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a></p>
+  <p style="margin-top:12px;">
+    <a href="/privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp;
+    <a href="/">← Back to Always On</a>
+  </p>
+</footer>
+
+</body>
+</html>

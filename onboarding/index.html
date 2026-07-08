@@ -839,7 +839,7 @@ async function handleSubmit() {
     }
 
     // 5. Save to Google Sheets (fire-and-forget — doesn't block submission)
-    if (SHEETS_URL && SHEETS_URL !== 'https://script.google.com/macros/s/AKfycbxWN5ipu8aeUqOjXwQVf4Efqkez8K6SdSiaDZhcxTbPgx0WrPPHLBJV-rzioHz_d0hxJQ/exec') {
+    if (SHEETS_URL) {
       fetch(SHEETS_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'text/plain' },
