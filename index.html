@@ -1288,7 +1288,7 @@
         <span class="nav-logo-text" style="display:none;">Plan <span>Grow</span> Do</span>
       </a>
       <div class="nav-actions">
-        <button class="btn btn-outline" onclick="openModal('FTMBpUwyKuY')">▶ Watch Demo</button>
+        <button class="btn btn-outline" onclick="openContactModal()">Contact Us Today!</button>
         <a href="#form1" class="btn btn-yellow">Get Started →</a>
       </div>
     </div>
@@ -2237,6 +2237,30 @@
   </div>
 </footer>
 
+<!-- ===== CONTACT MODAL ===== -->
+<div id="contact-modal" role="dialog" aria-modal="true" aria-label="Contact Us" onclick="handleContactModalClick(event)" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(20,8,32,0.75); backdrop-filter:blur(4px); overflow-y:auto; padding:24px 16px;">
+  <div style="background:#fff; border-radius:16px; max-width:680px; margin:40px auto; position:relative; box-shadow:0 24px 80px rgba(0,0,0,0.4);">
+    <div style="background:linear-gradient(135deg,#2d0e3e 0%,#43165c 100%); border-radius:16px 16px 0 0; padding:24px 32px; display:flex; align-items:center; justify-content:space-between;">
+      <div>
+        <div style="font-size:0.7rem; font-weight:700; letter-spacing:0.14em; text-transform:uppercase; color:#fbba00; margin-bottom:6px;">Get In Touch</div>
+        <h2 style="color:#fff; font-size:1.3rem; font-weight:800; margin:0;">Contact Us Today</h2>
+      </div>
+      <button onclick="closeContactModal()" aria-label="Close" style="background:rgba(255,255,255,0.1); border:none; color:#fff; font-size:1.2rem; width:36px; height:36px; border-radius:50%; cursor:pointer; display:flex; align-items:center; justify-content:center; flex-shrink:0;">&times;</button>
+    </div>
+    <div style="padding:8px 16px 24px;">
+      <!-- Plan Grow Do Enquiry Form - Powered by Plan Grow Do -->
+      <iframe
+        src="https://alwayson.plangrowdo.com/forms/plangrowdo/general-enquiry"
+        width="100%"
+        height="600"
+        frameborder="0"
+        style="border: none; border-radius: 8px; display:block;"
+        title="Plan Grow Do Enquiry Form"
+      ></iframe>
+    </div>
+  </div>
+</div>
+
 <!-- ===== VIDEO MODAL ===== -->
 <div id="video-modal" role="dialog" aria-modal="true" aria-label="Always On Demo Video" onclick="handleModalClick(event)">
   <div class="modal-inner">
@@ -2255,6 +2279,23 @@
 
 <!-- ===== JAVASCRIPT ===== -->
 <script>
+  /* --- Contact Modal --- */
+  function openContactModal() {
+    const m = document.getElementById('contact-modal');
+    m.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeContactModal() {
+    document.getElementById('contact-modal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  function handleContactModalClick(e) {
+    if (e.target === document.getElementById('contact-modal')) closeContactModal();
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeContactModal();
+  });
+
   /* --- Video Modal (YouTube) --- */
   function openModal(videoId) {
     document.getElementById('video-modal').classList.add('open');
