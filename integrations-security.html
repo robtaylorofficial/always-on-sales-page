@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Integrations &amp; Security Overview | Always On | Plan Grow Do</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: #f5f4f7;
+      color: #1a1a2e;
+      line-height: 1.7;
+    }
+
+    :root {
+      --purple:      #43165c;
+      --purple-dark: #2d0e3e;
+      --purple-light:#6b2a8f;
+      --yellow:      #fbba00;
+      --green:       #76b82a;
+      --blue:        #009fe3;
+      --white:       #ffffff;
+      --grey-light:  #f5f4f7;
+      --grey-mid:    #e8e4ef;
+      --text-muted:  #6b6b8a;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      background: var(--purple-dark);
+      border-bottom: 2px solid var(--yellow);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav-logo img { height: 38px; width: auto; display: block; }
+    .nav-logo-text {
+      color: var(--white);
+      font-size: 1.05rem;
+      font-weight: 700;
+      text-decoration: none;
+    }
+    .nav-logo-text span { color: var(--yellow); }
+    .nav-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: rgba(255,255,255,0.65);
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--yellow); }
+
+    /* ===== HERO ===== */
+    .policy-hero {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
+      padding: 60px 24px 52px;
+      text-align: center;
+    }
+    .policy-hero .badge {
+      display: inline-block;
+      background: rgba(251,186,0,0.15);
+      border: 1px solid rgba(251,186,0,0.35);
+      color: var(--yellow);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 50px;
+      margin-bottom: 18px;
+    }
+    .policy-hero h1 {
+      font-size: clamp(1.7rem, 4vw, 2.6rem);
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+    .policy-hero p { color: rgba(255,255,255,0.55); font-size: 0.9rem; }
+
+    /* ===== CONTENT WRAP ===== */
+    .policy-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 56px 24px 80px;
+    }
+
+    /* ===== SECTION GROUP ===== */
+    .group {
+      margin-bottom: 48px;
+    }
+    .group-title {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .group-title h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--purple);
+      margin: 0;
+    }
+    .group-title span {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* ===== TABLE ===== */
+    .table-wrap {
+      background: var(--white);
+      border: 1px solid var(--grey-mid);
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(67,22,92,0.07);
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 700px;
+      font-size: 0.845rem;
+    }
+    thead tr { background: var(--purple); color: var(--white); }
+    thead th {
+      text-align: left;
+      padding: 10px 16px;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    thead th:first-child  { width: 16%; }
+    thead th:nth-child(2) { width: 22%; }
+    thead th:nth-child(3) { width: 29%; }
+    thead th:nth-child(4) { width: 33%; }
+
+    tbody tr:nth-child(odd)  { background: var(--grey-light); }
+    tbody tr:nth-child(even) { background: var(--white); }
+    tbody tr:hover td { background: rgba(67,22,92,0.04); }
+    tbody td {
+      padding: 12px 16px;
+      vertical-align: top;
+      color: #3a3a5c;
+      line-height: 1.65;
+      border-bottom: 1px solid var(--grey-mid);
+      font-size: 0.845rem;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    td.name {
+      font-weight: 700;
+      color: #1a1a2e;
+    }
+    td.name .sub {
+      display: block;
+      font-weight: 500;
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+    td.plain {
+      font-style: italic;
+      color: #2a2a4a;
+    }
+    td.security {
+      position: relative;
+      padding-left: 28px;
+    }
+    td.security::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 18px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+    }
+
+    /* ===== CALLOUT PURPLE ===== */
+    .callout-purple {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
+      color: var(--white);
+      border-radius: 12px;
+      padding: clamp(1.5rem, 4vw, 2.2rem) clamp(1.6rem, 4vw, 2.4rem);
+      margin-bottom: 48px;
+    }
+    .callout-purple h3 {
+      margin: 0 0 20px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      color: var(--yellow);
+    }
+    .callout-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .callout-item {
+      display: flex;
+      gap: 12px;
+    }
+    .callout-mark {
+      flex-shrink: 0;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.14);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      font-weight: 800;
+      color: var(--yellow);
+      margin-top: 2px;
+    }
+    .callout-item p {
+      margin: 0;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: rgba(255,255,255,0.85);
+    }
+    .callout-item strong { color: var(--white); }
+
+    /* ===== INFO CALLOUT ===== */
+    .callout {
+      background: rgba(0,159,227,0.07);
+      border-left: 4px solid var(--blue);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      margin: 24px 0;
+      font-size: 0.85rem;
+      color: #1a3a5c;
+      line-height: 1.65;
+    }
+    .callout strong { color: var(--purple-dark); }
+
+    /* ===== RELATED PAGES ===== */
+    .related-pages {
+      background: var(--white);
+      border: 1px solid var(--grey-mid);
+      border-left: 4px solid var(--purple);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 48px;
+    }
+    .related-pages h2 {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--purple);
+      margin-bottom: 14px;
+    }
+    .related-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .related-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--grey-light);
+      border: 1px solid var(--grey-mid);
+      border-radius: 8px;
+      padding: 8px 16px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--purple);
+      text-decoration: none;
+      transition: background 0.15s, border-color 0.15s;
+    }
+    .related-link:hover {
+      background: rgba(67,22,92,0.08);
+      border-color: var(--purple);
+    }
+
+    /* ===== FOOTNOTE ===== */
+    .footnote {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 8px;
+      line-height: 1.6;
+    }
+    .footnote a { color: var(--purple); font-weight: 500; text-decoration: none; }
+    .footnote a:hover { text-decoration: underline; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--purple-dark);
+      border-top: 3px solid var(--yellow);
+      padding: 36px 24px;
+      text-align: center;
+    }
+    .footer-logo img { height: 34px; width: auto; margin: 0 auto 10px; display: block; }
+    footer p { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--yellow); }
+
+    @media (max-width: 640px) {
+      .group-title { flex-direction: column; gap: 2px; }
+      thead th:nth-child(3), thead th:nth-child(4),
+      td:nth-child(3), td:nth-child(4) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+      <span class="nav-logo-text" style="display:none;">Plan <span>Grow</span> Do</span>
+    </a>
+    <a href="/" class="nav-back">&#8592; Back to Always On</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="policy-hero">
+  <div class="badge">Technical Reference</div>
+  <h1>Integrations &amp; Security Overview</h1>
+  <p>Always On &nbsp;&middot;&nbsp; alwayson.plangrowdo.com &nbsp;&middot;&nbsp; How the platform connects across your business, and what is protected at each point.</p>
+</div>
+
+<div class="policy-wrap">
+
+  <!-- Related pages -->
+  <div class="related-pages">
+    <h2>Data &amp; Legal Documents</h2>
+    <div class="related-links">
+      <a href="/privacy-policy.html" class="related-link">&#128274; Platform Privacy Policy</a>
+      <a href="/dpa.html" class="related-link">&#128196; Data Processing Agreement</a>
+      <span class="related-link" style="background:rgba(67,22,92,0.08); border-color:var(--purple); cursor:default;">&#128279; Integrations &amp; Security (this page)</span>
+    </div>
+  </div>
+
+  <!-- Communication Channels -->
+  <div class="group">
+    <div class="group-title">
+      <h2>Communication Channels</h2>
+      <span>How enquiries reach reps and replies go out</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Integration</th>
+            <th>Purpose</th>
+            <th>In plain English</th>
+            <th>Security &amp; data handling</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Email (Resend)</td>
+            <td>Sends automated acknowledgement and reply emails to enquirers on your behalf.</td>
+            <td class="plain">Your emails go out through a proper business email service, not a shared inbox, and are always kept separate from every other company using Always On.</td>
+            <td class="security">Delivered via a dedicated transactional email provider (Resend). Every send is scoped strictly to your own enquiries and tagged by type for audit traceability. Mail is never mixed with another client's.</td>
+          </tr>
+          <tr>
+            <td class="name">Custom Email Domain</td>
+            <td>Sends from your own business domain (e.g. noreply@yourdomain.co.uk) instead of the shared Always On address.</td>
+            <td class="plain">We can only send as your domain once you have proven, through your own domain settings, that you actually own it. We cannot claim to be you without that verification.</td>
+            <td class="security">Requires DNS-level proof of ownership (SPF, DKIM, DMARC) before activation. Always On cannot send as a domain the Tenant has not cryptographically verified control of.</td>
+          </tr>
+          <tr>
+            <td class="name">WhatsApp Business</td>
+            <td>Receives and acknowledges enquiries via WhatsApp.</td>
+            <td class="plain">The sensitive WhatsApp login details are kept locked away on our side. They are never visible to anyone browsing your settings.</td>
+            <td class="security">Access tokens and webhook secrets are held server-side by Plan Grow Do only. Only the public display number is stored in your tenant configuration.</td>
+          </tr>
+          <tr>
+            <td class="name">Microsoft Teams</td>
+            <td>Posts a card to a Teams channel the moment a qualified enquiry arrives, so the team sees it without logging in.</td>
+            <td class="plain">You create and own the link that connects to your Teams channel. Switch it off or change it whenever you like. Only enquiries worth seeing get posted, not every message.</td>
+            <td class="security">Uses a webhook URL the Tenant generates and controls inside their own Teams admin. This can be rotated or revoked at any time. Only enquiries above the qualification threshold post, so noise never reaches the channel.</td>
+          </tr>
+          <tr>
+            <td class="name">Outlook Inbox Sync<span class="sub">Tenant-wide setting</span></td>
+            <td>Governs the background service that keeps connected mailboxes syncing across the team.</td>
+            <td class="plain">This switch just controls how often the system checks for new mail. It does not hold anyone's email password.</td>
+            <td class="security">Controls timing and scope only. This setting holds no mailbox credentials itself. Actual mailbox access is granted individually, per rep (see below).</td>
+          </tr>
+          <tr>
+            <td class="name">Rep Email Connection<span class="sub">Outlook / Gmail, per rep &mdash; My Profile &rarr; Email Sync</span></td>
+            <td>Each rep individually connects their own mailbox so Dan can help draft replies using their real conversation history.</td>
+            <td class="plain">Each person connects their own inbox themselves, the same way they would log into any app with Microsoft or Google. No one, including Plan Grow Do, ever sees their password, and colleagues cannot see into each other's inboxes.</td>
+            <td class="security">Each connection is a personal OAuth grant made by that rep alone. One rep's connection cannot read another rep's mailbox, and no admin at the Tenant or Plan Grow Do ever sees or holds a rep's password.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Lead Capture & Engagement -->
+  <div class="group">
+    <div class="group-title">
+      <h2>Lead Capture &amp; Engagement</h2>
+      <span>How enquiries get in, and how they are followed up</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Integration</th>
+            <th>Purpose</th>
+            <th>In plain English</th>
+            <th>Security &amp; data handling</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">Forms &amp; Sally Web Chat</td>
+            <td>The embeddable enquiry forms and AI chat widget placed on your own website.</td>
+            <td class="plain">The code that runs the chat widget on your site is built specifically for your business and validated to stop anyone sneaking harmful code in through a text box, such as a greeting message or form field.</td>
+            <td class="security">The embed script is generated per tenant, server-side. Any manager-editable text (colours, greetings, prompts) is strictly validated and safely encoded before reaching the live page, closing a stored-script-injection risk class identified in a platform security review.</td>
+          </tr>
+          <tr>
+            <td class="name">Catch-All Inbound Email</td>
+            <td>Reads a shared inbox, filters genuine commercial enquiries from spam, newsletters and invoices, and assigns them to the right rep.</td>
+            <td class="plain">Sally only reads and sorts these emails. She never replies on your behalf here. A real person always writes the actual response.</td>
+            <td class="security">Classification only. No automatic reply is ever sent from this channel. A human always writes and sends the actual reply.</td>
+          </tr>
+          <tr>
+            <td class="name">Campaign Emails</td>
+            <td>Lets reps send sector-targeted email campaigns via Caroline.</td>
+            <td class="plain">Campaigns only go to people who have already enquired with your business, never a bought-in or shared list. You decide which members of your team are allowed to send them.</td>
+            <td class="security">Sends only to your own captured contacts, never a shared or third-party list. Access can be restricted to named reps rather than opened to the whole team.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Business Systems -->
+  <div class="group">
+    <div class="group-title">
+      <h2>Business Systems</h2>
+      <span>Where qualified data flows once someone is ready to buy</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Integration</th>
+            <th>Purpose</th>
+            <th>In plain English</th>
+            <th>Security &amp; data handling</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="name">CRM Integration</td>
+            <td>One-click push of a qualified contact, company, deal and full email history into your CRM.</td>
+            <td class="plain">Only enquiries genuinely worth pursuing get pushed to your CRM. Casual or unqualified ones never do. Your CRM login details are never shared with or visible to any other company on the platform.</td>
+            <td class="security">Only enquiries that have reached Prospect stage, qualified against BANT, can be pushed. Nothing unqualified ever reaches the CRM. Connection credentials are stored per tenant and never shared across Always On's other clients.</td>
+          </tr>
+          <tr>
+            <td class="name">Knowledge Sources</td>
+            <td>Learns from your own website and documents so Sally, Dan and Caroline can answer questions accurately about your business.</td>
+            <td class="plain">Sally only ever learns from your own website and documents. She has no access to any other company's information.</td>
+            <td class="security">Retrieval is scoped strictly to your own tenant record. The AI agents cannot see, search, or draw on any other client's knowledge base. This is enforced architecturally, not just by policy.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Data Isolation callout -->
+  <div class="callout-purple">
+    <h3>Data Isolation &amp; AI Training</h3>
+    <div class="callout-grid">
+      <div class="callout-item">
+        <div class="callout-mark">&#10003;</div>
+        <p><strong>No cross-tenant visibility.</strong> Every client's enquiries, conversations, knowledge base and contacts live in an isolated tenant record. No other Always On client can see or query your data, and your business cannot see anyone else's.</p>
+      </div>
+      <div class="callout-item">
+        <div class="callout-mark">&#10003;</div>
+        <p><strong>No model training on your data.</strong> Per the platform's <a href="/dpa.html" style="color:var(--yellow); font-weight:600;">Data Processing Agreement</a> (Section 8), the AI providers behind Sally, Dan and Caroline process submitted data only to generate a response. It is not retained or used to train their underlying models.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>Further detail:</strong> Full sub-processor list, data locations and international transfer safeguards are set out in the <a href="/dpa.html">Always On Data Processing Agreement</a>. How the platform collects and uses personal data is explained in the <a href="/privacy-policy.html">Platform Privacy Policy</a>.
+  </div>
+
+  <p class="footnote">Questions about how Always On handles your data? Contact <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a></p>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+         onerror="this.style.display='none';" />
+  </div>
+  <p>Always On is operated by <a href="https://www.plangrowdo.com" target="_blank" rel="noopener">Plan Grow Do</a> &middot; Plan Grow Do Ltd</p>
+  <p><a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a></p>
+  <p style="margin-top:12px;">
+    <a href="/privacy-policy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
+    <a href="/dpa.html">Data Processing Agreement</a> &nbsp;&middot;&nbsp;
+    <a href="/integrations-security.html">Integrations &amp; Security</a> &nbsp;&middot;&nbsp;
+    <a href="/">&#8592; Back to Always On</a>
+  </p>
+</footer>
+
+</body>
+</html>
