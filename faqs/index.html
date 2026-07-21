@@ -316,7 +316,7 @@
     <p>No waffle — just straight answers about what Always On is, how it works, and whether it's right for you.</p>
     <div class="hero-meta">
       <span>🔍 5 categories</span>
-      <span>💬 30 questions</span>
+      <span>💬 38 questions</span>
       <span>⚡ Straight answers</span>
     </div>
     <div style="height:28px;"></div>
@@ -475,38 +475,80 @@
         <div class="faq-group-body">
           <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-              <span>What about data security?</span>
+              <span>Who owns the data inside Always On?</span>
               <span class="faq-chevron">▼</span>
             </div>
-            <div class="faq-answer">Data security has to be taken seriously from the start, not treated as an afterthought. Any Always On deployment should be designed around appropriate permissions, secure storage, controlled access, clear data handling rules, and compliance with relevant legislation such as GDPR where applicable. Personal data should only be collected where needed, stored appropriately, and made visible only to the people who require it to do their jobs.</div>
+            <div class="faq-answer">Your business owns your data. Under UK GDPR, your business is the data controller — you decide why and how personal data is processed. Plan Grow Do Ltd acts as the data processor, acting only on your instructions. This relationship is set out in full in our <a href="/dpa.html" style="color:var(--purple);font-weight:600;">Data Processing Agreement</a>, which is an Article 28-compliant contract available for review or signature on request.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Where is our data stored?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">The platform database runs on Supabase, hosted in the EU region. The application is served via Vercel. Email delivery uses Resend. AI processing uses Anthropic's Claude API, which processes data in the United States under Standard Contractual Clauses (SCCs) and the UK International Data Transfer Addendum (IDTA) — meaning the data transfer is governed by approved legal mechanisms, not simply sent overseas unchecked. A full list of sub-processors is published in the <a href="/dpa.html" style="color:var(--purple);font-weight:600;">Data Processing Agreement</a>.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Is our data used to train AI models?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">No. Always On uses Anthropic's API (Claude models) under commercial terms that explicitly exclude customer data from being used to train Anthropic's models. Your conversations, contacts, and commercial data are used only to generate responses in real time — they are not retained by Anthropic for training or improvement purposes. This is confirmed in our <a href="/dpa.html" style="color:var(--purple);font-weight:600;">Data Processing Agreement</a>.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>How is our data kept separate from other businesses on the platform?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Every tenant (business) on the platform is fully isolated at the database layer. Each record in the Supabase database is tagged with a unique tenant ID, and Row Level Security (RLS) policies enforce that queries can only ever return data belonging to your tenant. It is not a UI-level restriction — the database itself rejects cross-tenant queries. There is no scenario in which another business could see your data, and vice versa.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>How does email integration work — is it secure?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Email connections (Gmail and Outlook) use OAuth 2.0 — a secure token-based handshake. No email passwords are stored at any point. Each rep connects their own mailbox individually, so access is personal and isolated. The platform reads incoming emails to provide response-drafting and context, using read-only scopes where available. OAuth tokens are encrypted at rest and can be revoked at any time by the rep directly through their Google or Microsoft account settings. Full detail is in the <a href="/integrations-security.html" style="color:var(--purple);font-weight:600;">Integrations &amp; Security overview</a>.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What other channels integrate with the platform?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">Always On can connect to Gmail, Microsoft Outlook and Teams, WhatsApp Business (via Meta), web forms, and CRM systems. Each integration is purpose-built: the platform only requests the scopes it actually needs, connections are per-tenant, and no data from one business's integrations is visible to another. A full breakdown of what each integration does and what data it touches is available in the <a href="/integrations-security.html" style="color:var(--purple);font-weight:600;">Integrations &amp; Security overview</a>.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>Who are the sub-processors?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">The sub-processors used by Always On are: Anthropic PBC (AI processing via Claude API, US), Supabase Inc (database, EU), Vercel Inc (hosting and CDN, US), and Resend Inc (transactional email, US). Integration channel providers — Microsoft, Google, and Meta — process data only within your own account credentials and are not sub-processors of Plan Grow Do Ltd. The full sub-processor list with locations, purposes and transfer safeguards is published in the <a href="/dpa.html" style="color:var(--purple);font-weight:600;">Data Processing Agreement</a>.</div>
+          </div>
+          <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+              <span>What happens if there is a data breach?</span>
+              <span class="faq-chevron">▼</span>
+            </div>
+            <div class="faq-answer">In the event of a personal data breach, Plan Grow Do Ltd will notify you within 24 hours of becoming aware of it — giving you sufficient time to fulfil your own obligation to notify the ICO within 72 hours if required. Notification will include what happened, what data was affected, the likely consequences, and the steps being taken. This commitment is set out in full in the <a href="/dpa.html" style="color:var(--purple);font-weight:600;">Data Processing Agreement</a>.</div>
           </div>
           <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
               <span>Is it GDPR compliant?</span>
               <span class="faq-chevron">▼</span>
             </div>
-            <div class="faq-answer">Compliance is not a label you casually stick on a system — it depends on how the solution is designed, configured and governed in practice. That said, Always On can absolutely be implemented in a GDPR-conscious way: data minimisation, lawful basis for processing, appropriate consent where relevant, secure storage, clear access controls, sensible retention periods, and transparency around what is collected and why.</div>
+            <div class="faq-answer">Always On is designed to operate in line with UK GDPR. The platform applies data minimisation, purpose limitation, defined retention periods, encrypted storage at rest and in transit, role-based access control, and a formal Article 28 Data Processing Agreement covering the controller-processor relationship. We have a published <a href="/privacy-policy.html" style="color:var(--purple);font-weight:600;">Privacy Policy</a>, <a href="/dpa.html" style="color:var(--purple);font-weight:600;">DPA</a>, and <a href="/integrations-security.html" style="color:var(--purple);font-weight:600;">Integrations &amp; Security overview</a>. If your legal or compliance team wants to review these or request a signed DPA, contact <a href="mailto:info@plangrowdo.com" style="color:var(--purple);font-weight:600;">info@plangrowdo.com</a>.</div>
           </div>
           <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
               <span>Who can see what inside the system?</span>
               <span class="faq-chevron">▼</span>
             </div>
-            <div class="faq-answer">Access should be role-based. Not everyone needs to see everything. A good Always On setup allows managers, sales reps, marketing users and administrators to see the information relevant to their role while restricting wider access where appropriate. Good visibility is useful. Excess visibility is not.</div>
+            <div class="faq-answer">Access is role-based and scoped to your tenant. Reps see their own assigned contacts and conversations. Managers see team-wide activity within their organisation. Platform administrators at Plan Grow Do Ltd can access tenant configuration for support purposes — this is disclosed in the DPA. No user from another business can ever access your data. Audit capabilities and deletion rights are also addressed in the <a href="/dpa.html" style="color:var(--purple);font-weight:600;">Data Processing Agreement</a>.</div>
           </div>
           <div class="faq-item">
             <div class="faq-question" onclick="toggleFaq(this)">
-              <span>What if the AI gets something wrong?</span>
+              <span>Where can I read all the data and security documents?</span>
               <span class="faq-chevron">▼</span>
             </div>
-            <div class="faq-answer">That is a fair concern, and it is exactly why this should not be treated as magic. The system should be designed with clear rules, review points, guardrails and sensible limits. In most businesses, the role of AI here is to support speed, consistency, routing, summarising and preparation, while humans retain responsibility for judgement, commercial decisions and relationship management. You want reliability, auditability and continuous improvement, not blind trust.</div>
-          </div>
-          <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-              <span>Do we need perfect data before we start?</span>
-              <span class="faq-chevron">▼</span>
-            </div>
-            <div class="faq-answer">No. Perfect data is rarely available, and waiting for perfection usually delays progress. What you do need is enough clarity to define sensible workflows, routing rules, basic qualification logic, and the key commercial outcomes you want to improve. A good implementation can start with what is known, learn from live use, and improve iteratively.</div>
+            <div class="faq-answer">All three documents are available on the <a href="/data-security.html" style="color:var(--purple);font-weight:600;">Data &amp; Security hub</a>: the <a href="/privacy-policy.html" style="color:var(--purple);font-weight:600;">Platform Privacy Policy</a>, the <a href="/dpa.html" style="color:var(--purple);font-weight:600;">Data Processing Agreement</a>, and the <a href="/integrations-security.html" style="color:var(--purple);font-weight:600;">Integrations &amp; Security overview</a>. If you need anything beyond what is published there, email <a href="mailto:info@plangrowdo.com" style="color:var(--purple);font-weight:600;">info@plangrowdo.com</a>.</div>
           </div>
         </div>
       </div>
@@ -654,8 +696,8 @@
     <!-- CTA -->
     <div class="cta-strip fade-in">
       <h2>Still got questions?</h2>
-      <p>Jump on the next webinar — we walk through Always On live inside a real business. Ask anything.</p>
-      <a href="/#webinar" class="btn-yellow">See the next webinar →</a>
+      <p>Talk to the team directly — we will walk you through Always On and answer anything specific to your business.</p>
+      <a href="/" class="btn-yellow">Get in touch →</a>
     </div>
 
   </div>
@@ -675,11 +717,11 @@
       <a href="/#roi">ROI Calculator</a>
       <a href="/#wiifm">Benefits</a>
       <a href="/faqs">FAQs</a>
-      <a href="/#webinar">Webinar</a>
+      <a href="/data-security.html">Data &amp; Security</a>
     </div>
   </div>
   <div class="footer-bottom">
-    <p>© 2025 <a href="https://www.plangrowdo.com" target="_blank" rel="noopener">Plan Grow Do</a>. Always On Sales Control System. All rights reserved. &nbsp;·&nbsp; <a href="/privacy-policy">Privacy Policy</a></p>
+    <p>© 2025 <a href="https://www.plangrowdo.com" target="_blank" rel="noopener">Plan Grow Do</a>. Always On Sales Control System. All rights reserved. &nbsp;·&nbsp; <a href="/privacy-policy.html">Privacy Policy</a> &nbsp;·&nbsp; <a href="/dpa.html">DPA</a> &nbsp;·&nbsp; <a href="/data-security.html">Data &amp; Security</a></p>
   </div>
 </footer>
 
