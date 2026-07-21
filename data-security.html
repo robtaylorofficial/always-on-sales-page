@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Data &amp; Security | Always On | Plan Grow Do</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: 'Poppins', system-ui, sans-serif;
+      background: #f5f4f7;
+      color: #1a1a2e;
+      line-height: 1.7;
+    }
+
+    :root {
+      --purple:      #43165c;
+      --purple-dark: #2d0e3e;
+      --purple-light:#6b2a8f;
+      --yellow:      #fbba00;
+      --green:       #76b82a;
+      --blue:        #009fe3;
+      --white:       #ffffff;
+      --grey-light:  #f5f4f7;
+      --grey-mid:    #e8e4ef;
+      --text-muted:  #6b6b8a;
+    }
+
+    nav {
+      background: var(--purple-dark);
+      border-bottom: 2px solid var(--yellow);
+      padding: 14px 0;
+    }
+    .nav-inner {
+      max-width: 1140px; margin: 0 auto; padding: 0 24px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo img { height: 38px; width: auto; display: block; }
+    .nav-logo-text { color: var(--white); font-size: 1.05rem; font-weight: 700; text-decoration: none; }
+    .nav-logo-text span { color: var(--yellow); }
+    .nav-back {
+      display: inline-flex; align-items: center; gap: 7px;
+      color: rgba(255,255,255,0.65); font-size: 0.85rem; font-weight: 500;
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-back:hover { color: var(--yellow); }
+
+    .policy-hero {
+      background: linear-gradient(135deg, var(--purple-dark) 0%, var(--purple) 100%);
+      padding: 60px 24px 52px; text-align: center;
+    }
+    .policy-hero .badge {
+      display: inline-block;
+      background: rgba(251,186,0,0.15); border: 1px solid rgba(251,186,0,0.35);
+      color: var(--yellow); font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      padding: 5px 14px; border-radius: 50px; margin-bottom: 18px;
+    }
+    .policy-hero h1 {
+      font-size: clamp(1.7rem, 4vw, 2.6rem); font-weight: 800;
+      color: var(--white); letter-spacing: -0.02em; margin-bottom: 10px;
+    }
+    .policy-hero p { color: rgba(255,255,255,0.55); font-size: 0.9rem; max-width: 560px; margin: 0 auto; }
+
+    .policy-wrap { max-width: 960px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    /* Doc cards grid */
+    .doc-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .doc-card {
+      background: var(--white);
+      border: 1px solid var(--grey-mid);
+      border-radius: 16px;
+      padding: 32px 28px 28px;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 0.2s, transform 0.2s, border-color 0.2s;
+      box-shadow: 0 4px 24px rgba(67,22,92,0.06);
+    }
+    .doc-card:hover {
+      box-shadow: 0 12px 40px rgba(67,22,92,0.14);
+      transform: translateY(-3px);
+      border-color: var(--purple);
+    }
+
+    .doc-icon {
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+      flex-shrink: 0;
+    }
+    .doc-icon.purple { background: rgba(67,22,92,0.1); }
+    .doc-icon.blue   { background: rgba(0,159,227,0.1); }
+    .doc-icon.green  { background: rgba(118,184,42,0.1); }
+
+    .doc-label {
+      font-size: 0.68rem;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+    .doc-card h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--purple-dark);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+    .doc-card p {
+      font-size: 0.855rem;
+      color: #3a3a5c;
+      line-height: 1.7;
+      flex-grow: 1;
+      margin-bottom: 24px;
+    }
+
+    .doc-bullets {
+      list-style: none;
+      padding: 0;
+      margin-bottom: 24px;
+    }
+    .doc-bullets li {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      padding: 3px 0 3px 18px;
+      position: relative;
+      line-height: 1.5;
+    }
+    .doc-bullets li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 10px;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--purple);
+      opacity: 0.4;
+    }
+
+    .doc-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--purple);
+      margin-top: auto;
+    }
+    .doc-card:hover .doc-cta { color: var(--purple-light); }
+    .doc-cta-arrow { transition: transform 0.2s; }
+    .doc-card:hover .doc-cta-arrow { transform: translateX(4px); }
+
+    /* Intro callout */
+    .intro-callout {
+      background: var(--white);
+      border: 1px solid var(--grey-mid);
+      border-left: 4px solid var(--yellow);
+      border-radius: 10px;
+      padding: 24px 28px;
+      margin-bottom: 40px;
+      font-size: 0.9rem;
+      color: #3a3a5c;
+      line-height: 1.75;
+    }
+    .intro-callout strong { color: var(--purple-dark); }
+
+    footer {
+      background: var(--purple-dark); border-top: 3px solid var(--yellow);
+      padding: 36px 24px; text-align: center;
+    }
+    .footer-logo img { height: 34px; width: auto; margin: 0 auto 10px; display: block; }
+    footer p { font-size: 0.78rem; color: rgba(255,255,255,0.4); margin-bottom: 6px; }
+    footer a { color: rgba(255,255,255,0.55); text-decoration: none; transition: color 0.2s; }
+    footer a:hover { color: var(--yellow); }
+
+    @media (max-width: 640px) {
+      .doc-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="/" class="nav-logo">
+      <img src="Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do"
+           onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';" />
+      <span class="nav-logo-text" style="display:none;">Plan <span>Grow</span> Do</span>
+    </a>
+    <a href="/" class="nav-back">&#8592; Back to Always On</a>
+  </div>
+</nav>
+
+<div class="policy-hero">
+  <div class="badge">Trust &amp; Compliance</div>
+  <h1>Data &amp; Security</h1>
+  <p>Everything you need to understand how Always On handles your data, protects it, and what we are each responsible for.</p>
+</div>
+
+<div class="policy-wrap">
+
+  <div class="intro-callout">
+    <strong>Always On is built for B2B sales teams</strong> that share sensitive commercial data with a platform every day. These documents set out plainly what we do with that data, the legal basis on which we do it, and the technical controls that keep it safe and isolated from every other business on the platform.
+  </div>
+
+  <div class="doc-grid">
+
+    <!-- Privacy Policy -->
+    <a href="/privacy-policy.html" class="doc-card">
+      <div class="doc-icon purple">&#128274;</div>
+      <div class="doc-label">Platform Document</div>
+      <h2>Platform Privacy Policy</h2>
+      <p>How personal data is collected, stored and used within the Always On platform. Who is responsible for what, and what your rights are.</p>
+      <ul class="doc-bullets">
+        <li>Data controllers and processors explained</li>
+        <li>What the platform holds and why</li>
+        <li>Gmail and Outlook integration detail</li>
+        <li>Data retention and your rights</li>
+      </ul>
+      <span class="doc-cta">Read Privacy Policy <span class="doc-cta-arrow">&#8594;</span></span>
+    </a>
+
+    <!-- DPA -->
+    <a href="/dpa.html" class="doc-card">
+      <div class="doc-icon blue">&#128196;</div>
+      <div class="doc-label">Legal Agreement</div>
+      <h2>Data Processing Agreement</h2>
+      <p>The legally binding agreement under UK GDPR Article 28 that governs how Plan Grow Do Ltd processes personal data on your behalf as a tenant.</p>
+      <ul class="doc-bullets">
+        <li>Controller and processor obligations</li>
+        <li>Security measures in full</li>
+        <li>Sub-processor list and safeguards</li>
+        <li>Breach notification, audit rights, deletion</li>
+      </ul>
+      <span class="doc-cta">Read DPA <span class="doc-cta-arrow">&#8594;</span></span>
+    </a>
+
+    <!-- Integrations & Security -->
+    <a href="/integrations-security.html" class="doc-card">
+      <div class="doc-icon green">&#128279;</div>
+      <div class="doc-label">Technical Reference</div>
+      <h2>Integrations &amp; Security Overview</h2>
+      <p>A plain-English walkthrough of every integration in the platform, what each one does, and exactly how the data at each point is protected.</p>
+      <ul class="doc-bullets">
+        <li>Email, WhatsApp, Teams, CRM</li>
+        <li>Per-rep mailbox connections</li>
+        <li>AI agents and what they access</li>
+        <li>Tenant isolation and no cross-training</li>
+      </ul>
+      <span class="doc-cta">Read Integrations &amp; Security <span class="doc-cta-arrow">&#8594;</span></span>
+    </a>
+
+  </div>
+
+  <p style="font-size:0.85rem; color:var(--text-muted); text-align:center;">
+    Questions? Contact <a href="mailto:info@plangrowdo.com" style="color:var(--purple); font-weight:600;">info@plangrowdo.com</a>
+  </p>
+
+</div>
+
+<footer>
+  <div class="footer-logo">
+    <img src="Agency PlanGrowDoLogoLeft.png" alt="Plan Grow Do" onerror="this.style.display='none';" />
+  </div>
+  <p>Always On is operated by <a href="https://www.plangrowdo.com" target="_blank" rel="noopener">Plan Grow Do</a> &middot; Plan Grow Do Ltd</p>
+  <p><a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a></p>
+  <p style="margin-top:12px;">
+    <a href="/privacy-policy.html">Privacy Policy</a> &nbsp;&middot;&nbsp;
+    <a href="/dpa.html">Data Processing Agreement</a> &nbsp;&middot;&nbsp;
+    <a href="/integrations-security.html">Integrations &amp; Security</a> &nbsp;&middot;&nbsp;
+    <a href="/">&#8592; Back to Always On</a>
+  </p>
+</footer>
+
+</body>
+</html>
