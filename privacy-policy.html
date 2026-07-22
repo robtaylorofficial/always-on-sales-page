@@ -353,10 +353,10 @@
       <li>Name, email address, job title</li>
       <li>Profile picture (if uploaded)</li>
       <li>LinkedIn URL, regions, specialities, sectors (if provided)</li>
-      <li>Connected email account information (Gmail or Outlook OAuth token — encrypted at rest)</li>
+      <li>Connected email account information (Gmail or Outlook OAuth token, encrypted at rest)</li>
       <li>Login timestamps and activity logs within the platform</li>
     </ul>
-    <p><strong>Lawful basis:</strong> <span class="basis">Contract performance</span> — providing access to the platform under the tenant's subscription.</p>
+    <p><strong>Lawful basis:</strong> <span class="basis">Contract performance</span>: providing access to the platform under the tenant's subscription.</p>
 
     <h3>3.2 Contact and Prospect Data</h3>
     <p>The platform holds data about your company's contacts and prospects. Your employer (the tenant) is the Data Controller for this data. It includes:</p>
@@ -402,7 +402,7 @@
           <tr><td>Provide and operate the Always On platform</td><td><span class="basis">Contract performance</span></td></tr>
           <tr><td>Authenticate users and manage access</td><td><span class="basis">Contract performance / legitimate interest</span></td></tr>
           <tr><td>Enable AI-assisted qualification and communication</td><td><span class="basis">Contract performance (on behalf of tenant)</span></td></tr>
-          <tr><td>Sync emails between rep mailboxes and contact records</td><td><span class="basis">Consent</span> — rep explicitly authorises via OAuth</td></tr>
+          <tr><td>Sync emails between rep mailboxes and contact records</td><td><span class="basis">Consent</span>: rep explicitly authorises via OAuth</td></tr>
           <tr><td>Send transactional emails (invites, notifications)</td><td><span class="basis">Contract performance</span></td></tr>
           <tr><td>Security monitoring and fraud prevention</td><td><span class="basis">Legitimate interest</span></td></tr>
           <tr><td>Platform analytics and improvement</td><td><span class="basis">Legitimate interest</span></td></tr>
@@ -420,10 +420,10 @@
           <tr><th>Component</th><th>Provider</th><th>Location</th></tr>
         </thead>
         <tbody>
-          <tr><td>Database</td><td>Supabase (PostgreSQL)</td><td>EU — Ireland (eu-west-1)</td></tr>
-          <tr><td>File storage</td><td>Supabase Storage</td><td>EU — Ireland (eu-west-1)</td></tr>
+          <tr><td>Database</td><td>Supabase (PostgreSQL)</td><td>EU: Ireland (eu-west-1)</td></tr>
+          <tr><td>File storage</td><td>Supabase Storage</td><td>EU: Ireland (eu-west-1)</td></tr>
           <tr><td>Email sending</td><td>Resend</td><td>EU region</td></tr>
-          <tr><td>Application hosting</td><td>Vercel</td><td>Edge — primarily EU</td></tr>
+          <tr><td>Application hosting</td><td>Vercel</td><td>Edge: primarily EU</td></tr>
           <tr><td>AI processing</td><td>Google Gemini API</td><td>Google Cloud</td></tr>
           <tr><td>WhatsApp messages</td><td>Meta Cloud API</td><td>Meta infrastructure</td></tr>
         </tbody>
@@ -442,7 +442,7 @@
       <li>No cross-tenant data access is possible at any level</li>
       <li>All data is encrypted in transit (TLS/HTTPS) and at rest</li>
       <li>OAuth tokens for email sync are encrypted separately with a dedicated encryption key</li>
-      <li>Platform access is invite-only — no self-registration</li>
+      <li>Platform access is invite-only, no self-registration</li>
     </ul>
   </div>
 
@@ -451,7 +451,7 @@
     <h2><span class="section-num">7</span> Email Sync &amp; Gmail Integration</h2>
     <p>Always On allows you to connect your email account to sync communications with your contact records. The following applies to all email connections:</p>
     <ul>
-      <li>You explicitly authorise access via OAuth — you can disconnect at any time from your profile settings</li>
+      <li>You explicitly authorise access via OAuth, you can disconnect at any time from your profile settings</li>
       <li>Only emails matching existing contact records in the platform are synced</li>
       <li>OAuth tokens are encrypted at rest and are never visible to other users or PGD staff</li>
       <li>Disconnecting your account immediately stops further sync</li>
@@ -460,8 +460,8 @@
     <h3>7.1 Google Gmail Integration</h3>
     <p>When you choose to connect your Gmail account to Always On, we request access to the following Google account data:</p>
     <ul>
-      <li><strong>Read your emails (<code>gmail.readonly</code>)</strong> — We access your Gmail messages solely to match incoming and outgoing emails against contact records in your sales pipeline. Email content is stored securely and linked to the relevant contact profile within your organisation's workspace.</li>
-      <li><strong>Send emails on your behalf (<code>gmail.send</code>)</strong> — We send emails through your Gmail account when you compose and send messages from within the platform. These sent emails are also recorded against the relevant contact record.</li>
+      <li><strong>Read your emails (<code>gmail.readonly</code>)</strong>: We access your Gmail messages solely to match incoming and outgoing emails against contact records in your sales pipeline. Email content is stored securely and linked to the relevant contact profile within your organisation's workspace.</li>
+      <li><strong>Send emails on your behalf (<code>gmail.send</code>)</strong>: We send emails through your Gmail account when you compose and send messages from within the platform. These sent emails are also recorded against the relevant contact record.</li>
     </ul>
 
     <h3>7.2 What We Do Not Do</h3>
@@ -484,9 +484,9 @@
     <h3>7.4 Microsoft Outlook Integration</h3>
     <p>When you choose to connect your Microsoft (Outlook / Microsoft 365) account to Always On, we request access to the following Microsoft account data via the Microsoft Graph API:</p>
     <ul>
-      <li><strong>Read your emails (<code>Mail.Read</code>)</strong> — We access your Outlook messages solely to match incoming and outgoing emails against contact records in your sales pipeline. Email content is stored securely and linked to the relevant contact profile within your organisation's workspace.</li>
-      <li><strong>Send emails on your behalf (<code>Mail.Send</code>)</strong> — We send emails through your Outlook account when you compose and send messages from within the platform. These sent emails are also recorded against the relevant contact record.</li>
-      <li><strong>Maintain access (<code>offline_access</code>)</strong> — We request a refresh token so your connection remains active without requiring you to re-authenticate each session. This token is encrypted at rest and never visible to other users or PGD staff.</li>
+      <li><strong>Read your emails (<code>Mail.Read</code>)</strong>: We access your Outlook messages solely to match incoming and outgoing emails against contact records in your sales pipeline. Email content is stored securely and linked to the relevant contact profile within your organisation's workspace.</li>
+      <li><strong>Send emails on your behalf (<code>Mail.Send</code>)</strong>: We send emails through your Outlook account when you compose and send messages from within the platform. These sent emails are also recorded against the relevant contact record.</li>
+      <li><strong>Maintain access (<code>offline_access</code>)</strong>: We request a refresh token so your connection remains active without requiring you to re-authenticate each session. This token is encrypted at rest and never visible to other users or PGD staff.</li>
     </ul>
 
     <h3>7.5 What We Do Not Do (Microsoft)</h3>
@@ -533,13 +533,13 @@
     <h2><span class="section-num">9</span> Your Rights</h2>
     <h3>As a platform user (rep or manager)</h3>
     <ul>
-      <li>Access, correct or request deletion of your account data — contact your manager or <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a></li>
+      <li>Access, correct or request deletion of your account data, contact your manager or <a href="mailto:info@plangrowdo.com">info@plangrowdo.com</a></li>
       <li>Disconnect your email account at any time from your profile settings</li>
-      <li>Request deletion of your Always On account — contact your manager</li>
+      <li>Request deletion of your Always On account, contact your manager</li>
     </ul>
     <h3>As a contact whose data is in the platform</h3>
     <ul>
-      <li>Your rights should be exercised with the business (tenant) that entered your data — they are the Data Controller</li>
+      <li>Your rights should be exercised with the business (tenant) that entered your data, they are the Data Controller</li>
       <li>If you cannot reach them, contact <a href="mailto:rob@plangrowdo.com">rob@plangrowdo.com</a> and we will direct your request appropriately</li>
     </ul>
   </div>

@@ -1,0 +1,411 @@
+<title>Always On, Integration &amp; Security Reference</title>
+
+<style>
+  :root {
+    --purple: #43165c;
+    --purple-soft: #f8f5fb;
+    --purple-line: #e8e0ef;
+    --yellow: #fbba00;
+    --green: #76b82a;
+    --green-bg: #eaf7d9;
+    --green-border: #a9d67a;
+    --ink: #1a1a2e;
+    --ink-soft: #55505c;
+    --ink-faint: #8b8592;
+    --paper: #f4f4f8;
+    --card: #ffffff;
+    --line: #e6e3dc;
+    --radius: 12px;
+  }
+
+  :root[data-theme="dark"] {
+    --purple: #b98fd1;
+    --purple-soft: #241a2e;
+    --purple-line: #3a2c46;
+    --yellow: #ffd166;
+    --green: #9bd15e;
+    --green-bg: #1e2c14;
+    --green-border: #3d5a24;
+    --ink: #ece9f2;
+    --ink-soft: #b3aec0;
+    --ink-faint: #837d90;
+    --paper: #16131c;
+    --card: #1e1a26;
+    --line: #322c3c;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --purple: #b98fd1;
+      --purple-soft: #241a2e;
+      --purple-line: #3a2c46;
+      --yellow: #ffd166;
+      --green: #9bd15e;
+      --green-bg: #1e2c14;
+      --green-border: #3d5a24;
+      --ink: #ece9f2;
+      --ink-soft: #b3aec0;
+      --ink-faint: #837d90;
+      --paper: #16131c;
+      --card: #1e1a26;
+      --line: #322c3c;
+    }
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page {
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 0 4rem;
+  }
+
+  /* ---- Header ---- */
+  .cover {
+    background: var(--purple);
+    color: #fff;
+    padding: clamp(2.2rem, 5vw, 3.2rem) clamp(1.5rem, 5vw, 3rem);
+    border-radius: 0 0 var(--radius) var(--radius);
+  }
+  .cover .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: .6rem;
+    font-size: .74rem;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: #e7d6ee;
+    margin-bottom: .9rem;
+  }
+  .cover .eyebrow::before {
+    content: "";
+    width: 22px;
+    height: 2px;
+    background: var(--yellow);
+    display: inline-block;
+  }
+  .cover h1 {
+    margin: 0 0 .5rem;
+    font-size: clamp(1.7rem, 3.4vw, 2.3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    text-wrap: balance;
+  }
+  .cover p {
+    margin: 0;
+    color: #e7d6ee;
+    font-size: 1rem;
+    max-width: 62ch;
+  }
+
+  /* ---- Layout ---- */
+  .body-content {
+    padding: clamp(1.4rem, 4vw, 2.4rem) clamp(1.5rem, 5vw, 3rem) 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2.2rem;
+  }
+
+  .group-title {
+    display: flex;
+    align-items: baseline;
+    gap: .7rem;
+    margin: 0 0 .9rem;
+  }
+  .group-title h2 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--purple);
+  }
+  .group-title span {
+    font-size: .78rem;
+    color: var(--ink-faint);
+    font-weight: 500;
+  }
+
+  .table-wrap {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    box-shadow: 0 18px 40px -28px rgba(23, 19, 29, .35);
+    overflow-x: auto;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+  }
+
+  th {
+    background: var(--purple-soft);
+    color: var(--purple);
+    text-align: left;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .05em;
+    padding: .8rem 1rem;
+    border-bottom: 2px solid var(--purple-line);
+    white-space: nowrap;
+  }
+  th:first-child { width: 15%; }
+  th:nth-child(2) { width: 21%; }
+  th:nth-child(3) { width: 30%; }
+  th:nth-child(4) { width: 34%; }
+
+  td {
+    padding: .9rem 1rem;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+    font-size: .85rem;
+    color: var(--ink-soft);
+  }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: var(--purple-soft); }
+
+  td.name {
+    font-weight: 700;
+    color: var(--ink);
+  }
+  td.name .sub {
+    display: block;
+    font-weight: 500;
+    font-size: .74rem;
+    color: var(--ink-faint);
+    margin-top: .15rem;
+  }
+  td.plain {
+    font-style: italic;
+    color: var(--ink);
+  }
+  td.security {
+    position: relative;
+    padding-left: 1.8rem;
+  }
+  td.security::before {
+    content: "";
+    position: absolute;
+    left: 1rem;
+    top: 1.1rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--green);
+  }
+
+  /* ---- Isolation callout ---- */
+  .callout {
+    background: var(--purple);
+    color: #fff;
+    border-radius: var(--radius);
+    padding: clamp(1.5rem, 4vw, 2.1rem) clamp(1.6rem, 4vw, 2.4rem);
+  }
+  .callout h3 {
+    margin: 0 0 .9rem;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--yellow);
+  }
+  .callout .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1.4rem;
+  }
+  .callout .item {
+    display: flex;
+    gap: .8rem;
+  }
+  .callout .item .mark {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    background: rgba(255,255,255,.14);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: .75rem;
+    font-weight: 800;
+    color: var(--yellow);
+    margin-top: .1rem;
+  }
+  .callout .item p {
+    margin: 0;
+    font-size: .89rem;
+    line-height: 1.55;
+    color: #efe3f2;
+  }
+  .callout .item strong {
+    color: #fff;
+  }
+
+  .footnote {
+    font-size: .8rem;
+    color: var(--ink-faint);
+    padding: 0 .2rem;
+  }
+
+  @media print {
+    @page { size: A4 landscape; margin: 12mm; }
+    body { background: #fff; font-size: 12px; }
+    .page { max-width: none; }
+    .cover { border-radius: 0; }
+    .table-wrap { box-shadow: none; border: 1px solid #ddd; overflow-x: visible; }
+    table { min-width: 0; }
+    td, th { padding: .6rem .7rem; font-size: .78rem; }
+    tr:hover td { background: transparent; }
+  }
+
+  @media (max-width: 640px) {
+    th:first-child, td.name { width: auto; }
+  }
+</style>
+
+<div class="page">
+
+  <div class="cover">
+    <div class="eyebrow">Always On, Meeting Reference</div>
+    <h1>Integrations &amp; Security Overview</h1>
+    <p>Prepared for Rob's meeting with Morris Lubricants, Thursday 23 July 2026, how Always On connects across the business, and what's protected at each point.</p>
+  </div>
+
+  <div class="body-content">
+
+    <div>
+      <div class="group-title">
+        <h2>Communication Channels</h2>
+        <span>How enquiries reach reps and replies go out</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Integration</th><th>Purpose</th><th>In plain English</th><th>Security &amp; data handling</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="name">Email (Resend)</td>
+              <td>Sends automated acknowledgement and reply emails to enquirers on Morris's behalf.</td>
+              <td class="plain">Your emails go out through a proper business email service, not a shared inbox, and they're always kept separate from every other company using Always On.</td>
+              <td class="security">Delivered via a dedicated transactional email provider (Resend). Every send is scoped strictly to Morris's own enquiries and tagged by type for audit traceability, never mixed with another client's mail.</td>
+            </tr>
+            <tr>
+              <td class="name">Custom Email Domain</td>
+              <td>Sends from Morris's own domain (e.g. noreply@morrislubricants.co.uk) instead of the shared Always On address.</td>
+              <td class="plain">We can only send as "morrislubricants.co.uk" once you've proven, through your own domain settings, that you actually own it, we can't just claim to be you.</td>
+              <td class="security">Requires DNS-level proof of ownership (SPF, DKIM, DMARC) before activation, Always On cannot send as a domain Morris hasn't cryptographically verified control of.</td>
+            </tr>
+            <tr>
+              <td class="name">WhatsApp Business</td>
+              <td>Receives and acknowledges enquiries via WhatsApp.</td>
+              <td class="plain">The sensitive WhatsApp login details are kept locked away on our side, you'll never see them, and neither could anyone browsing your settings.</td>
+              <td class="security">Access tokens and webhook secrets are held server-side by PGD only, never exposed in Morris's own settings. Only the public display number is stored in Morris's tenant configuration.</td>
+            </tr>
+            <tr>
+              <td class="name">Microsoft Teams</td>
+              <td>Posts a card to a Teams channel the moment a qualified enquiry arrives, so the team sees it without logging in.</td>
+              <td class="plain">You create and own the link that connects to your Teams channel, switch it off or change it whenever you like. Only enquiries worth seeing get posted, not every message.</td>
+              <td class="security">Uses a webhook URL Morris generates and controls inside their own Teams admin, Morris can rotate or revoke it at any time. Only enquiries above the qualification threshold post, so noise never reaches the channel.</td>
+            </tr>
+            <tr>
+              <td class="name">Outlook Inbox Sync<span class="sub">Tenant-wide setting</span></td>
+              <td>Governs the background service that keeps connected mailboxes syncing across the team.</td>
+              <td class="plain">This switch just controls how often the system checks for new mail, it doesn't hold anyone's email password.</td>
+              <td class="security">Controls timing and scope only, this setting holds no mailbox credentials itself. Actual mailbox access is granted individually, per rep (see below).</td>
+            </tr>
+            <tr>
+              <td class="name">Rep Email Connection<span class="sub">Outlook, per rep, My Profile → Email Sync</span></td>
+              <td>Each rep individually connects their own Outlook so Dan can help draft replies using their real conversation history.</td>
+              <td class="plain">Each person connects their own inbox themselves, the same way they'd log into any app with Microsoft. No one, including us, ever sees their password, and colleagues can't see into each other's inboxes.</td>
+              <td class="security">Each connection is a personal OAuth grant made by that rep alone. One rep's connection cannot read another rep's mailbox, and no admin, at Morris or PGD, ever sees or holds a rep's password.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="group-title">
+        <h2>Lead Capture &amp; Engagement</h2>
+        <span>How enquiries get in, and how they're followed up</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Integration</th><th>Purpose</th><th>In plain English</th><th>Security &amp; data handling</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="name">Forms &amp; Sally Web Chat</td>
+              <td>The embeddable enquiry forms and AI chat widget placed on Morris's own website.</td>
+              <td class="plain">The code that runs the chat widget on your site is built specifically for Morris and checked to stop anyone sneaking harmful code in through a text box, like a greeting message.</td>
+              <td class="security">The embed script is generated fresh, per tenant, server-side. Any manager-editable text (colours, greetings, prompts) is strictly validated and safely encoded before reaching the live page, closing a stored-script-injection risk class identified and fixed in a recent platform security review.</td>
+            </tr>
+            <tr>
+              <td class="name">Catch-All Inbound Email</td>
+              <td>Reads a shared inbox, filters genuine commercial enquiries from spam, newsletters and invoices, and assigns them to the right rep.</td>
+              <td class="plain">Sally only reads and sorts these emails, she never replies on your behalf here. A real person always writes the actual response.</td>
+              <td class="security">Classification only, no automatic reply is ever sent from this channel. A human always writes and sends the actual reply.</td>
+            </tr>
+            <tr>
+              <td class="name">Campaign Emails</td>
+              <td>Lets reps send sector-targeted email campaigns via Caroline.</td>
+              <td class="plain">Campaigns only go to people who've already enquired with Morris, never a bought-in or shared list. You decide who on your team is allowed to send them.</td>
+              <td class="security">Sends only to Morris's own captured contacts, never a shared or third-party list. Access can be restricted to named reps rather than opened to the whole team.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div>
+      <div class="group-title">
+        <h2>Business Systems</h2>
+        <span>Where qualified data flows once someone's ready to buy</span>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Integration</th><th>Purpose</th><th>In plain English</th><th>Security &amp; data handling</th></tr></thead>
+          <tbody>
+            <tr>
+              <td class="name">CRM Integration</td>
+              <td>One-click push of a qualified contact, company, deal and full email history into Morris's own CRM.</td>
+              <td class="plain">Only enquiries genuinely worth pursuing get pushed to your CRM, casual or unqualified ones never do. Your CRM login details are never shared with or visible to any other company on the platform.</td>
+              <td class="security">Only enquiries that have reached Prospect stage, qualified against BANT, can be pushed; nothing unqualified ever reaches the CRM. Connection credentials are stored per tenant and never shared across Always On's other clients.</td>
+            </tr>
+            <tr>
+              <td class="name">Knowledge Sources</td>
+              <td>Scrapes Morris's own website so Sally, Dan and Caroline can answer questions accurately about the business.</td>
+              <td class="plain">Sally, Dan and Caroline all only ever learn from Morris's own website and documents, none of them has access to any other company's information, ever.</td>
+              <td class="security">Retrieval is scoped strictly to Morris's own tenant record for all three agents. None of them can see, search, or draw on any other client's knowledge base, architecturally, not just by policy.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="callout">
+      <h3>Data Isolation &amp; AI Training</h3>
+      <div class="grid">
+        <div class="item">
+          <div class="mark">✓</div>
+          <p><strong>No cross-tenant visibility.</strong> Every client's enquiries, conversations, knowledge base and contacts live in an isolated tenant record. No other Always On client can see or query Morris's data, and Morris cannot see anyone else's.</p>
+        </div>
+        <div class="item">
+          <div class="mark">✓</div>
+          <p><strong>No model training on Morris's data.</strong> Per the platform's Data Processing Agreement (Section 13), the AI providers behind Sally, Dan and Caroline process submitted data only to generate a response, it is not retained or used to train their underlying models.</p>
+        </div>
+      </div>
+    </div>
+
+    <p class="footnote">Full sub-processor list, data locations and transfer safeguards are set out in the Always On Data Processing Agreement, available on request.</p>
+
+  </div>
+</div>

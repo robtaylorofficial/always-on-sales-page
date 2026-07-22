@@ -202,7 +202,7 @@
 <!-- ── PAGE HEADER ── -->
 <div class="page-header">
   <div class="badge">New Client Setup</div>
-  <h1>Always On — Client Onboarding</h1>
+  <h1>Always On, Client Onboarding</h1>
   <p>9 short sections · your progress is saved automatically</p>
 </div>
 
@@ -236,14 +236,14 @@
     <!-- Confirmation screen (hidden until submit) -->
     <div id="confirmation">
       <div class="conf-icon">✅</div>
-      <h2>Thank you — we've received everything.</h2>
+      <h2>Thank you, we've received everything.</h2>
       <p>Your Plan Grow Do contact will be in touch shortly to confirm your setup timeline.</p>
       <p style="font-size:0.85rem;">A copy of your responses has been sent to <strong>rob@plangrowdo.com</strong>.</p>
 
       <!-- Step 2 card -->
       <div class="step2-card">
         <div class="step2-badge">Step 2 of 2</div>
-        <h3>One more thing — your Company Knowledge Base</h3>
+        <h3>One more thing, your Company Knowledge Base</h3>
         <p>This is what your AI agents use to answer questions, qualify leads, and represent your business. It takes about 15 minutes and your progress saves automatically, so you can return any time.</p>
         <ul>
           <li>8 sections covering your products, pricing, team, and sales process</li>
@@ -253,7 +253,7 @@
         <a href="/company-knowledge" class="btn-step2">
           Complete Your Knowledge Base →
         </a>
-        <span class="step2-skip">You can also do this later — we'll remind you.</span>
+        <span class="step2-skip">You can also do this later, we'll remind you.</span>
       </div>
 
       <a href="/" class="back-link">← Return to Always On</a>
@@ -275,7 +275,7 @@
 <!-- ── SCRIPT ── -->
 <script>
 /* ============================================================
-   ⚙️  SETUP — Fill in these values before going live
+   ⚙️  SETUP, Fill in these values before going live
    ============================================================
    1. Web3Forms (email): Sign up free at https://web3forms.com
       → Create account → copy your Access Key below.
@@ -286,7 +286,7 @@
       Files are stored on Uploadcare CDN; download links go in the email.
 
    If keys are left as placeholders, the form will still work but
-   email won't send and files won't upload to CDN — use for testing.
+   email won't send and files won't upload to CDN, use for testing.
    ============================================================ */
 const WEB3FORMS_KEY      = '1c6295d4-4b6f-4ed7-b5d7-04a421efb19e';   // web3forms.com → Account → Access Key
 const UPLOADCARE_PUB_KEY = '78f51c689ae102e830e9';  // uploadcare.com → Dashboard → API Keys
@@ -313,7 +313,7 @@ const STEPS = [
     subtitle: "Help us understand your visual identity and tone",
     fields: [
       { id:'logo',             label:'Upload your logo',                       type:'file',   accept:'.png,.svg,.jpg,.jpeg', hint:'PNG or SVG preferred' },
-      { id:'brand_assets',     label:'Upload brand guidelines or assets',      type:'file',   accept:'*',                   hint:'Any files — PDF, ZIP, images', multiple:true },
+      { id:'brand_assets',     label:'Upload brand guidelines or assets',      type:'file',   accept:'*',                   hint:'Any files, PDF, ZIP, images', multiple:true },
       { id:'primary_colour',   label:'Primary brand colour',                   type:'text',   placeholder:'#43165c or "deep purple"' },
       { id:'secondary_colours',label:'Secondary brand colour(s)',              type:'text' },
       { id:'tone_of_voice',    label:'Brand tone of voice',                    type:'select', options:['Professional','Friendly','Technical','Conversational','Other'] },
@@ -387,7 +387,7 @@ const STEPS = [
   },
   {
     id: 9, title: 'Legal & Compliance', icon: '🔒',
-    subtitle: "Almost done — just a few compliance questions",
+    subtitle: "Almost done, just a few compliance questions",
     fields: [
       { id:'has_privacy_policy', label:'Do you have a privacy policy on your website?', type:'select', options:['Yes','No','Not yet'] },
       { id:'privacy_policy_url', label:'Privacy policy URL',                            type:'url',    placeholder:'https://', showIf:{field:'has_privacy_policy',value:'Yes'} },
@@ -437,7 +437,7 @@ function renderField(f) {
     input = `<textarea id="${f.id}" name="${f.id}" placeholder="${f.placeholder||''}" oninput="saveToStorage()">${''}</textarea>`;
   } else if (f.type === 'select') {
     const opts = (f.options||[]).map(o => `<option value="${o}">${o}</option>`).join('');
-    input = `<select id="${f.id}" name="${f.id}" onchange="saveToStorage();checkConditionals()"><option value="">— Select —</option>${opts}</select>`;
+    input = `<select id="${f.id}" name="${f.id}" onchange="saveToStorage();checkConditionals()"><option value="">, Select,</option>${opts}</select>`;
   } else if (f.type === 'file') {
     const multi = f.multiple ? 'multiple' : '';
     input = `<div class="file-zone" id="zone-${f.id}">
@@ -545,7 +545,7 @@ function handleFileSelect(event, fieldId) {
   const files = Array.from(event.target.files);
   if (!selectedFiles[fieldId]) selectedFiles[fieldId] = [];
   files.forEach(f => {
-    if (f.size > 20 * 1024 * 1024) { showToast(`${f.name} exceeds 20MB — skipped`); return; }
+    if (f.size > 20 * 1024 * 1024) { showToast(`${f.name} exceeds 20MB, skipped`); return; }
     selectedFiles[fieldId].push(f);
   });
   renderFileTags(fieldId);
@@ -725,7 +725,7 @@ function buildEmailHTML(formData, fileUploads) {
     `Company:   ${companyName}`,
     `Submitted: ${date}`,
     ``,
-    section('1 — YOUR BUSINESS', [
+    section('1, YOUR BUSINESS', [
       field('Company name', f.company_name),
       field('Trading name', f.trading_name),
       field('Industry / sector', f.industry),
@@ -735,7 +735,7 @@ function buildEmailHTML(formData, fileUploads) {
       field('Social handles', f.social_handles),
       field('Description', f.description),
     ]),
-    section('2 — YOUR BRAND', [
+    section('2, YOUR BRAND', [
       fileField('logo', 'Logo'),
       fileField('brand_assets', 'Brand assets'),
       field('Primary colour', f.primary_colour),
@@ -744,39 +744,39 @@ function buildEmailHTML(formData, fileUploads) {
       field('Tone (other)', f.tone_other),
       field('Tagline', f.tagline),
     ]),
-    section('3 — PRODUCTS & SERVICES', [
+    section('3, PRODUCTS & SERVICES', [
       field('Products / services', f.products_services),
       field('Price range', f.price_range),
       field('Minimum order', f.min_order),
       field('Top 3 reasons', f.top_reasons),
       field('Exclusions', f.exclusions),
     ]),
-    section('4 — IDEAL CUSTOMER', [
+    section('4, IDEAL CUSTOMER', [
       field('Target industry', f.target_industry),
       field('Company size', f.company_size),
       field('Job titles', f.job_titles),
       field('Geography', f.geography),
       field('Best-fit customer', f.best_fit_customer),
     ]),
-    section('5 — SALES PROCESS', [
+    section('5, SALES PROCESS', [
       field('Lead sources', f.lead_sources),
       field('Sales cycle', f.sales_cycle),
       field('Objections', f.objections),
       field('Quoting information', f.quoting_info),
       field('CRM', f.crm),
     ]),
-    section('6 — COMPETITORS', [
+    section('6, COMPETITORS', [
       field('Competitors', f.competitors),
       field('Advantages', f.advantages),
       field('Avoid mentioning', f.avoid_competitors),
     ]),
-    section('7 — TEAM', [
+    section('7, TEAM', [
       field('Primary contact', f.primary_contact_name),
       field('Primary email', f.primary_contact_email),
       teamBlock,
       fileField('prospect_list', 'Prospect list'),
     ]),
-    section('8 — FORMS & FOLLOW-UP', [
+    section('8, FORMS & FOLLOW-UP', [
       field('Enquiry form questions', f.enquiry_questions),
       field('Resource on submit', f.has_resource),
       fileField('resource_upload', 'Resource file'),
@@ -784,7 +784,7 @@ function buildEmailHTML(formData, fileUploads) {
       field('Automated tone', f.automated_tone),
       field('Message rules', f.message_rules),
     ]),
-    section('9 — LEGAL & COMPLIANCE', [
+    section('9, LEGAL & COMPLIANCE', [
       field('Has privacy policy', f.has_privacy_policy),
       field('Privacy policy URL', f.privacy_policy_url),
       field('Do-not-contact list', f.has_dnc_list),
@@ -823,7 +823,7 @@ async function handleSubmit() {
     if (WEB3FORMS_KEY && WEB3FORMS_KEY !== 'YOUR_WEB3FORMS_ACCESS_KEY') {
       const payload = {
         access_key: WEB3FORMS_KEY,
-        subject:    `New Always On Onboarding — ${companyName}`,
+        subject:    `New Always On Onboarding, ${companyName}`,
         from_name:  'Always On Onboarding',
         to_email:   'rob@plangrowdo.com',
         message:    messageHTML,
@@ -856,7 +856,7 @@ async function handleSubmit() {
     console.error(err);
     btn.disabled = false;
     btn.innerHTML = 'Submit ✓';
-    showToast('Something went wrong — please try again');
+    showToast('Something went wrong, please try again');
   }
 }
 
@@ -897,7 +897,7 @@ document.addEventListener('drop', e => {
   const files = Array.from(e.dataTransfer.files);
   if (!selectedFiles[fieldId]) selectedFiles[fieldId] = [];
   files.forEach(f => {
-    if (f.size > 20 * 1024 * 1024) { showToast(`${f.name} exceeds 20MB — skipped`); return; }
+    if (f.size > 20 * 1024 * 1024) { showToast(`${f.name} exceeds 20MB, skipped`); return; }
     selectedFiles[fieldId].push(f);
   });
   renderFileTags(fieldId);
