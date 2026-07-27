@@ -277,7 +277,7 @@
 <div class="policy-hero">
   <div class="badge">Legal</div>
   <h1>Platform Privacy Policy</h1>
-  <p>Always On &nbsp;·&nbsp; alwayson.plangrowdo.com &nbsp;·&nbsp; Version 1.2 &nbsp;·&nbsp; May 2026</p>
+  <p>Always On &nbsp;·&nbsp; alwaysonSCS.com &nbsp;·&nbsp; Version 1.3 &nbsp;·&nbsp; July 2026</p>
 </div>
 
 <!-- CONTENT -->
@@ -304,7 +304,7 @@
   <!-- Section 1 -->
   <div class="policy-section" id="s1">
     <h2><span class="section-num">1</span> About This Policy</h2>
-    <p>This Privacy Policy explains how personal data is collected, stored and used within the Always On platform (alwayson.plangrowdo.com). It is intended for:</p>
+    <p>This Privacy Policy explains how personal data is collected, stored and used within the Always On platform (alwaysonSCS.com). It is intended for:</p>
     <ul>
       <li>Sales representatives and managers who use Always On on behalf of their employer</li>
       <li>Contacts and prospects whose data is entered into the platform</li>
@@ -438,12 +438,19 @@
     <p>Always On is a multi-tenant platform. Your employer's data is strictly isolated from all other tenants:</p>
     <ul>
       <li>Every record is tagged with a <code>tenant_id</code> at the database level</li>
-      <li>Row Level Security (RLS) enforces that queries can only return data belonging to the authenticated user's tenant</li>
+      <li>Every data action runs a server-side authorisation check that verifies the caller's tenant and role from their authenticated session before any data is read or written. Tenant identity is never taken from a value supplied by the caller</li>
+      <li>Row Level Security (RLS) policies provide an additional layer of defence at the database layer. Cross-tenant access is blocked by both session-verified checks and RLS</li>
       <li>No cross-tenant data access is possible at any level</li>
       <li>All data is encrypted in transit (TLS/HTTPS) and at rest</li>
-      <li>OAuth tokens for email sync are encrypted separately with a dedicated encryption key</li>
-      <li>Platform access is invite-only, no self-registration</li>
+      <li>OAuth tokens for email sync are encrypted at rest using AES-256-GCM, with encryption keys held server-side only</li>
+      <li>Email connections use delegated, mailbox-scoped OAuth. The platform can act only on the specific connected mailbox and has no access to the wider Microsoft 365 or Google Workspace tenant</li>
+      <li>Platform access is invite-only; public self-registration is disabled at the platform level</li>
+      <li>API keys are stored as encrypted environment variables, never in code</li>
+      <li>Public endpoints (web chat, form capture) are rate limited; chat processing uses the server-stored conversation record, not message content supplied by the caller</li>
     </ul>
+    <div class="callout">
+      <strong>Independent security review:</strong> In July 2026, Always On completed a white-box, source-level security review against OWASP ASVS and OWASP Top 10 standards, ahead of a formal CREST-accredited penetration test being commissioned. Findings from that review have been implemented. Any further issues are tracked and remediated on a prioritised basis.
+    </div>
   </div>
 
   <!-- Section 7 -->

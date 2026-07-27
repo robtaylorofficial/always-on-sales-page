@@ -402,7 +402,7 @@
             <td class="security">Controls timing and scope only. This setting holds no mailbox credentials itself. Actual mailbox access is granted individually, per rep (see below).</td>
           </tr>
           <tr>
-            <td class="name">Rep Email Connection<span class="sub">Outlook / Gmail, per rep &mdash; My Profile &rarr; Email Sync</span></td>
+            <td class="name">Rep Email Connection<span class="sub">Outlook / Gmail, per rep. My Profile &rarr; Email Sync</span></td>
             <td>Each rep individually connects their own mailbox so Dan can help draft replies using their real conversation history.</td>
             <td class="plain">Each person connects their own inbox themselves, the same way they would log into any app with Microsoft or Google. No one, including Plan Grow Do, ever sees their password, and colleagues cannot see into each other's inboxes.</td>
             <td class="security">Each connection is a personal OAuth grant made by that rep alone. One rep's connection cannot read another rep's mailbox, and no admin at the Tenant or Plan Grow Do ever sees or holds a rep's password.</td>
@@ -433,7 +433,7 @@
             <td class="name">Forms &amp; Sally Web Chat</td>
             <td>The embeddable enquiry forms and AI chat widget placed on your own website.</td>
             <td class="plain">The code that runs the chat widget on your site is built specifically for your business and validated to stop anyone sneaking harmful code in through a text box, such as a greeting message or form field.</td>
-            <td class="security">The embed script is generated per tenant, server-side. Any manager-editable text (colours, greetings, prompts) is strictly validated and safely encoded before reaching the live page, closing a stored-script-injection risk class identified in a platform security review.</td>
+            <td class="security">The embed script is generated per tenant, server-side. Any manager-editable text (colours, greetings, prompts) is strictly validated and safely encoded before reaching the live page, closing a stored-script-injection risk class identified in a platform security review. Public endpoints are rate limited. Chat processing uses the server-stored conversation record, not message content supplied by the caller, preventing prompt-injection via the public interface.</td>
           </tr>
           <tr>
             <td class="name">Catch-All Inbound Email</td>
@@ -484,6 +484,11 @@
         </tbody>
       </table>
     </div>
+  </div>
+
+  <!-- Security review callout -->
+  <div class="callout" style="margin-bottom:32px;">
+    <strong>Independent security review, July 2026:</strong> Always On completed a white-box, source-level review against OWASP ASVS and OWASP Top 10 standards, ahead of a formal CREST-accredited penetration test being commissioned. The findings above reflect controls implemented as a result of that review.
   </div>
 
   <!-- Data Isolation callout -->
