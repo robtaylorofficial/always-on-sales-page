@@ -1220,8 +1220,9 @@
           headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
           body: JSON.stringify({
             access_key: '1c6295d4-4b6f-4ed7-b5d7-04a421efb19e',
-            subject: `Always On Knowledge, ${company}, Full Submission`,
+            subject: `Always On Knowledge: ${company} - Full Submission`,
             from_name: 'Always On Knowledge Form',
+            replyto: submitterEmail,
             message: allSectionsBody,
           })
         }).then(r => r.json());
