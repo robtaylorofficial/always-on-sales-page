@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pennine Lubricants Metalworking fluid selector Data review | Always On</title>
+  <meta name="description" content="Pennine Lubricants product selector data review, prepared by Plan Grow Do." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+    body { font-family: 'Poppins', system-ui, sans-serif; background: #f5f4f7; color: #1a1a2e; line-height: 1.6; }
+    :root {
+      --purple: #43165c; --purple-dark: #2d0e3e;
+      --yellow: #fbba00; --green: #76b82a; --blue: #009fe3;
+      --ink: #1a1a2e; --ink-soft: #55505c; --ink-faint: #8b8592;
+      --line: #e3e0e8; --panel: #ffffff; --panel-2: #faf9fb;
+      --crit: #a8281f; --crit-bg: #fbeceb;
+      --warn-bg: #fff6df;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    }
+
+    /* ── site chrome ── */
+    #top-ribbon { background: var(--purple-dark); color: rgba(255,255,255,0.75); font-size: 0.78rem; padding: 7px 0; text-align: center; }
+    .ribbon-inner { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
+    .ribbon-label { font-weight: 600; color: rgba(255,255,255,0.5); letter-spacing: 0.05em; }
+    .ribbon-link { color: rgba(255,255,255,0.85); text-decoration: none; }
+    .ribbon-link:hover { color: var(--yellow); }
+    .ribbon-divider { color: rgba(255,255,255,0.3); }
+    nav { background: var(--purple); padding: 0 32px; display: flex; align-items: center; justify-content: space-between; height: 64px; box-shadow: 0 2px 16px rgba(0,0,0,0.18); }
+    nav img { height: 34px; width: auto; }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+    .nav-link { color: rgba(255,255,255,0.75); font-size: 0.85rem; text-decoration: none; }
+    .nav-link:hover { color: #fff; }
+    .btn-nav { background: var(--yellow); color: var(--purple-dark); font-weight: 700; font-size: 0.82rem; padding: 8px 18px; border-radius: 8px; text-decoration: none; }
+    .btn-nav:hover { background: #ffd040; }
+
+    /* ── sticky progress ── */
+    #bar { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,0.97); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); padding: 10px 0; }
+    .bar-inner { max-width: 1120px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+    .ptrack { flex: 1 1 200px; min-width: 160px; height: 8px; background: #ece9f0; border-radius: 99px; overflow: hidden; }
+    .pfill { height: 100%; width: 0%; background: var(--green); transition: width .35s cubic-bezier(.22,1,.36,1); }
+    .plabel { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-faint); white-space: nowrap; }
+    #autosave { font-size: 0.74rem; color: var(--green); opacity: 0; transition: opacity .3s; font-weight: 600; white-space: nowrap; }
+    #autosave.show { opacity: 1; }
+
+    /* ── resume banner ── */
+    #resume { display: none; background: var(--warn-bg); border-bottom: 2px solid var(--yellow); padding: 14px 24px; text-align: center; }
+    .resume-inner { display: flex; align-items: center; justify-content: center; gap: 14px; flex-wrap: wrap; font-size: 0.88rem; }
+    .resume-inner strong { color: var(--purple); }
+
+    /* ── layout ── */
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+    .hero { background: var(--purple); color: #fff; padding: 54px 0 48px; }
+    .hero .wrap { max-width: 1120px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.6); margin-bottom: 14px; }
+    .eyebrow::before { content: ""; width: 26px; height: 2px; background: var(--yellow); }
+    .hero h1 { font-size: clamp(1.9rem, 4.4vw, 3rem); font-weight: 700; line-height: 1.12; letter-spacing: -0.02em; }
+    .hero h1 span { display: block; font-weight: 400; color: rgba(255,255,255,0.72); font-size: 0.55em; margin-top: 6px; letter-spacing: 0; }
+    .hero p { max-width: 64ch; color: rgba(255,255,255,0.85); margin-top: 16px; }
+    .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; font-family: var(--mono); font-size: 0.76rem; color: rgba(255,255,255,0.6); }
+    .hero-meta b { color: rgba(255,255,255,0.85); font-weight: 500; }
+
+    section.blk { padding: 44px 0; }
+    section.blk > .wrap > h2 { font-size: clamp(1.35rem, 2.6vw, 1.9rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
+    .blurb { color: var(--ink-soft); max-width: 70ch; margin-bottom: 22px; }
+    .ctx h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 8px; color: var(--purple); }
+    .ctx p { color: var(--ink-soft); max-width: 72ch; margin-bottom: 12px; }
+    .ctx { margin-bottom: 28px; }
+
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin: 24px 0; }
+    .stat { background: var(--panel); padding: 18px 16px; }
+    .stat .n { font-family: var(--mono); font-size: 1.75rem; font-weight: 600; color: var(--purple); line-height: 1; font-variant-numeric: tabular-nums; }
+    .stat .l { font-size: 0.75rem; color: var(--ink-faint); margin-top: 7px; }
+
+    .chart { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 22px; margin: 22px 0; }
+    .chart h4 { font-size: 0.8rem; font-family: var(--mono); color: var(--ink-faint); font-weight: 500; margin-bottom: 16px; }
+    .bars { display: flex; flex-direction: column; gap: 7px; }
+    .brow { display: grid; grid-template-columns: 3.6rem 1fr 2rem; gap: 12px; align-items: center; }
+    .brow .k { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); text-align: right; font-variant-numeric: tabular-nums; }
+    .brow .t { height: 20px; background: #ece9f0; border-radius: 3px; overflow: hidden; }
+    .brow .f { height: 100%; border-radius: 3px; display: block; }
+    .f.new { background: var(--green); } .f.mid { background: var(--yellow); }
+    .f.old { background: var(--crit); opacity: .85; } .f.non { background: var(--ink-faint); opacity: .4; }
+    .brow .v { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); font-variant-numeric: tabular-nums; }
+    .chart .note { font-size: 0.86rem; color: var(--ink-soft); margin-top: 16px; padding-top: 14px; border-top: 1px solid var(--line); max-width: 72ch; }
+
+    /* ── fields ── */
+    .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; margin-bottom: 14px; }
+    .chead { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; margin-bottom: 8px; }
+    .tag { font-family: var(--mono); font-size: 0.64rem; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; padding: 4px 9px; border-radius: 99px; }
+    .tag.critical { background: var(--crit-bg); color: var(--crit); }
+    .tag.high { background: var(--warn-bg); color: #8a6100; }
+    .tag.medium { background: #eef5e4; color: #4a7517; }
+    .tag.low { background: #f0eef2; color: var(--ink-faint); }
+    .area { font-family: var(--mono); font-size: 0.7rem; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-faint); }
+    .qtext { margin-bottom: 12px; max-width: 76ch; }
+    label.fl { display: block; font-size: 0.8rem; font-weight: 600; color: var(--ink-soft); margin-bottom: 5px; }
+    input[type=text], input[type=email], textarea, select {
+      font-family: 'Poppins', sans-serif; font-size: 0.9rem; color: var(--ink); background: #fff;
+      border: 1px solid #cfc9d6; border-radius: 9px; padding: 9px 11px; width: 100%; line-height: 1.5; }
+    textarea { resize: vertical; min-height: 70px; }
+    select { cursor: pointer; }
+    input:focus, textarea:focus, select:focus { outline: 2px solid var(--blue); outline-offset: 1px; border-color: transparent; }
+    .done { border-color: var(--green); box-shadow: inset 3px 0 0 var(--green); }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); gap: 14px; }
+    .req { color: var(--crit); }
+
+    .tablewrap { overflow-x: auto; border: 1px solid var(--line); border-radius: 14px; background: var(--panel); }
+    table { border-collapse: collapse; width: 100%; min-width: 720px; }
+    th, td { text-align: left; padding: 9px 11px; border-bottom: 1px solid var(--line); font-size: 0.85rem; vertical-align: top; }
+    th { font-size: 0.66rem; text-transform: uppercase; letter-spacing: .08em; color: var(--ink-faint); font-weight: 700; background: var(--panel-2); }
+    tr:last-child td { border-bottom: none; }
+    td.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; white-space: nowrap; }
+    td.flagged { color: var(--crit); font-weight: 600; }
+
+    details.grp { border: 1px solid var(--line); border-radius: 12px; background: var(--panel); margin-bottom: 9px; overflow: hidden; }
+    details.grp > summary { cursor: pointer; padding: 13px 16px; font-weight: 600; font-size: 0.92rem; list-style: none; display: flex; align-items: center; gap: 10px; }
+    details.grp > summary::-webkit-details-marker { display: none; }
+    details.grp > summary::before { content: "+"; font-family: var(--mono); color: var(--ink-faint); width: 1ch; }
+    details.grp[open] > summary::before { content: "\2013"; }
+    .cnt { margin-left: auto; font-family: var(--mono); font-size: 0.74rem; color: var(--ink-faint); }
+    .gbody { padding: 0 16px 14px; }
+    .bulk { display: flex; gap: 7px; align-items: center; padding: 8px 0; font-size: 0.76rem; color: var(--ink-faint); flex-wrap: wrap; }
+    .trow { display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center; padding: 7px 0; border-top: 1px solid var(--line); }
+    .trow .sl { font-family: var(--mono); font-size: 0.8rem; color: var(--ink-soft); word-break: break-word; }
+    .seg { display: inline-flex; border: 1px solid #cfc9d6; border-radius: 99px; overflow: hidden; background: #fff; }
+    .seg button { font-family: 'Poppins', sans-serif; font-size: 0.73rem; font-weight: 600; padding: 5px 13px; border: none; background: transparent; color: var(--ink-faint); cursor: pointer; }
+    .seg button[aria-pressed=true] { background: var(--purple); color: #fff; }
+
+    .btn { font-family: 'Poppins', sans-serif; font-weight: 600; font-size: 0.86rem; border-radius: 99px; padding: 10px 22px; border: 1px solid transparent; cursor: pointer; background: var(--purple); color: #fff; }
+    .btn:hover { background: var(--purple-dark); }
+    .btn[disabled] { opacity: .5; cursor: not-allowed; }
+    .btn.ghost { background: #fff; color: var(--ink-soft); border-color: #cfc9d6; }
+    .btn.ghost:hover { background: var(--panel-2); color: var(--purple); }
+    .btn.sm { font-size: 0.75rem; padding: 6px 14px; }
+    .btn.big { background: var(--yellow); color: var(--purple-dark); font-weight: 700; font-size: 1rem; padding: 14px 34px; }
+    .btn.big:hover { background: #ffd040; }
+
+    .toolbar { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin: 20px 0 6px; }
+    .toolnote { font-size: 0.82rem; color: var(--ink-faint); max-width: 66ch; }
+
+    .submitblk { background: var(--purple-dark); color: #fff; border-radius: 16px; padding: 34px; margin: 34px 0; text-align: center; }
+    .submitblk h2 { font-size: 1.5rem; font-weight: 700; margin-bottom: 10px; }
+    .submitblk p { color: rgba(255,255,255,0.78); max-width: 60ch; margin: 0 auto 20px; }
+    #err { display: none; background: var(--crit-bg); color: var(--crit); border-radius: 10px; padding: 12px 16px; margin: 0 auto 16px; max-width: 60ch; font-size: 0.87rem; }
+    #success { display: none; background: var(--panel); border: 2px solid var(--green); border-radius: 16px; padding: 44px 34px; text-align: center; margin: 34px 0; }
+    #success h2 { color: var(--green); font-size: 1.6rem; margin-bottom: 12px; }
+    #success p { color: var(--ink-soft); max-width: 58ch; margin: 0 auto 10px; }
+
+    footer { background: var(--purple-dark); color: rgba(255,255,255,0.6); padding: 28px 0; font-size: 0.82rem; margin-top: 40px; }
+    footer .wrap { display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+    footer a { color: rgba(255,255,255,0.8); }
+
+    @media (max-width: 720px) {
+      nav { padding: 0 16px; } .wrap { padding: 0 16px; }
+      .trow { grid-template-columns: 1fr; align-items: start; }
+      .submitblk { padding: 26px 20px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  </style>
+</head>
+<body>
+
+<div id="top-ribbon"><div class="ribbon-inner">
+  <span class="ribbon-label">Explore:</span>
+  <a href="/faqs" class="ribbon-link">FAQs</a><span class="ribbon-divider">&middot;</span>
+  <a href="/alwaysonroi" class="ribbon-link">ROI Calculator</a><span class="ribbon-divider">&middot;</span>
+  <a href="/brochure" class="ribbon-link">Download Brochure</a>
+</div></div>
+
+<nav>
+  <a href="/"><img src="/Agency%20PlanGrowDoLogoLeft.png" alt="Plan Grow Do" onerror="this.style.display='none'" /></a>
+  <div class="nav-right"><a href="/" class="btn-nav">Always On Home</a></div>
+</nav>
+
+<div id="resume"><div class="resume-inner">
+  <strong>You have saved progress on this device.</strong>
+  <span>Pick up where you left off?</span>
+  <button class="btn sm" onclick="restoreProgress()">Continue</button>
+  <button class="btn ghost sm" onclick="clearProgress()">Start fresh</button>
+</div></div>
+
+<div id="bar"><div class="bar-inner">
+  <div class="ptrack"><span class="pfill" id="pfill"></span></div>
+  <span class="plabel" id="plabel">0 answered</span>
+  <span id="autosave">Saved</span>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <p class="eyebrow" id="eyebrow"></p>
+  <h1 id="h1"></h1>
+  <p id="introp"></p>
+  <div class="hero-meta" id="heroMeta"></div>
+</div></header>
+
+<main>
+  <section class="blk"><div class="wrap" id="context"></div></section>
+  <form id="form" autocomplete="off">
+    <section class="blk"><div class="wrap">
+      <h2>Your details</h2>
+      <p class="blurb">So we know who to come back to with follow-up questions.</p>
+      <div class="card"><div class="contact-grid" id="contact"></div></div>
+    </div></section>
+    <div id="sections"></div>
+    <section class="blk"><div class="wrap">
+      <div class="submitblk">
+        <h2>Send this to Plan Grow Do</h2>
+        <p>Partial is genuinely useful. Send what you have and come back for the rest whenever it suits.</p>
+        <div id="err"></div>
+        <button type="submit" class="btn big" id="submitBtn"><span id="submitLabel">Send my answers</span></button>
+      </div>
+      <div id="success">
+        <h2>Thank you</h2>
+        <p>Your answers are with us. We will pick up the critical questions on our next call.</p>
+        <p id="successCount"></p>
+      </div>
+      <div class="toolbar">
+        <button type="button" class="btn ghost sm" id="dl">Download a copy of my answers</button>
+        <button type="button" class="btn ghost sm" id="loadBtn">Load a saved file</button>
+        <input type="file" id="loadFile" accept="application/json" hidden />
+      </div>
+      <p class="toolnote">Your answers save automatically in this browser as you type. To carry on from a different computer, or hand over to a colleague, download the file here and load it there.</p>
+    </div></section>
+  </form>
+</main>
+
+<footer><div class="wrap">
+  <span>&copy; Plan Grow Do Ltd</span>
+  <span><a href="/privacy-policy.html">Privacy</a> &middot; <a href="/data-security.html">Data security</a></span>
+</div></footer>
+
+<script id="spec" type="application/json">{"schema_version":1,"client":"Pennine Lubricants","slug":"pennine-selector-review","agency":"Plan Grow Do","title":"Metalworking fluid selector","subtitle":"Data review","intro":"We have built the product data foundation for your online fluid selector. It works. This page sets out what we found, and the handful of things only Pennine can answer before it goes live.","sources":"Your product sheet, penninelubricants.co.uk, 26 Technical Data Sheets","date":"19 August 2026","time_estimate":"About an hour, and you can stop and come back","context":[{"h":"Where we are","p":["Your sheet gave us 28 products with links to their datasheets. We have turned that into a structured data pool that can answer a customer question like \u003cem>\"my coolant foams in a high-pressure system and my aluminium parts are staining\"\u003c/em> and return the right grades with a reason.","The data came from your own published material, so every recommendation the selector makes can be traced back to a line in one of your Technical Data Sheets."]},{"h":"What we found in your datasheets","p":["The \u003cstrong>Features &amp; Benefits\u003c/strong> table on a Pennine TDS is written as feature, then benefit, and the benefit side is a plain statement of the problem the product solves. \u003cem>\"Biostable emulsion ~ Extended sump life\"\u003c/em>. \u003cem>\"Highly effective anti mist package ~ Improved working environment\"\u003c/em>.","That is exactly the language a customer searches in, so the selector leads with the problem and chemistry comes out as the answer rather than going in as a question."]}],"stats":[{"n":"28","l":"products classified"},{"n":"24","l":"customer problems mapped"},{"n":"21","l":"machining operations"},{"n":"17","l":"material types"},{"n":"100%","l":"of tags evidenced from your TDS"}],"chart":{"title":"Technical Data Sheet revision dates","note":"Thirteen of the twenty-four datasheets we read predate 2020, and nine are dated September 2016: the whole Metacut neat oil range, plus Micron SE and both EDM fluids. Your water-soluble range is current. It is specifically the neat oils where the published data has aged. That is question 2 below.","max":9,"bars":[{"k":"2025","v":1,"c":"new"},{"k":"2024","v":2,"c":"new"},{"k":"2023","v":2,"c":"new"},{"k":"2022","v":4,"c":"new"},{"k":"2020","v":2,"c":"mid"},{"k":"2019","v":1,"c":"old"},{"k":"2017","v":3,"c":"old"},{"k":"2016","v":9,"c":"old"},{"k":"none","v":4,"c":"non"}]},"contact_fields":[{"id":"submitter_name","label":"Your name","type":"text","required":true},{"id":"submitter_email","label":"Your email","type":"email","required":true},{"id":"submitter_role","label":"Your role","type":"text","required":false}],"sections":[{"id":"questions","title":"Open questions","type":"questions","blurb":"Eleven questions. The three marked critical are the ones that unblock the most.","items":[{"id":"q1","area":"Scope","q":"Your sheet lists 28 products. Your website lists 105 in the metalworking category, including Ultrasol X-NT 736, X-535, X-929 and 11 further Metacut grades. Was the 28 a deliberate shortlist for the selector, or an incomplete list?","pri":"critical"},{"id":"q2","area":"Data age","q":"Nine TDS are dated September 2016: Metacut FD, GD-B, NSR, PG, T, TR, Micron SE, Spark Erosion Fluid A, Synspark FX. Do these still describe the current formulations?","pri":"critical"},{"id":"q3","area":"Product status","q":"Micron GA 1624 appears in your sheet but has no product page, no TDS and no SDS anywhere. Is it still a live product?","pri":"critical"},{"id":"q4","area":"Chemistry","q":"Ultrasol X-NT 718: the TDS subtitle says “Multipurpose Synthetic” but the description in the same document says “semi synthetic”. We have classified it as semi-synthetic. Correct?","pri":"high"},{"id":"q5","area":"Product status","q":"Metacut T is the only product in the range with active chlorine EP additives. Is it still actively sold, and is it right to steer customers to Metacut GD-B or PG where chlorine-free is needed?","pri":"high"},{"id":"q6","area":"Range detail","q":"Your sheet lists “Metacut RCM 12” but the TDS covers the whole Metacut Ultra RCM range. What are the other grades and should they be individually selectable?","pri":"high"},{"id":"q7","area":"Range detail","q":"The Spark Erosion TDS covers Fluid A and Fluid K, but only A is in your sheet. Fluid K is the only product covering pressing, spinning and reaming. Should it be included?","pri":"medium"},{"id":"q8","area":"Safety data","q":"Synspark FX has a flash point of 84 degrees C. We have flagged this so the selector prompts the user to check their machine's requirement. Is that the right treatment?","pri":"medium"},{"id":"q9","area":"Ancillaries","q":"Your website lists 22 coolant-care products (dipslides, BioGuard CCF, Antifoam SB, BioFlush, tramp oil skimmer, ProCare test kits). These map naturally onto customer problems. Should the selector recommend them alongside fluids?","pri":"medium"},{"id":"q10","area":"Sectors","q":"Should the selector filter or personalise by sector (aerospace, precision engineering, seals, automotive)? If so, which grades suit which sectors?","pri":"medium"},{"id":"q11","area":"Website","q":"The Metacut PG product page lists a datasheet with a blank title, and Metagrind GL has a TDS but no product page at all. Worth a look at your end.","pri":"low"}]},{"id":"products","title":"Product confirmation","type":"grid","blurb":"The 28 products from your sheet, with what we currently hold. Correct anything that is wrong. Rows with an older datasheet date are flagged in red.","key_field":"status","columns":[{"id":"name","label":"Product","type":"static"},{"id":"code","label":"Code","type":"static","mono":true},{"id":"chem","label":"Chemistry we assigned","type":"static"},{"id":"rev","label":"TDS date","type":"static","mono":true,"flag":"stale"},{"id":"status","label":"Still current?","type":"select","options":["Yes, current","Discontinued","Reformulated"]},{"id":"chemok","label":"Chemistry right?","type":"select","options":["Yes","No"]},{"id":"tdsok","label":"TDS accurate?","type":"select","options":["Yes, accurate","Needs update"]},{"id":"price","label":"Price band","type":"select","options":["Entry","Mid","Premium"]},{"id":"note","label":"Anything we have wrong","type":"text"}],"items":[{"id":"metacut-fd","name":"Metacut FD","code":"AFU","chem":"Neat mineral cutting oil","rev":"2016-09","stale":true},{"id":"metacut-gd-b","name":"Metacut GD-B","code":"AG4","chem":"Neat mineral cutting oil","rev":"2016-09","stale":true},{"id":"metacut-nsr","name":"Metacut NSR","code":"AG9","chem":"Neat mineral cutting oil","rev":"2016-09","stale":true},{"id":"metacut-pg","name":"Metacut PG","code":"AF","chem":"Neat mineral cutting oil","rev":"2016-09","stale":true},{"id":"metacut-t","name":"Metacut T","code":"AF2","chem":"Neat mineral cutting oil","rev":"2016-09","stale":true},{"id":"metacut-tr","name":"Metacut TR","code":"AFW","chem":"Neat mineral cutting oil","rev":"2016-09","stale":true},{"id":"metacut-ultra-md-12","name":"Metacut Ultra MD 12","code":"AG6","chem":"Neat mineral cutting oil","rev":"2017-10","stale":true},{"id":"metacut-ultra-md-22","name":"Metacut Ultra MD 22","code":"AG7","chem":"Neat mineral cutting oil","rev":"2017-06","stale":true},{"id":"metacut-rcm-12","name":"Metacut RCM 12","code":"","chem":"Neat mineral cutting oil","rev":"2022-11","stale":false},{"id":"metagrind-gl","name":"Metagrind GL","code":"AG1","chem":"Neat synthetic fluid","rev":"2020-06","stale":false},{"id":"metagrind-lp","name":"Metagrind LP","code":"","chem":"Neat mineral cutting oil","rev":"none","stale":true},{"id":"micron-ga-1624","name":"Micron GA 1624","code":"","chem":"No data","rev":"none","stale":true},{"id":"micron-se","name":"Micron SE","code":"AFT","chem":"Neat biodegradable ester","rev":"2016-09","stale":true},{"id":"spark-erosion-fluid-a","name":"Spark Erosion Fluid A","code":"AE0","chem":"Mineral EDM dielectric","rev":"2016-09","stale":true},{"id":"synspark-fx","name":"Synspark FX","code":"AE2","chem":"Synthetic EDM dielectric","rev":"2016-09","stale":true},{"id":"metasol-e-50","name":"Metasol E-50","code":"","chem":"Ester soluble (mineral oil free)","rev":"none","stale":true},{"id":"microgrind-x-cg27","name":"Microgrind X-CG27","code":"AHEC","chem":"Full synthetic soluble","rev":"2024-06","stale":false},{"id":"microgrind-x-lf","name":"Microgrind X-LF","code":"HS0146","chem":"Full synthetic soluble","rev":"none","stale":true},{"id":"ultrasol-x-2102","name":"Ultrasol X-2102","code":"","chem":"Semi-synthetic soluble","rev":"2024-02","stale":false},{"id":"ultrasol-x-3203","name":"Ultrasol X-3203","code":"","chem":"Semi-synthetic soluble","rev":"2022-06","stale":false},{"id":"ultrasol-x-4304","name":"Ultrasol X-4304","code":"","chem":"Semi-synthetic soluble","rev":"2022-05","stale":false},{"id":"ultrasol-x-777","name":"Ultrasol X-777","code":"AWD","chem":"Semi-synthetic soluble","rev":"2020-06","stale":false},{"id":"ultrasol-x-915","name":"Ultrasol X-915","code":"AWP","chem":"Full synthetic soluble","rev":"2019-09","stale":true},{"id":"ultrasol-x-nf","name":"Ultrasol X-NF","code":"AWF","chem":"Semi-synthetic soluble","rev":"2017-06","stale":true},{"id":"ultrasol-x-nt-714","name":"Ultrasol X-NT 714","code":"AXE","chem":"Semi-synthetic soluble","rev":"2022-05","stale":false},{"id":"ultrasol-x-nt-718","name":"Ultrasol X-NT 718","code":"AXF","chem":"Semi-synthetic soluble","rev":"2023-02","stale":false},{"id":"ultrasol-x-nt-728","name":"Ultrasol X-NT 728","code":"AXH","chem":"Semi-synthetic soluble","rev":"2023-02","stale":false},{"id":"ultrasol-x-nt-750","name":"Ultrasol X-NT 750","code":"HS0145","chem":"Semi-synthetic soluble","rev":"2025-02","stale":false}]},{"id":"scope","title":"Which of these belong in the selector?","type":"triage","blurb":"Your sheet lists 28 products. Your website lists 105 in the metalworking category. These are the 79 that are not in the sheet, grouped by range. Use \u003cstrong>Set all\u003c/strong> to move fast.","options":["Yes","No","Later"],"items":[{"id":"s1","label":"30-litre-maintenance-spill-response-kit-with-clip-top-carrier","group":"Coolant care and equipment"},{"id":"s2","label":"antifoam-sb","group":"Coolant care and equipment"},{"id":"s3","label":"bioflush-msc-plus","group":"Coolant care and equipment"},{"id":"s4","label":"bioflush-system-cleaner","group":"Coolant care and equipment"},{"id":"s5","label":"bioguard-ccf","group":"Coolant care and equipment"},{"id":"s6","label":"biotect-biocide-additive","group":"Coolant care and equipment"},{"id":"s7","label":"cnc-os2-tramp-oil-skimmer","group":"Coolant care and equipment"},{"id":"s8","label":"combi-dipslides-x-100","group":"Coolant care and equipment"},{"id":"s9","label":"coolreturn-cnc-fluid-recovery-system","group":"Coolant care and equipment"},{"id":"s10","label":"dipslide-incubator","group":"Coolant care and equipment"},{"id":"s11","label":"dosatron-soluble-oil-mixer-units","group":"Coolant care and equipment"},{"id":"s12","label":"ecospill-premier-absorbent-pads-for-oil-only","group":"Coolant care and equipment"},{"id":"s13","label":"ecospill-premier-maintenance-sock","group":"Coolant care and equipment"},{"id":"s14","label":"fungicide-mwf","group":"Coolant care and equipment"},{"id":"s15","label":"hand-refractometer","group":"Coolant care and equipment"},{"id":"s16","label":"insight-kb-clear-screens","group":"Coolant care and equipment"},{"id":"s17","label":"insight-kb-coolant-gun-with-auto-shut-off","group":"Coolant care and equipment"},{"id":"s18","label":"mixtron-dosing-pump-locking-collar","group":"Coolant care and equipment"},{"id":"s19","label":"mixtron-soluble-oil-doser","group":"Coolant care and equipment"},{"id":"s20","label":"nimatic-emulsion-mixer","group":"Coolant care and equipment"},{"id":"s21","label":"pennine-new-safety-tread-granules-30-litre-bag","group":"Coolant care and equipment"},{"id":"s22","label":"premier-maintenance-pad-50cm-x-40cm-100-pack","group":"Coolant care and equipment"},{"id":"s23","label":"premier-oil-only-drum-top-pad-56cm-diameter-pack-of-25","group":"Coolant care and equipment"},{"id":"s24","label":"procare-coolant-test-kit-1","group":"Coolant care and equipment"},{"id":"s25","label":"procare-coolant-test-kit-2","group":"Coolant care and equipment"},{"id":"s26","label":"sustainable-maintenance-roll-absorbency-108-litres","group":"Coolant care and equipment"},{"id":"s27","label":"metacut-ap","group":"Metacut"},{"id":"s28","label":"metacut-aq","group":"Metacut"},{"id":"s29","label":"metacut-cf","group":"Metacut"},{"id":"s30","label":"metacut-cx","group":"Metacut"},{"id":"s31","label":"metacut-el","group":"Metacut"},{"id":"s32","label":"metacut-ep","group":"Metacut"},{"id":"s33","label":"metacut-ht","group":"Metacut"},{"id":"s34","label":"metacut-sc-f","group":"Metacut"},{"id":"s35","label":"metacut-sm","group":"Metacut"},{"id":"s36","label":"metacut-ultra-hl","group":"Metacut"},{"id":"s37","label":"metacut-wp","group":"Metacut"},{"id":"s38","label":"metagrind-lv4","group":"Metagrind"},{"id":"s39","label":"microcore-24m","group":"Micro"},{"id":"s40","label":"microcore-m12","group":"Micro"},{"id":"s41","label":"microcore-m6","group":"Micro"},{"id":"s42","label":"microcut-ep-x","group":"Micro"},{"id":"s43","label":"microtap-supercut-extreme","group":"Micro"},{"id":"s44","label":"microtap-supercut-hd-compound","group":"Micro"},{"id":"s45","label":"microtap-supercut-hd-spray","group":"Micro"},{"id":"s46","label":"microtap-supercut-pro","group":"Micro"},{"id":"s47","label":"multisol-g","group":"Multisol"},{"id":"s48","label":"multisol-ss","group":"Multisol"},{"id":"s49","label":"d2-pro-cooltech-mtc","group":"Other"},{"id":"s50","label":"d2-pro-cooltech-mtc-pd","group":"Other"},{"id":"s51","label":"honing-fluid","group":"Other"},{"id":"s52","label":"quenching-oils","group":"Other"},{"id":"s53","label":"ultraquench-pq-133","group":"Other"},{"id":"s54","label":"pencool-clf","group":"Pencool"},{"id":"s55","label":"pencool-s204","group":"Pencool"},{"id":"s56","label":"pencool-s600","group":"Pencool"},{"id":"s57","label":"pencool-s800","group":"Pencool"},{"id":"s58","label":"pencool-ultra-s102","group":"Pencool"},{"id":"s59","label":"pencool-ultra-s206","group":"Pencool"},{"id":"s60","label":"pencool-ultra-s267","group":"Pencool"},{"id":"s61","label":"pencool-ultra-s310","group":"Pencool"},{"id":"s62","label":"pencool-ultra-s325","group":"Pencool"},{"id":"s63","label":"pencool-ultra-s430","group":"Pencool"},{"id":"s64","label":"pengrind-gr","group":"Pengrind"},{"id":"s65","label":"quaker-quakercool-3502","group":"Quaker"},{"id":"s66","label":"quaker-quakercool-3750","group":"Quaker"},{"id":"s67","label":"quaker-quakercool-7101-bff","group":"Quaker"},{"id":"s68","label":"quaker-quakercool-7101-lf","group":"Quaker"},{"id":"s69","label":"quaker-quakercool-7350-bff","group":"Quaker"},{"id":"s70","label":"quakercool-7330-bff","group":"Quaker"},{"id":"s71","label":"rustguard-22-fp","group":"Rustguard"},{"id":"s72","label":"rustguard-aqua","group":"Rustguard"},{"id":"s73","label":"rustguard-corrosion-preventatives","group":"Rustguard"},{"id":"s74","label":"rustguard-waxcoat","group":"Rustguard"},{"id":"s75","label":"ultrasol-mls-877","group":"Ultrasol"},{"id":"s76","label":"ultrasol-x-535","group":"Ultrasol"},{"id":"s77","label":"ultrasol-x-929","group":"Ultrasol"},{"id":"s78","label":"ultrasol-x-nt-736","group":"Ultrasol"},{"id":"s79","label":"unisol-mp","group":"Unisol"}]},{"id":"xref","title":"Competitor cross-reference","type":"rows","blurb":"The single most valuable thing on this page. It lets the selector say \u003cem>\"you are running that, here is our equivalent and here is why\"\u003c/em>. If a list already exists in any format, just send it over and skip this.","columns":[{"id":"brand","label":"Competitor brand","ph":"e.g. Quaker"},{"id":"product","label":"Their product","ph":"Product name"},{"id":"equiv","label":"Pennine equivalent","ph":"Our grade"},{"id":"why","label":"Why ours fits better","ph":"One line, customer language"}]},{"id":"commercial","title":"Commercial rules","type":"questions","blurb":"These are decisions about where your sales effort is worth spending, so we have deliberately not proposed numbers. Rough is fine, we can refine once the selector is running.","items":[{"id":"c1","area":"Low volume threshold","q":"Below what size should a customer be able to buy or quote online with no human involvement? Answer in whichever measure you actually use: machines, pack size, litres or annual spend.","pri":""},{"id":"c2","area":"Mid volume threshold","q":"Above that, at what point should an enquiry go into follow-up rather than straight to a rep?","pri":""},{"id":"c3","area":"High volume threshold","q":"At what point should a rep be alerted and a fluid survey offered?","pri":""},{"id":"c4","area":"Self-serve possible?","q":"Can a customer actually buy online today, or is everything quoted?","pri":""},{"id":"c5","area":"Who gets the lead","q":"Which inbox or CRM should selector enquiries land in? Is it territory-based?","pri":""},{"id":"c6","area":"Rep alert","q":"Should high-volume enquiries trigger an immediate alert, and to whom?","pri":""},{"id":"c7","area":"Price banding","q":"If exact pricing is not shareable, can you band each product Entry / Mid / Premium?","pri":""},{"id":"c8","area":"Fluid survey","q":"Is the lubrication survey the right offer for high-volume enquiries, or something else?","pri":""},{"id":"c9","area":"PROCARE","q":"Should the selector promote PROCARE fluid monitoring where a customer reports sump life or bacterial problems?","pri":""}]},{"id":"missing","title":"Missing documents","type":"grid","blurb":"We checked each product page directly, so these are genuine gaps rather than broken links.","key_field":"can","columns":[{"id":"name","label":"Product","type":"static"},{"id":"doc","label":"Document","type":"static"},{"id":"can","label":"Can you supply?","type":"select","options":["Yes","No","Discontinued"]},{"id":"link","label":"Link, or where to find it","type":"text"}],"items":[{"id":"m1","name":"Metacut NSR","doc":"Safety Data Sheet"},{"id":"m2","name":"Metacut PG","doc":"Safety Data Sheet"},{"id":"m3","name":"Metacut T","doc":"Safety Data Sheet"},{"id":"m4","name":"Metagrind GL","doc":"Website product page"},{"id":"m5","name":"Metagrind LP","doc":"Technical Data Sheet"},{"id":"m6","name":"Microgrind X-CG27","doc":"Safety Data Sheet"},{"id":"m7","name":"Micron GA 1624","doc":"Safety Data Sheet"},{"id":"m8","name":"Micron GA 1624","doc":"Technical Data Sheet"},{"id":"m9","name":"Micron GA 1624","doc":"Website product page"},{"id":"m10","name":"Synspark FX","doc":"Safety Data Sheet"}]}],"closing":{"h":"What happens next","p":["We do not need this back before starting. The data pool is already good enough to build a working selector, and holding the build for a complete dataset would be the wrong call.","One last thing worth saying: your source sheet was accurate. Everywhere it recorded a datasheet as missing, we checked the live product page and it was genuinely absent. That made this a great deal quicker."]},"endpoints":{"sheets":"https://script.google.com/macros/s/AKfycbxWN5ipu8aeUqOjXwQVf4Efqkez8K6SdSiaDZhcxTbPgx0WrPPHLBJV-rzioHz_d0hxJQ/exec","web3forms_key":"1c6295d4-4b6f-4ed7-b5d7-04a421efb19e","form_type":"selector-review"}}</script>
+<script>
+(function(){
+  "use strict";
+  var SPEC = JSON.parse(document.getElementById('spec').textContent);
+  var STORAGE_KEY = 'ao_review_' + SPEC.slug;
+  var A = {};           // answers, flat: "sectionId.itemId.colId" or "sectionId.itemId"
+  var XREF = [];
+
+  function $(s,r){ return (r||document).querySelector(s); }
+  function el(t,c,x){ var n=document.createElement(t); if(c)n.className=c; if(x!=null)n.textContent=x; return n; }
+  function esc(s){ return String(s==null?'':s); }
+
+  /* ---------- restore saved state BEFORE anything renders ----------
+     Fields read their value from A as they are created, so state has to be
+     in place first. Restoring afterwards leaves every field visibly blank
+     while the progress bar reports them answered. */
+  (function boot(){
+    var raw = null;
+    try { raw = localStorage.getItem(STORAGE_KEY); } catch(e){}
+    if (!raw) return;
+    var st; try { st = JSON.parse(raw); } catch(e){ return; }
+    var has = st.a && Object.keys(st.a).some(function(k){ return String(st.a[k]||'').trim(); });
+    if (!has) return;
+    var auto = false;
+    try {
+      auto = sessionStorage.getItem(STORAGE_KEY + '_auto') === '1';
+      if (auto) sessionStorage.removeItem(STORAGE_KEY + '_auto');
+    } catch(e){}
+    if (auto){ A = st.a || {}; XREF = st.xref || []; }
+    else { document.getElementById('resume').style.display = 'block'; }
+  })();
+
+  /* ---------- header ---------- */
+  $('#eyebrow').textContent = SPEC.agency + ' for ' + SPEC.client;
+  var h1 = $('#h1'); h1.textContent = SPEC.title;
+  var sub = el('span','',SPEC.subtitle); h1.appendChild(sub);
+  $('#introp').innerHTML = SPEC.intro;
+  var hm = $('#heroMeta');
+  [['Date',SPEC.date],['Sources',SPEC.sources],['Time needed',SPEC.time_estimate]].forEach(function(p){
+    var s = el('span'); s.appendChild(el('b','',p[0])); s.appendChild(document.createTextNode(' ' + p[1])); hm.appendChild(s);
+  });
+  document.title = SPEC.client + ' ' + SPEC.title + ' | Always On';
+
+  /* ---------- context ---------- */
+  var ctx = $('#context');
+  (SPEC.context||[]).forEach(function(c){
+    var d = el('div','ctx');
+    d.appendChild(el('h3','',c.h));
+    c.p.forEach(function(t){ var p = el('p'); p.innerHTML = t; d.appendChild(p); });
+    ctx.appendChild(d);
+  });
+  if (SPEC.stats && SPEC.stats.length){
+    var sw = el('div','stats');
+    SPEC.stats.forEach(function(s){
+      var b = el('div','stat'); b.appendChild(el('div','n',s.n)); b.appendChild(el('div','l',s.l)); sw.appendChild(b);
+    });
+    ctx.appendChild(sw);
+  }
+  if (SPEC.chart){
+    var ch = el('div','chart');
+    ch.appendChild(el('h4','',SPEC.chart.title));
+    var bars = el('div','bars');
+    SPEC.chart.bars.forEach(function(b){
+      var row = el('div','brow');
+      row.appendChild(el('span','k',b.k));
+      var t = el('span','t'); var f = el('span','f '+b.c);
+      f.style.width = Math.round(b.v / SPEC.chart.max * 100) + '%';
+      t.appendChild(f); row.appendChild(t);
+      row.appendChild(el('span','v',String(b.v)));
+      bars.appendChild(row);
+    });
+    ch.appendChild(bars);
+    if (SPEC.chart.note){ var n = el('p','note'); n.innerHTML = SPEC.chart.note; ch.appendChild(n); }
+    ctx.appendChild(ch);
+  }
+
+  /* ---------- field factories ---------- */
+  function mark(n){ if (String(n.value||'').trim()) n.classList.add('done'); else n.classList.remove('done'); }
+  function bind(n, key){
+    n.value = A[key] || '';
+    mark(n);
+    n.addEventListener('input', function(){ A[key] = n.value; mark(n); onChange(); });
+    n.addEventListener('change', function(){ A[key] = n.value; mark(n); onChange(); });
+    return n;
+  }
+  function mkText(key, ph, multi){
+    var n = multi ? el('textarea') : el('input');
+    if (!multi) n.type = 'text';
+    if (ph) n.placeholder = ph;
+    return bind(n, key);
+  }
+  function mkSelect(key, opts){
+    var n = el('select');
+    n.appendChild(new Option('', ''));
+    opts.forEach(function(o){ n.appendChild(new Option(o, o)); });
+    return bind(n, key);
+  }
+
+  /* ---------- contact ---------- */
+  var cg = $('#contact');
+  SPEC.contact_fields.forEach(function(f){
+    var w = el('div');
+    var l = el('label','fl'); l.textContent = f.label; l.htmlFor = f.id;
+    if (f.required){ var r = el('span','req',' *'); l.appendChild(r); }
+    w.appendChild(l);
+    var n = el('input'); n.type = f.type === 'email' ? 'email' : 'text'; n.id = f.id;
+    if (f.required) n.required = true;
+    bind(n, 'contact.' + f.id);
+    w.appendChild(n); cg.appendChild(w);
+  });
+
+  /* ---------- sections ---------- */
+  var host = $('#sections');
+  SPEC.sections.forEach(function(sec){
+    var s = el('section','blk'); var w = el('div','wrap');
+    w.appendChild(el('h2','',sec.title));
+    if (sec.blurb){ var b = el('p','blurb'); b.innerHTML = sec.blurb; w.appendChild(b); }
+
+    if (sec.type === 'questions'){
+      sec.items.forEach(function(it){
+        var c = el('div','card'); var h = el('div','chead');
+        if (it.pri) h.appendChild(el('span','tag '+it.pri, it.pri));
+        if (it.area) h.appendChild(el('span','area', it.area));
+        c.appendChild(h);
+        var q = el('p','qtext'); q.innerHTML = it.q; c.appendChild(q);
+        c.appendChild(mkText(sec.id+'.'+it.id, 'Your answer', true));
+        w.appendChild(c);
+      });
+
+    } else if (sec.type === 'grid'){
+      var tw = el('div','tablewrap'); var tb = el('table');
+      var thead = el('thead'); var htr = el('tr');
+      sec.columns.forEach(function(col){ htr.appendChild(el('th','',col.label)); });
+      thead.appendChild(htr); tb.appendChild(thead);
+      var body = el('tbody');
+      sec.items.forEach(function(it){
+        var tr = el('tr');
+        sec.columns.forEach(function(col){
+          var td = el('td', col.mono ? 'mono' : '');
+          if (col.type === 'static'){
+            td.textContent = esc(it[col.id]);
+            if (col.flag && it[col.flag]) td.className += ' flagged';
+          } else if (col.type === 'select'){
+            td.appendChild(mkSelect(sec.id+'.'+it.id+'.'+col.id, col.options));
+          } else {
+            td.appendChild(mkText(sec.id+'.'+it.id+'.'+col.id, col.ph || ''));
+          }
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+      tb.appendChild(body); tw.appendChild(tb); w.appendChild(tw);
+
+    } else if (sec.type === 'triage'){
+      var groups = {};
+      sec.items.forEach(function(it){ (groups[it.group] = groups[it.group] || []).push(it); });
+      Object.keys(groups).sort().forEach(function(g){
+        var items = groups[g];
+        var d = el('details','grp'); var sm = el('summary');
+        sm.appendChild(el('span','',g));
+        sm.appendChild(el('span','cnt', items.length + (items.length===1?' product':' products')));
+        d.appendChild(sm);
+        var gb = el('div','gbody');
+        var bulk = el('div','bulk'); bulk.appendChild(el('span','','Set all:'));
+        sec.options.forEach(function(v){
+          var bb = el('button','btn ghost sm', v); bb.type='button';
+          bb.addEventListener('click', function(){
+            items.forEach(function(it){ A[sec.id+'.'+it.id] = v; });
+            paint(gb, sec, items); onChange();
+          });
+          bulk.appendChild(bb);
+        });
+        gb.appendChild(bulk);
+        items.forEach(function(it){
+          var row = el('div','trow');
+          row.appendChild(el('span','sl', it.label));
+          var seg = el('span','seg'); seg.dataset.k = it.id;
+          sec.options.forEach(function(v){
+            var bb = el('button','',v); bb.type='button'; bb.dataset.v = v;
+            bb.addEventListener('click', function(){
+              var k = sec.id+'.'+it.id;
+              A[k] = (A[k] === v) ? '' : v;
+              paint(gb, sec, items); onChange();
+            });
+            seg.appendChild(bb);
+          });
+          row.appendChild(seg); gb.appendChild(row);
+        });
+        d.appendChild(gb); w.appendChild(d);
+        paint(gb, sec, items);
+      });
+
+    } else if (sec.type === 'rows'){
+      var tw2 = el('div','tablewrap'); var tb2 = el('table');
+      var th2 = el('thead'); var htr2 = el('tr');
+      sec.columns.forEach(function(c){ htr2.appendChild(el('th','',c.label)); });
+      htr2.appendChild(el('th','',''));
+      th2.appendChild(htr2); tb2.appendChild(th2);
+      var bd2 = el('tbody'); bd2.id = 'rows-'+sec.id;
+      tb2.appendChild(bd2); tw2.appendChild(tb2); w.appendChild(tw2);
+      var add = el('button','btn ghost sm','Add a row'); add.type='button';
+      add.style.marginTop = '12px';
+      add.addEventListener('click', function(){ XREF.push({}); renderRows(sec); onChange(); });
+      w.appendChild(add);
+      setTimeout(function(){ if (!XREF.length) XREF.push({}); renderRows(sec); }, 0);
+    }
+    s.appendChild(w); host.appendChild(s);
+  });
+
+  function paint(gb, sec, items){
+    items.forEach(function(it){
+      var seg = gb.querySelector('.seg[data-k="'+it.id+'"]');
+      if (!seg) return;
+      Array.prototype.forEach.call(seg.querySelectorAll('button'), function(b){
+        b.setAttribute('aria-pressed', A[sec.id+'.'+it.id] === b.dataset.v ? 'true' : 'false');
+      });
+    });
+  }
+
+  function renderRows(sec){
+    var body = document.getElementById('rows-'+sec.id);
+    if (!body) return;
+    body.textContent = '';
+    XREF.forEach(function(rec, i){
+      var tr = el('tr');
+      sec.columns.forEach(function(col){
+        var td = el('td'); var n = el('input'); n.type='text'; n.placeholder = col.ph || '';
+        n.value = rec[col.id] || '';
+        n.addEventListener('input', function(){ rec[col.id] = n.value; onChange(); });
+        td.appendChild(n); tr.appendChild(td);
+      });
+      var last = el('td');
+      var rm = el('button','btn ghost sm','Remove'); rm.type='button';
+      rm.addEventListener('click', function(){ XREF.splice(i,1); if(!XREF.length) XREF.push({}); renderRows(sec); onChange(); });
+      last.appendChild(rm); tr.appendChild(last);
+      body.appendChild(tr);
+    });
+  }
+
+  /* ---------- progress ---------- */
+  function counts(){
+    var total = 0, done = 0;
+    SPEC.sections.forEach(function(sec){
+      if (sec.type === 'questions'){
+        sec.items.forEach(function(it){ total++; if ((A[sec.id+'.'+it.id]||'').trim()) done++; });
+      } else if (sec.type === 'grid'){
+        sec.items.forEach(function(it){ total++; if ((A[sec.id+'.'+it.id+'.'+sec.key_field]||'').trim()) done++; });
+      } else if (sec.type === 'triage'){
+        sec.items.forEach(function(it){ total++; if ((A[sec.id+'.'+it.id]||'').trim()) done++; });
+      }
+    });
+    return { total: total, done: done };
+  }
+  function updateProgress(){
+    var c = counts();
+    var pct = c.total ? Math.round(c.done/c.total*100) : 0;
+    $('#pfill').style.width = pct + '%';
+    $('#plabel').textContent = c.done + ' of ' + c.total + ' answered  ·  ' + pct + '%';
+    return c;
+  }
+
+  /* ---------- autosave ---------- */
+  var timer, ind = $('#autosave');
+  function onChange(){
+    updateProgress();
+    clearTimeout(timer);
+    timer = setTimeout(function(){
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ a: A, xref: XREF, at: new Date().toISOString() }));
+        ind.classList.add('show');
+        setTimeout(function(){ ind.classList.remove('show'); }, 1600);
+      } catch(e){}
+    }, 700);
+  }
+  window.restoreProgress = function(){
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      var st = JSON.parse(raw);
+      A = st.a || {}; XREF = st.xref || [];
+      sessionStorage.setItem(STORAGE_KEY + '_auto', '1');
+      location.reload();
+    } catch(e){}
+  };
+  window.clearProgress = function(){
+    try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+    $('#resume').style.display = 'none';
+  };
+
+  /* ---------- file save / load ---------- */
+  $('#dl').addEventListener('click', function(){
+    var blob = new Blob([JSON.stringify({ slug: SPEC.slug, client: SPEC.client, a: A, xref: XREF, at: new Date().toISOString() }, null, 2)], { type: 'application/json' });
+    var url = URL.createObjectURL(blob);
+    var a = el('a'); a.href = url; a.download = SPEC.slug + '-progress.json';
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  });
+  $('#loadBtn').addEventListener('click', function(){ $('#loadFile').click(); });
+  $('#loadFile').addEventListener('change', function(e){
+    var f = e.target.files && e.target.files[0];
+    if (!f) return;
+    var rd = new FileReader();
+    rd.onload = function(){
+      try {
+        var st = JSON.parse(rd.result);
+        if (st.slug && st.slug !== SPEC.slug){ alert('That file is for a different review.'); return; }
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({ a: st.a || {}, xref: st.xref || [], at: new Date().toISOString() }));
+        sessionStorage.setItem(STORAGE_KEY + '_auto', '1');
+        location.reload();
+      } catch(err){ alert('Could not read that file.'); }
+    };
+    rd.readAsText(f);
+  });
+
+  /* ---------- build the readable submission ---------- */
+  function buildSummary(){
+    var L = '─'.repeat(58);
+    var out = [];
+    SPEC.sections.forEach(function(sec){
+      var lines = [];
+      if (sec.type === 'questions'){
+        sec.items.forEach(function(it){
+          var v = (A[sec.id+'.'+it.id]||'').trim();
+          if (v) lines.push((it.area ? '['+it.area+'] ' : '') + it.q + '\nANSWER: ' + v);
+        });
+      } else if (sec.type === 'grid'){
+        sec.items.forEach(function(it){
+          var parts = [];
+          sec.columns.forEach(function(col){
+            if (col.type === 'static') return;
+            var v = (A[sec.id+'.'+it.id+'.'+col.id]||'').trim();
+            if (v) parts.push(col.label + ': ' + v);
+          });
+          if (parts.length) lines.push((it.name||it.id) + (it.doc ? ' (' + it.doc + ')' : '') + ' → ' + parts.join('; '));
+        });
+      } else if (sec.type === 'triage'){
+        var by = {};
+        sec.items.forEach(function(it){
+          var v = (A[sec.id+'.'+it.id]||'').trim();
+          if (v) (by[v] = by[v] || []).push(it.label);
+        });
+        Object.keys(by).forEach(function(v){ lines.push(v.toUpperCase() + ' (' + by[v].length + '): ' + by[v].join(', ')); });
+      } else if (sec.type === 'rows'){
+        XREF.forEach(function(r){
+          var vals = sec.columns.map(function(c){ return (r[c.id]||'').trim(); });
+          if (vals.some(Boolean)) lines.push(vals.join(' | '));
+        });
+      }
+      if (lines.length) out.push(L + '\n' + sec.title + '\n' + L + '\n\n' + lines.join('\n\n'));
+    });
+    return out.join('\n\n');
+  }
+
+  /* ---------- submit ---------- */
+  $('#form').addEventListener('submit', function(ev){
+    ev.preventDefault();
+    var errBox = $('#err');
+    errBox.style.display = 'none';
+    var name = (A['contact.submitter_name']||'').trim();
+    var mail = (A['contact.submitter_email']||'').trim();
+    if (!name || !mail){
+      errBox.textContent = 'Please add your name and email at the top so we know who to reply to.';
+      errBox.style.display = 'block';
+      document.getElementById('contact').scrollIntoView({ behavior:'smooth', block:'center' });
+      return;
+    }
+    var btn = $('#submitBtn'), lab = $('#submitLabel');
+    btn.disabled = true; lab.textContent = 'Sending…';
+
+    var c = counts();
+    var role = (A['contact.submitter_role']||'').trim();
+    var header = 'Client: ' + SPEC.client + '\nReview: ' + SPEC.title + ' ' + SPEC.subtitle +
+      '\nSubmitted by: ' + name + (role ? ' (' + role + ')' : '') + '\nEmail: ' + mail +
+      '\nProgress: ' + c.done + ' of ' + c.total + ' answered\nDate: ' + new Date().toLocaleString('en-GB') + '\n\n';
+    var summary = buildSummary();
+    var message = header + (summary || '(no answers filled in yet)');
+
+    var payload = {
+      form_type: SPEC.endpoints.form_type,
+      client: SPEC.client, slug: SPEC.slug, review: SPEC.title + ' ' + SPEC.subtitle,
+      submitter_name: name, submitter_email: mail, submitter_role: role,
+      answered: String(c.done), total: String(c.total),
+      progress: (c.total ? Math.round(c.done/c.total*100) : 0) + '%',
+      summary: summary,
+      full_json: JSON.stringify({ a: A, xref: XREF })
+    };
+
+    var jobs = [];
+    jobs.push(fetch('https://api.web3forms.com/submit', {
+      method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+      body: JSON.stringify({
+        access_key: SPEC.endpoints.web3forms_key,
+        subject: SPEC.client + ' selector data review – ' + c.done + '/' + c.total + ' answered',
+        from_name: 'Always On selector review',
+        replyto: mail,
+        message: message
+      })
+    }).then(function(r){ return r.json(); }));
+
+    if (SPEC.endpoints.sheets){
+      jobs.push(fetch(SPEC.endpoints.sheets, {
+        method: 'POST', headers: { 'Content-Type': 'text/plain' }, body: JSON.stringify(payload)
+      }).catch(function(e){ console.warn('Sheets save failed (non-critical):', e); }));
+    }
+
+    Promise.allSettled(jobs).then(function(res){
+      var emailOk = res[0] && res[0].status === 'fulfilled' && res[0].value && res[0].value.success !== false;
+      if (!emailOk){
+        btn.disabled = false; lab.textContent = 'Send my answers';
+        errBox.textContent = 'That did not send. Please check your connection and try again, or download a copy of your answers and email it to rob@plangrowdo.com.';
+        errBox.style.display = 'block';
+        return;
+      }
+      try { localStorage.removeItem(STORAGE_KEY); } catch(e){}
+      $('#form').style.display = 'none';
+      $('#bar').style.display = 'none';
+      $('#successCount').textContent = c.done + ' of ' + c.total + ' items answered.';
+      $('#success').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+
+  updateProgress();
+})();
+</script>
+</body>
+</html>

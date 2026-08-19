@@ -1,6 +1,6 @@
 // ============================================================
 //  Always On — Google Sheets Storage
-//  Handles: Onboarding form + Company Knowledge submissions
+//  Handles: Onboarding form + Company Knowledge + Product Selector Review
 //
 //  SETUP:
 //  1. Open a new Google Sheet
@@ -23,6 +23,8 @@ function doPost(e) {
       saveKnowledge(ss, data);
     } else if (data.form_type === 'onboarding') {
       saveOnboarding(ss, data);
+    } else if (data.form_type === 'selector-review') {
+      saveSelectorReview(ss, data);
     }
 
     return ContentService
@@ -153,6 +155,34 @@ function saveOnboarding(ss, d) {
     d.geography                || '',
     d.company_size             || '',
     JSON.stringify(d, null, 2),
+  ]);
+}
+
+// ── PRODUCT SELECTOR DATA REVIEWS ──────────────────────────
+// Generic across clients: one tab per client, one row per submission.
+// The page posts a readable summary plus the raw answers, so nothing is
+// lost even when the question set changes between clients.
+function saveSelectorReview(ss, d) {
+  const TAB = (d.client || 'Selector Review').substring(0, 28) + ' Review';
+  const HEADERS = [
+    'Timestamp', 'Client', 'Review', 'Submitted By', 'Email', 'Role',
+    'Answered', 'Total', 'Progress', 'Summary', 'Raw Answers (JSON)'
+  ];
+
+  const sheet = getOrCreateSheet(ss, TAB, HEADERS);
+
+  sheet.appendRow([
+    new Date(),
+    d.client           || '',
+    d.review           || '',
+    d.submitter_name   || '',
+    d.submitter_email  || '',
+    d.submitter_role   || '',
+    d.answered         || '',
+    d.total            || '',
+    d.progress         || '',
+    d.summary          || '',
+    d.full_json        || '',
   ]);
 }
 
