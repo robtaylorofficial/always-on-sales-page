@@ -1,4 +1,21 @@
 // ============================================================
+//  REFERENCE COPY, NOT A DEPLOYABLE BACKUP
+//
+//  The LIVE script in Google has diverged from this file. As of
+//  2026-08-19 the live version opens the spreadsheet by id:
+//
+//      const ss = SpreadsheetApp.openById('<sheet id>');
+//
+//  ...where this file uses getActiveSpreadsheet(). The id is not
+//  recorded here on purpose, since this repo is public.
+//
+//  DO NOT paste this file wholesale over the live script. Doing so
+//  swaps that line and, if the script is standalone rather than
+//  bound to the sheet, silently breaks EVERY form on the site.
+//  Apply changes as targeted edits instead.
+// ============================================================
+
+// ============================================================
 //  Always On — Google Sheets Storage
 //  Handles: Onboarding form + Company Knowledge + Product Selector Review
 //
