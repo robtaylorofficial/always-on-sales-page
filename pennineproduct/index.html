@@ -44,8 +44,19 @@
     .ptrack { flex: 1 1 200px; min-width: 160px; height: 8px; background: #ece9f0; border-radius: 99px; overflow: hidden; }
     .pfill { height: 100%; width: 0%; background: var(--green); transition: width .35s cubic-bezier(.22,1,.36,1); }
     .plabel { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-faint); white-space: nowrap; }
-    #autosave { font-size: 0.74rem; color: var(--green); opacity: 0; transition: opacity .3s; font-weight: 600; white-space: nowrap; }
-    #autosave.show { opacity: 1; }
+    .savestate { font-size: 0.74rem; color: var(--ink-faint); font-weight: 600; white-space: nowrap; }
+    .savestate.saved { color: var(--green); }
+    .savestate.saving { color: var(--blue); }
+    .barbtns { display: flex; gap: 7px; flex-wrap: wrap; }
+    /* On narrow screens let the controls wrap onto their own row rather than
+       hiding any of them. A phone user with no way to move their answers to
+       another device is worse off than one with a two-line bar. */
+    @media (max-width: 860px) {
+      .bar-inner { gap: 8px 10px; }
+      .ptrack { flex: 1 1 100%; order: -1; }
+      .barbtns { flex: 1 1 100%; }
+      .barbtns .btn { flex: 1 1 auto; }
+    }
 
     /* ── resume banner ── */
     #resume { display: none; background: var(--warn-bg); border-bottom: 2px solid var(--yellow); padding: 14px 24px; text-align: center; }
@@ -63,6 +74,9 @@
     .hero p { max-width: 64ch; color: rgba(255,255,255,0.85); margin-top: 16px; }
     .hero-meta { display: flex; flex-wrap: wrap; gap: 8px 28px; margin-top: 24px; font-family: var(--mono); font-size: 0.76rem; color: rgba(255,255,255,0.6); }
     .hero-meta b { color: rgba(255,255,255,0.85); font-weight: 500; }
+    .reassure { margin-top: 22px; padding: 12px 16px; border-left: 3px solid var(--yellow);
+      background: rgba(255,255,255,0.09); border-radius: 0 10px 10px 0; font-size: 0.87rem;
+      color: rgba(255,255,255,0.9); max-width: 68ch; }
 
     section.blk { padding: 44px 0; }
     section.blk > .wrap > h2 { font-size: clamp(1.35rem, 2.6vw, 1.9rem); font-weight: 700; letter-spacing: -0.02em; margin-bottom: 10px; }
@@ -187,7 +201,12 @@
 <div id="bar"><div class="bar-inner">
   <div class="ptrack"><span class="pfill" id="pfill"></span></div>
   <span class="plabel" id="plabel">0 answered</span>
-  <span id="autosave">Saved</span>
+  <span class="savestate" id="savestate">Nothing to save yet</span>
+  <span class="barbtns">
+    <button type="button" class="btn sm" id="saveNow">Save progress</button>
+    <button type="button" class="btn ghost sm" id="barDl" title="Download your answers as a file to continue on another computer">Save to file</button>
+    <button type="button" class="btn ghost sm" id="barLoad" title="Load answers from a file you saved earlier">Load file</button>
+  </span>
 </div></div>
 
 <header class="hero"><div class="wrap">
@@ -195,6 +214,7 @@
   <h1 id="h1"></h1>
   <p id="introp"></p>
   <div class="hero-meta" id="heroMeta"></div>
+  <p class="reassure">Your answers save on this device as you go. Close the page whenever you like and pick up where you left off. Nothing is sent to us until you press send at the bottom.</p>
 </div></header>
 
 <main>
@@ -495,19 +515,53 @@
     return c;
   }
 
-  /* ---------- autosave ---------- */
-  var timer, ind = $('#autosave');
+  /* ---------- autosave ----------
+     The status here is deliberately always visible. An indicator that only
+     appears for a second while you type is the same as no indicator at all
+     on a page this long: people cannot tell whether it is safe to leave. */
+  var timer, stateEl = $('#savestate'), lastSaved = null, storageWorks = true;
+
+  function setState(text, cls){
+    stateEl.textContent = text;
+    stateEl.className = 'savestate' + (cls ? ' ' + cls : '');
+  }
+  function relTime(d){
+    var s = Math.round((Date.now() - d.getTime()) / 1000);
+    if (s < 10)  return 'just now';
+    if (s < 60)  return s + ' seconds ago';
+    var m = Math.round(s / 60);
+    if (m < 60)  return m === 1 ? 'a minute ago' : m + ' minutes ago';
+    var h = Math.round(m / 60);
+    return h === 1 ? 'an hour ago' : h + ' hours ago';
+  }
+  function refreshState(){
+    if (!storageWorks){ setState('Cannot save in this browser, use Save to file', ''); return; }
+    if (!lastSaved){ setState(anyAnswers() ? 'Not saved yet' : 'Nothing to save yet', ''); return; }
+    setState('Saved ' + relTime(lastSaved), 'saved');
+  }
+  function anyAnswers(){
+    return Object.keys(A).some(function(k){ return String(A[k]||'').trim(); });
+  }
+  function writeNow(){
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ a: A, xref: XREF, at: new Date().toISOString() }));
+      lastSaved = new Date();
+      storageWorks = true;
+      refreshState();
+      return true;
+    } catch(e){
+      storageWorks = false;
+      refreshState();
+      return false;
+    }
+  }
   function onChange(){
     updateProgress();
+    setState('Saving…', 'saving');
     clearTimeout(timer);
-    timer = setTimeout(function(){
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify({ a: A, xref: XREF, at: new Date().toISOString() }));
-        ind.classList.add('show');
-        setTimeout(function(){ ind.classList.remove('show'); }, 1600);
-      } catch(e){}
-    }, 700);
+    timer = setTimeout(writeNow, 700);
   }
+  setInterval(refreshState, 30000);
   window.restoreProgress = function(){
     try {
       var raw = localStorage.getItem(STORAGE_KEY);
@@ -524,6 +578,14 @@
   };
 
   /* ---------- file save / load ---------- */
+  $('#saveNow').addEventListener('click', function(){
+    clearTimeout(timer);
+    if (writeNow()) setState('Saved just now', 'saved');
+    else alert('This browser will not let the page save locally (private browsing can do this). Use "Save to file" instead so you do not lose your answers.');
+  });
+  $('#barDl').addEventListener('click', function(){ $('#dl').click(); });
+  $('#barLoad').addEventListener('click', function(){ $('#loadFile').click(); });
+
   $('#dl').addEventListener('click', function(){
     var blob = new Blob([JSON.stringify({ slug: SPEC.slug, client: SPEC.client, a: A, xref: XREF, at: new Date().toISOString() }, null, 2)], { type: 'application/json' });
     var url = URL.createObjectURL(blob);
@@ -657,6 +719,15 @@
   });
 
   updateProgress();
+  (function initState(){
+    try { localStorage.setItem('__t','1'); localStorage.removeItem('__t'); }
+    catch(e){ storageWorks = false; }
+    try {
+      var raw = localStorage.getItem(STORAGE_KEY);
+      if (raw){ var st = JSON.parse(raw); if (st && st.at) lastSaved = new Date(st.at); }
+    } catch(e){}
+    refreshState();
+  })();
 })();
 </script>
 </body>
