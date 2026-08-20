@@ -201,11 +201,11 @@
 <div id="bar"><div class="bar-inner">
   <div class="ptrack"><span class="pfill" id="pfill"></span></div>
   <span class="plabel" id="plabel">0 answered</span>
-  <span class="savestate" id="savestate">Nothing to save yet</span>
+  <span class="savestate" id="savestate">Nothing saved yet</span>
   <span class="barbtns">
-    <button type="button" class="btn sm" id="saveNow">Save progress</button>
-    <button type="button" class="btn ghost sm" id="barDl" title="Download your answers as a file to continue on another computer">Save to file</button>
-    <button type="button" class="btn ghost sm" id="barLoad" title="Load answers from a file you saved earlier">Load file</button>
+    <button type="button" class="btn sm" id="saveNow" title="Keeps your answers in this browser. Nothing is sent to us until you press send at the bottom.">Save on this device</button>
+    <button type="button" class="btn ghost sm" id="barDl" title="Saves a backup file you can reload here or on another computer. Not for reading, use Download for Excel below for that.">Save a backup</button>
+    <button type="button" class="btn ghost sm" id="barLoad" title="Reload a backup file you saved earlier">Load a backup</button>
   </span>
 </div></div>
 
@@ -214,7 +214,7 @@
   <h1 id="h1"></h1>
   <p id="introp"></p>
   <div class="hero-meta" id="heroMeta"></div>
-  <p class="reassure">Your answers save on this device as you go. Close the page whenever you like and pick up where you left off. Nothing is sent to us until you press send at the bottom.</p>
+  <p class="reassure">Your answers save in this browser as you go, so you can close the page and pick up where you left off. <strong>They stay on your machine until you press send at the bottom</strong>, which is the step that delivers them to us.</p>
 </div></header>
 
 <main>
@@ -229,6 +229,7 @@
     <section class="blk"><div class="wrap">
       <div class="submitblk">
         <h2>Send this to Plan Grow Do</h2>
+        <p><strong>This is the only step that reaches us.</strong> Saving on your device keeps your answers safe locally, but we cannot see them until you press the button below.</p>
         <p>Partial is genuinely useful. Send what you have and come back for the rest whenever it suits.</p>
         <div id="err"></div>
         <button type="submit" class="btn big" id="submitBtn"><span id="submitLabel">Send my answers</span></button>
@@ -239,11 +240,12 @@
         <p id="successCount"></p>
       </div>
       <div class="toolbar">
-        <button type="button" class="btn ghost sm" id="dl">Download a copy of my answers</button>
-        <button type="button" class="btn ghost sm" id="loadBtn">Load a saved file</button>
+        <button type="button" class="btn ghost sm" id="csv">Download for Excel</button>
+        <button type="button" class="btn ghost sm" id="dl">Save a backup file</button>
+        <button type="button" class="btn ghost sm" id="loadBtn">Load a backup</button>
         <input type="file" id="loadFile" accept="application/json" hidden />
       </div>
-      <p class="toolnote">Your answers save automatically in this browser as you type. To carry on from a different computer, or hand over to a colleague, download the file here and load it there.</p>
+      <p class="toolnote"><strong>Download for Excel</strong> gives you a readable spreadsheet of your answers, to check over or share internally. <strong>Save a backup</strong> gives you a file that reloads straight back into this page, so you can carry on from another computer or hand over to a colleague. Neither sends anything to us.</p>
     </div></section>
   </form>
 </main>
@@ -536,8 +538,8 @@
   }
   function refreshState(){
     if (!storageWorks){ setState('Cannot save in this browser, use Save to file', ''); return; }
-    if (!lastSaved){ setState(anyAnswers() ? 'Not saved yet' : 'Nothing to save yet', ''); return; }
-    setState('Saved ' + relTime(lastSaved), 'saved');
+    if (!lastSaved){ setState(anyAnswers() ? 'Not saved yet' : 'Nothing saved yet', ''); return; }
+    setState('Saved on this device ' + relTime(lastSaved), 'saved');
   }
   function anyAnswers(){
     return Object.keys(A).some(function(k){ return String(A[k]||'').trim(); });
@@ -580,7 +582,7 @@
   /* ---------- file save / load ---------- */
   $('#saveNow').addEventListener('click', function(){
     clearTimeout(timer);
-    if (writeNow()) setState('Saved just now', 'saved');
+    if (writeNow()) setState('Saved on this device just now', 'saved');
     else alert('This browser will not let the page save locally (private browsing can do this). Use "Save to file" instead so you do not lose your answers.');
   });
   $('#barDl').addEventListener('click', function(){ $('#dl').click(); });
@@ -594,6 +596,61 @@
     setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
   });
   $('#loadBtn').addEventListener('click', function(){ $('#loadFile').click(); });
+  /* ---------- readable export ----------
+     Opens straight in Excel. This one is for a human to read, check over or
+     circulate internally. It is deliberately NOT the reload format: round
+     tripping free text with commas and line breaks through a spreadsheet
+     loses data, so the backup file stays JSON. */
+  function buildRows(){
+    var rows = [['Section','Item','Your answer']];
+    var name = (A['contact.submitter_name']||'').trim();
+    var mail = (A['contact.submitter_email']||'').trim();
+    var role = (A['contact.submitter_role']||'').trim();
+    rows.push(['Your details','Name',name]);
+    rows.push(['Your details','Email',mail]);
+    rows.push(['Your details','Role',role]);
+    SPEC.sections.forEach(function(sec){
+      if (sec.type === 'questions'){
+        sec.items.forEach(function(it){
+          rows.push([sec.title, (it.area ? it.area + ': ' : '') + it.q, A[sec.id+'.'+it.id] || '']);
+        });
+      } else if (sec.type === 'grid'){
+        sec.items.forEach(function(it){
+          sec.columns.forEach(function(col){
+            if (col.type === 'static') return;
+            rows.push([sec.title, (it.name||it.id) + (it.doc ? ' (' + it.doc + ')' : '') + ' - ' + col.label,
+                       A[sec.id+'.'+it.id+'.'+col.id] || '']);
+          });
+        });
+      } else if (sec.type === 'triage'){
+        sec.items.forEach(function(it){
+          rows.push([sec.title, it.label, A[sec.id+'.'+it.id] || '']);
+        });
+      } else if (sec.type === 'rows'){
+        XREF.forEach(function(rec, i){
+          var vals = sec.columns.map(function(c){ return (rec[c.id]||'').trim(); });
+          if (vals.some(Boolean)) rows.push([sec.title, 'Row ' + (i+1), vals.join(' | ')]);
+        });
+      }
+    });
+    return rows;
+  }
+  function download(filename, text, mime){
+    var blob = new Blob([text], { type: mime });
+    var url = URL.createObjectURL(blob);
+    var a = el('a'); a.href = url; a.download = filename;
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+  }
+  $('#csv').addEventListener('click', function(){
+    var csv = buildRows().map(function(r){
+      return r.map(function(c){ return '"' + String(c==null?'':c).replace(/"/g,'""') + '"'; }).join(',');
+    }).join('\r\n');
+    // BOM so Excel reads it as UTF-8 rather than mangling accents and symbols
+    download(SPEC.slug + '-answers.csv', '\uFEFF' + csv, 'text/csv;charset=utf-8');
+  });
+
+
   $('#loadFile').addEventListener('change', function(e){
     var f = e.target.files && e.target.files[0];
     if (!f) return;
